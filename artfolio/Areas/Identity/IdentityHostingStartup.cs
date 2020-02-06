@@ -20,8 +20,6 @@ namespace artfolio.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("artfolioContextConnection")));
 
-                services.AddDefaultIdentity<artfolioUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<artfolioContext>();
             });
         }
     }

@@ -9,5 +9,6 @@ namespace artfolio.Areas.Identity.Data
     // Add profile data for application users by adding properties to the artfolioUser class
     public class artfolioUser : IdentityUser
     {
+        public string NameTEST { get; set; }
     }
 }
