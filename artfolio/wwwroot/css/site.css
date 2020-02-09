@@ -1,10 +1,22 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+body {
+    font-family: 'Source Sans Pro';
+}
+
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-family: 'Source Sans Pro';
+    font-weight: lighter;
+    color: #747474;
+    font-size: 3rem;
+}
+
+a.navbar-brand span {
+    color: #F9A585;
 }
 
 /* Provide sufficient contrast against white background */
@@ -12,10 +24,34 @@ a {
   color: #0366d6;
 }
 
+.searchBox {
+    border-color: #DEDEDE;
+    border: 1px solid #DEDEDE;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+
+.searchInput {
+    color: #A4A4A4;
+    font-weight: 300;
+    border-radius: unset;
+    min-width: 300px;
+    border: 0;
+}
+
+.searchInput::placeholder {
+    color: #A4A4A4;
+}
+
+.input-group-prepend > span {
+    background: white;
+    border-radius: unset;
+    border: 0;
+}
+
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

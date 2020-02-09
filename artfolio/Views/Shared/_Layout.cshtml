@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,9 +9,19 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">artfolio</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span>art</span>folio</a>
+
+                <form class="form-inline">
+                    <div class="input-group searchBox">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><img src="~/images/icons/search.png" alt="search for an artist, an artwork..." width="16"/></span>
+                        </div>
+                        <input type="text" class="form-control searchInput" placeholder="search for an artist, an artwork..." aria-label="search" aria-describedby="searchInput">
+                    </div>
+                </form>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
