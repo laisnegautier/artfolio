@@ -16,6 +16,8 @@ namespace artfolio.Models
     {
         public int ArtistId { get; set; }
 
+        public ApplicationUser User { get; set; }
+
         [Required]
         public string Name { get; set; }
         [Required]
