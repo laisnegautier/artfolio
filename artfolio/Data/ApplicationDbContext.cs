@@ -14,8 +14,15 @@ namespace artfolio.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
+
+        public DbSet<Document> Documents { get; set; }
 
         public DbSet<ArtworkTag> ArtworkTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
@@ -24,14 +31,6 @@ namespace artfolio.Data
 
         public DbSet<ArtworkCollection> ArtworkCollections { get; set; }
         public DbSet<Collection> Collections { get; set; }
-
-        public DbSet<Document> Documents { get; set; }
-        public DbSet<DocumentType> DocumentTypes { get; set; }
-        public DbSet<RelatedDocument> RelatedDocuments { get; set; }
-
-        public DbSet<ArtworkLicense> ArtworkLicenses { get; set; }
-        public DbSet<CreativeCommonsLicense> CreativeCommonsLicenses { get; set; }
-        public DbSet<OtherLicense> OtherLicenses { get; set; }
 
         public DbSet<Message> Messages { get; set; }
         public DbSet<Report> Reports { get; set; }

@@ -13,11 +13,13 @@ namespace artfolio.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
+            _context = context;
             _logger = logger;
             _userManager = userManager;
         }
@@ -26,6 +28,7 @@ namespace artfolio.Controllers
         {
             return View(_userManager.Users);
         }
+
 
         public IActionResult Privacy()
         {

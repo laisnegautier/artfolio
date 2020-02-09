@@ -10,19 +10,9 @@ namespace artfolio.Models
     {
         public int ArtworkTagId { get; set; }
 
-
-        #region Foreign Keys 
-
         [Required]
         public Artwork Artwork { get; set; }
         [Required]
         public Tag Tag { get; set; }
-
-        #endregion
-
-
-        #region Associated elements
-
-        #endregion
     }
 }

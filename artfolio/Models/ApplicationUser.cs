@@ -10,4 +10,10 @@ namespace artfolio.Models
     {
         public string Gender { get; set; }
     }
+
+    /*public enum Gender
+    {
+        Male = 1,
+        Female = 2
+    }*/
 }

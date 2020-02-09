@@ -5,11 +5,23 @@
     <UserSecretsId>aspnet-artfolio-62E13D1D-0F3F-4B5F-A8A5-C1B43300A7E0</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20200209152853_EnumerationGender.cs" />
+    <Compile Remove="Migrations\20200209152853_EnumerationGender.Designer.cs" />
+    <Compile Remove="Migrations\20200209160921_1stSeedDocumentType.cs" />
+    <Compile Remove="Migrations\20200209160921_1stSeedDocumentType.Designer.cs" />
+    <Compile Remove="Migrations\20200209161649_1stSeedDocumentType2.cs" />
+    <Compile Remove="Migrations\20200209161649_1stSeedDocumentType2.Designer.cs" />
+    <Compile Remove="Migrations\20200209162146_ModifDocumentTypeModelRestriction.cs" />
+    <Compile Remove="Migrations\20200209162146_ModifDocumentTypeModelRestriction.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />

@@ -313,6 +313,15 @@ namespace artfolio.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("License")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Privacy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PublicationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -375,33 +384,6 @@ namespace artfolio.Migrations
                     b.ToTable("ArtworkCollections");
                 });
 
-            modelBuilder.Entity("artfolio.Models.ArtworkLicense", b =>
-                {
-                    b.Property<int>("ArtworkLicenseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ArtworkId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreativeCommonsLicenseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OtherLicenseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ArtworkLicenseId");
-
-                    b.HasIndex("ArtworkId");
-
-                    b.HasIndex("CreativeCommonsLicenseId");
-
-                    b.HasIndex("OtherLicenseId");
-
-                    b.ToTable("ArtworkLicenses");
-                });
-
             modelBuilder.Entity("artfolio.Models.ArtworkTag", b =>
                 {
                     b.Property<int>("ArtworkTagId")
@@ -450,36 +432,6 @@ namespace artfolio.Migrations
                     b.ToTable("Collections");
                 });
 
-            modelBuilder.Entity("artfolio.Models.CreativeCommonsLicense", b =>
-                {
-                    b.Property<int>("CreativeCommonsLicenseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeprecated")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("Logo")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficialLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Version")
-                        .HasColumnType("real");
-
-                    b.HasKey("CreativeCommonsLicenseId");
-
-                    b.ToTable("CreativeCommonsLicenses");
-                });
-
             modelBuilder.Entity("artfolio.Models.Document", b =>
                 {
                     b.Property<int>("DocumentId")
@@ -490,35 +442,20 @@ namespace artfolio.Migrations
                     b.Property<int>("ArtworkId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DocumentTypeId")
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsMainDocument")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Position")
                         .HasColumnType("int");
 
                     b.HasKey("DocumentId");
 
                     b.HasIndex("ArtworkId");
 
-                    b.HasIndex("DocumentTypeId");
-
                     b.ToTable("Documents");
-                });
-
-            modelBuilder.Entity("artfolio.Models.DocumentType", b =>
-                {
-                    b.Property<int>("DocumentTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Media")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DocumentTypeId");
-
-                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("artfolio.Models.Follower", b =>
@@ -543,49 +480,6 @@ namespace artfolio.Migrations
                     b.HasKey("MessageId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("artfolio.Models.OtherLicense", b =>
-                {
-                    b.Property<int>("OtherLicenseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OtherLicenseId");
-
-                    b.ToTable("OtherLicenses");
-                });
-
-            modelBuilder.Entity("artfolio.Models.RelatedDocument", b =>
-                {
-                    b.Property<int>("RelatedDocumentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ArtworkId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DocumentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.HasKey("RelatedDocumentId");
-
-                    b.HasIndex("ArtworkId");
-
-                    b.HasIndex("DocumentTypeId");
-
-                    b.ToTable("RelatedDocuments");
                 });
 
             modelBuilder.Entity("artfolio.Models.Report", b =>
@@ -744,23 +638,6 @@ namespace artfolio.Migrations
                         .HasForeignKey("CollectionId");
                 });
 
-            modelBuilder.Entity("artfolio.Models.ArtworkLicense", b =>
-                {
-                    b.HasOne("artfolio.Models.Artwork", "Artwork")
-                        .WithMany()
-                        .HasForeignKey("ArtworkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("artfolio.Models.CreativeCommonsLicense", "CreativeCommonsLicense")
-                        .WithMany()
-                        .HasForeignKey("CreativeCommonsLicenseId");
-
-                    b.HasOne("artfolio.Models.OtherLicense", "OtherLicense")
-                        .WithMany()
-                        .HasForeignKey("OtherLicenseId");
-                });
-
             modelBuilder.Entity("artfolio.Models.ArtworkTag", b =>
                 {
                     b.HasOne("artfolio.Models.Artwork", "Artwork")
@@ -788,27 +665,6 @@ namespace artfolio.Migrations
                     b.HasOne("artfolio.Models.Artwork", "Artwork")
                         .WithMany("Documents")
                         .HasForeignKey("ArtworkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("artfolio.Models.DocumentType", "DocumentType")
-                        .WithMany()
-                        .HasForeignKey("DocumentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("artfolio.Models.RelatedDocument", b =>
-                {
-                    b.HasOne("artfolio.Models.Artwork", "Artwork")
-                        .WithMany("RelatedDocuments")
-                        .HasForeignKey("ArtworkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("artfolio.Models.DocumentType", "DocumentType")
-                        .WithMany("RelatedDocuments")
-                        .HasForeignKey("DocumentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

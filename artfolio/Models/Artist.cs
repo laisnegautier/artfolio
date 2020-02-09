@@ -26,12 +26,9 @@ namespace artfolio.Models
         [Required]
         public bool IsPubliclyVisible { get; set; }
 
-        //public Identity.ApplicationUser User { get; set; }
-
         public ICollection<Artwork> Artworks { get; set; }
         public ICollection<Collection> Collections { get; set; }
         //public ICollection<Follower> Following { get; set; }
-
     }
 }
 
