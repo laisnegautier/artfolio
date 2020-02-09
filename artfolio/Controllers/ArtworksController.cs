@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using artfolio.Data;
 using artfolio.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace artfolio.Controllers
 {
-    [Authorize]
     public class ArtworksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -56,7 +54,7 @@ namespace artfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtworkId,Title,Description,CreationDate")] Artwork artwork)
+        public async Task<IActionResult> Create([Bind("ArtworkId,Title,Description,CreationDate,PublicationDate,Privacy,License")] Artwork artwork)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +86,7 @@ namespace artfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtworkId,Title,Description,CreationDate")] Artwork artwork)
+        public async Task<IActionResult> Edit(int id, [Bind("ArtworkId,Title,Description,CreationDate,PublicationDate,Privacy,License")] Artwork artwork)
         {
             if (id != artwork.ArtworkId)
             {

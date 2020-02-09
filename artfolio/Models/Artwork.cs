@@ -49,6 +49,7 @@ namespace artfolio.Models
 
     public enum Visibility
     {
+        [Display(Name = "Do not publish now")]
         NotPublished = 0,
         Public = 1,
         Private = 2
