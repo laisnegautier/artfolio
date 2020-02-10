@@ -13,16 +13,6 @@ namespace artfolio.Models
         [Required]
         public string Name { get; set; }
 
-
-        #region Foreign Keys 
-
-        #endregion
-
-
-        #region Associated elements
-
         public ICollection<ArtworkTag> ArtworkTags { get; set; }
-
-        #endregion
     }
 }

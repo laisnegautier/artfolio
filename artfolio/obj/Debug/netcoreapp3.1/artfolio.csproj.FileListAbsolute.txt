@@ -188,7 +188,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.csproj.CopyComplete
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.pdb
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
