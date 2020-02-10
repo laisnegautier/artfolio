@@ -20,9 +20,7 @@ a.navbar-brand span {
 }
 
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
+
 
 .searchBox {
     border-color: #DEDEDE;
@@ -60,10 +58,47 @@ a {
   border-color: #1861ac;
 }
 
+.nav-item .sign-up-btn {
+    color: white !important;
+    background-color: #F9A585;
+    border-radius: 5px;
+    transition: ease-in-out .1s;
+    font-weight: 200;
+}
+
+.nav-item .sign-up-btn:hover {
+    background-color: #FB8051;
+    color: white !important;
+    text-decoration: none;
+}
+
+.nav-item .sign-in-btn {
+    color: black !important;
+    border-bottom: 2px solid #F9A585;
+    font-weight: 200;
+}
+
+.nav-item .sign-in-btn:hover {
+    color: grey !important;
+    border-bottom: 2px solid #FB8051;
+    text-decoration: none;
+}
+
+.nav-item .img-not-connected-btn {
+    padding: 0;
+}
+
+.nav-item .img-not-connected {
+    background: #F3F3F3;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
