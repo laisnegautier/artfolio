@@ -14,8 +14,14 @@ namespace artfolio.Models
         public string Title { get; set; }
         public string Description { get; set; }
         [Required]
+        [Display(Name = "Creation Date")]
+        [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
-        public DateTime PublicationDate { get; set; }
+        [Required]
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        public DateTime ReleaseDate { get; set; }
+        [Required]
         public Visibility Privacy { get; set; }
         [Required]
         public CreativeCommonsLicense License { get; set; }
@@ -49,9 +55,9 @@ namespace artfolio.Models
 
     public enum Visibility
     {
-        [Display(Name = "Do not publish now")]
-        NotPublished = 0,
+        [Display(Name = "Everyone can preview")]
         Public = 1,
+        [Display(Name = "I'm the only one")]
         Private = 2
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using artfolio.Models;
 using artfolio.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace artfolio.Controllers
 {
@@ -24,11 +25,10 @@ namespace artfolio.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_userManager.Users);
+            return View(await _userManager.Users.ToListAsync());
         }
-
 
         public IActionResult Privacy()
         {

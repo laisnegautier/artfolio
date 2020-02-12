@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 namespace artfolio.Models
 {
     /// <summary>
-    /// An artist is linked to a login
+    /// An artist is linked to a profile
     /// </summary>
     public class Artist
     {

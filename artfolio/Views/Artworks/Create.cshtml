@@ -29,21 +29,18 @@
                 <span asp-validation-for="CreationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublicationDate" class="control-label"></label>
-                <input asp-for="PublicationDate" class="form-control" />
-                <span asp-validation-for="PublicationDate" class="text-danger"></span>
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Privacy" class="control-label"></label>
-                <select asp-for="Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control">
-                </select>
+                <select asp-for="@Model.Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control"></select>
                 <span asp-validation-for="Privacy" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="License" class="control-label"></label>
-                <select asp-for="License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control">
-                    <option selected="selected" value="">Please select</option>
-                </select>
+                <select asp-for="@Model.License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control"></select>
                 <span asp-validation-for="License" class="text-danger"></span>
             </div>
             <div class="form-group">

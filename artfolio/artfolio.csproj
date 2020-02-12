@@ -14,6 +14,16 @@
     <Compile Remove="Migrations\20200209161649_1stSeedDocumentType2.Designer.cs" />
     <Compile Remove="Migrations\20200209162146_ModifDocumentTypeModelRestriction.cs" />
     <Compile Remove="Migrations\20200209162146_ModifDocumentTypeModelRestriction.Designer.cs" />
+    <Compile Remove="Migrations\20200212075853_artworkModelDataAnnotation2.cs" />
+    <Compile Remove="Migrations\20200212075853_artworkModelDataAnnotation2.Designer.cs" />
+    <Compile Remove="Migrations\20200212075936_artworkModelDataAnnotation2.cs" />
+    <Compile Remove="Migrations\20200212075936_artworkModelDataAnnotation2.Designer.cs" />
+    <Compile Remove="Migrations\20200212093534_FollowerManyToManyRelationships.cs" />
+    <Compile Remove="Migrations\20200212093534_FollowerManyToManyRelationships.Designer.cs" />
+    <Compile Remove="Migrations\20200212094024_FollowerTablesManyToManyUpdate.cs" />
+    <Compile Remove="Migrations\20200212094024_FollowerTablesManyToManyUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20200212094715_newTestFollower.cs" />
+    <Compile Remove="Migrations\20200212094715_newTestFollower.Designer.cs" />
   </ItemGroup>
 
 

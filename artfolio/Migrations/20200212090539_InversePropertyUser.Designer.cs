@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using artfolio.Data;
 
 namespace artfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200212090539_InversePropertyUser")]
+    partial class InversePropertyUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -458,6 +460,18 @@ namespace artfolio.Migrations
                     b.HasIndex("ArtworkId");
 
                     b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("artfolio.Models.Follower", b =>
+                {
+                    b.Property<int>("FollowerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("FollowerId");
+
+                    b.ToTable("Followers");
                 });
 
             modelBuilder.Entity("artfolio.Models.Message", b =>

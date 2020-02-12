@@ -9,10 +9,9 @@ namespace artfolio.Models
 {
     public class Follower
     {
-        public int FollowerId { get; set; }
-
-        //public Artist FollowedArtist { get; set; }
-        //public Artist FollowerArtist { get; set; }
-
+        public int FollowedArtistId { get; set; }
+        public Artist FollowedArtist { get; set; }
+        public int FollowerArtistId { get; set; }
+        public Artist FollowerArtist { get; set; }
     }
 }

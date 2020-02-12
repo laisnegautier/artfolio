@@ -10,6 +10,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<ul>
+    <li>Id :  @ViewData["currentId"]</li>
+    <li>Name :  </li>
+</ul>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.CreationDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PublicationDate)
+                @Html.DisplayNameFor(model => model.ReleaseDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Privacy)
@@ -35,32 +41,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublicationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Privacy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.License)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ArtworkId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ArtworkId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ArtworkId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Privacy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.License)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ArtworkId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ArtworkId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ArtworkId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

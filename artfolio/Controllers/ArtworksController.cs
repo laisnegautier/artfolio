@@ -7,21 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using artfolio.Data;
 using artfolio.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace artfolio.Controllers
 {
     public class ArtworksController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public ArtworksController(ApplicationDbContext context)
+        public ArtworksController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
         // GET: Artworks
         public async Task<IActionResult> Index()
         {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            //Artist currentArtist = _context.Artists.Single(x => x.UserId == user.Id);
+
+            ViewData["currentId"] = user.Id;
+            //ViewData["currentArtistName"] = user.Name;
+
             return View(await _context.Artworks.ToListAsync());
         }
 
@@ -44,6 +54,7 @@ namespace artfolio.Controllers
         }
 
         // GET: Artworks/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -53,8 +64,9 @@ namespace artfolio.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtworkId,Title,Description,CreationDate,PublicationDate,Privacy,License")] Artwork artwork)
+        public async Task<IActionResult> Create([Bind("ArtworkId,Title,Description,CreationDate,ReleaseDate,Privacy,License")] Artwork artwork)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +98,7 @@ namespace artfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtworkId,Title,Description,CreationDate,PublicationDate,Privacy,License")] Artwork artwork)
+        public async Task<IActionResult> Edit(int id, [Bind("ArtworkId,Title,Description,CreationDate,ReleaseDate,Privacy,License")] Artwork artwork)
         {
             if (id != artwork.ArtworkId)
             {

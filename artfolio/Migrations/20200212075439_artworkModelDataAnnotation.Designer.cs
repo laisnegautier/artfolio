@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using artfolio.Data;
 
 namespace artfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200212075439_artworkModelDataAnnotation")]
+    partial class artworkModelDataAnnotation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,9 +164,6 @@ namespace artfolio.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ArtistId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -213,10 +212,6 @@ namespace artfolio.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArtistId")
-                        .IsUnique()
-                        .HasFilter("[ArtistId] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -291,7 +286,12 @@ namespace artfolio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ArtistId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Artists");
                 });
@@ -460,6 +460,18 @@ namespace artfolio.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("artfolio.Models.Follower", b =>
+                {
+                    b.Property<int>("FollowerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("FollowerId");
+
+                    b.ToTable("Followers");
+                });
+
             modelBuilder.Entity("artfolio.Models.Message", b =>
                 {
                     b.Property<int>("MessageId")
@@ -592,18 +604,18 @@ namespace artfolio.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("artfolio.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("artfolio.Models.Artist", "Artist")
-                        .WithOne("User")
-                        .HasForeignKey("artfolio.Models.ApplicationUser", "ArtistId");
-                });
-
             modelBuilder.Entity("artfolio.Models.ArtfolioStyleSheet", b =>
                 {
                     b.HasOne("artfolio.Models.Artist", "Artist")
                         .WithMany()
                         .HasForeignKey("ArtistId");
+                });
+
+            modelBuilder.Entity("artfolio.Models.Artist", b =>
+                {
+                    b.HasOne("artfolio.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("artfolio.Models.Artwork", b =>

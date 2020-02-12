@@ -35,7 +35,7 @@ namespace artfolio.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Report> Reports { get; set; }
 
-        public DbSet<Follower> Followers { get; set; }
+       // public DbSet<Follower> Followers { get; set; }
         public DbSet<Support> Supports { get; set; }
     }
 }
