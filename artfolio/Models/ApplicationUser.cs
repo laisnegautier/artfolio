@@ -11,9 +11,6 @@ namespace artfolio.Models
     public class ApplicationUser : IdentityUser
     {
         public string Gender { get; set; }
-
-        [ForeignKey("ArtistId")]
-        public Artist Artist { get; set; }
     }
 
     /*public enum Gender

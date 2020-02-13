@@ -1,0 +1,132 @@
+﻿/* HEADER */
+
+header {
+    /* box-shadow: 0 5px 30px #f3f3f3; */
+    position: relative;
+    z-index: 3;
+}
+
+nav {
+    min-height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    /* box-shadow: 0 3px 15px lightgray; */
+}
+
+    /* LEFT NAVIGATION */
+    nav .nav-left {
+        max-width: 75%;
+        min-width: 40%;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: flex-end;
+    }
+
+.brand {
+    font-size: 4rem;
+    color: #747474;
+    font-weight: 200;
+}
+
+    .brand span {
+        color: #f9a585;
+    }
+
+/* SEARCH INPUT */
+.search-box {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding: 0px 15px;
+    margin-left: 20px;
+    margin-bottom: 11px;
+    background-color: white;
+    border: 1px solid #dedede;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .search-box input {
+        width: 100%;
+        font-size: 1.2rem;
+        color: #a4a4a4;
+        margin: 10px 10px 10px 5px;
+        padding: 0px 10px;
+        border: 0;
+    }
+
+        .search-box input::placeholder {
+            font-weight: 200;
+            color: #a4a4a4;
+        }
+
+        .search-box input:active,
+        .search-box input:focus {
+            outline: none;
+        }
+
+    .search-box img {
+        width: 20px;
+    }
+
+/* RIGHT MENU */
+nav .nav-right {
+    min-width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-in {
+    color: black;
+    background-color: #fff;
+    padding: 10px 15px;
+    font-weight: 300;
+}
+
+.primary-underline {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+    .primary-underline:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        height: 0;
+        border: 2px solid #f9a585;
+        border-radius: 10px;
+    }
+
+    .primary-underline:hover:before {
+        border: 2px solid #fc8b5e;
+    }
+
+.sign-up {
+    color: white;
+    background-color: #f9a585;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: 300;
+}
+
+    .sign-up:hover {
+        background-color: #fc8b5e;
+    }
+
+.img-not-connected {
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background: #f3f3f3;
+}

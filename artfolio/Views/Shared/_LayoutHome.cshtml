@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - artfolio</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/siteHome.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left"></div>
+            <partial name="_LoginPartialHome" />
+        </nav>
+    </header>
+
+    <main>
+        <h1><span>art</span>folio</h1>
+        <form class="search-box">
+            <img src="~/images/design/home/search.png" alt="search for an artist, an artwork..." />
+            <input type="text" placeholder="search for an artist, an artwork..." />
+        </form>
+    </main>
+
+    <footer class="footer-home">
+        <div class="discover-link">
+            <a class="discover-in" asp-area="" asp-controller="Home" asp-action="Index2">
+                <h3>discover artworks</h3>
+                <img src="~/images/design/home/arrowDown.svg" />
+            </a>
+        </div>
+
+        <div class="link-about">
+            <ul>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
+                <li class="muted">artfolio - 2020</li>
+            </ul>
+        </div>
+    </footer>
+
+    <div style="display: none">
+            @RenderBody()
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

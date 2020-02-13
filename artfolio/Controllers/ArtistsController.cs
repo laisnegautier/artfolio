@@ -7,15 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using artfolio.Data;
 using artfolio.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace artfolio.Controllers
 {
     public class ArtistsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public ArtistsController(ApplicationDbContext context)
+        public ArtistsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -54,8 +57,11 @@ namespace artfolio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtistId,Name,PublicLink,Photo,IsPubliclyVisible")] Artist artist)
+        public async Task<IActionResult> Create([Bind("ArtistId,Name,PublicLink,Photo,IsPubliclyVisible,User")] Artist artist)
         {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            artist.User = user;
+
             if (ModelState.IsValid)
             {
                 _context.Add(artist);

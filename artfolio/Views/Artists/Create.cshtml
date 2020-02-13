@@ -1,4 +1,6 @@
 ﻿@model artfolio.Models.Artist
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Create";
@@ -33,6 +35,7 @@
                     <input class="form-check-input" asp-for="IsPubliclyVisible" /> @Html.DisplayNameFor(model => model.IsPubliclyVisible)
                 </label>
             </div>
+            <h3>UserID connected of @UserManager.GetUserName(User) : @UserManager.GetUserId(User)</h3>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

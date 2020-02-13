@@ -1,31 +1,5 @@
-﻿@model IEnumerable<ApplicationUser>
-
+﻿
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "H";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-
-    <table class="table">
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
-
-</div>

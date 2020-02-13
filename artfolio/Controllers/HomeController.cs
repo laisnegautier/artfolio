@@ -30,6 +30,12 @@ namespace artfolio.Controllers
             return View(await _userManager.Users.ToListAsync());
         }
 
+        public async Task<IActionResult> Index2()
+        {
+            return View(await _userManager.Users.ToListAsync());
+        }
+
+
         public IActionResult Privacy()
         {
             return View();

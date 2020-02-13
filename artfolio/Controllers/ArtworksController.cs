@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace artfolio.Controllers
 {
+    [Authorize]
     public class ArtworksController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -26,14 +27,16 @@ namespace artfolio.Controllers
         // GET: Artworks
         public async Task<IActionResult> Index()
         {
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-            //Artist currentArtist = _context.Artists.Single(x => x.UserId == user.Id);
-
-            ViewData["currentId"] = user.Id;
-            //ViewData["currentArtistName"] = user.Name;
-
             return View(await _context.Artworks.ToListAsync());
         }
+
+        // GET: MyArtworks
+        /*public async Task<IActionResult> MyArtworks()
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            
+            return View(await _context.Artworks.Where(a => a.Artist.User == user).ToListAsync());
+        }*/
 
         // GET: Artworks/Details/5
         public async Task<IActionResult> Details(int? id)
