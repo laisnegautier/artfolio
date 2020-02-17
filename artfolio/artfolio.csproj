@@ -24,6 +24,12 @@
     <Compile Remove="Migrations\20200212094024_FollowerTablesManyToManyUpdate.Designer.cs" />
     <Compile Remove="Migrations\20200212094715_newTestFollower.cs" />
     <Compile Remove="Migrations\20200212094715_newTestFollower.Designer.cs" />
+    <Compile Remove="Migrations\20200213115928_test.cs" />
+    <Compile Remove="Migrations\20200213115928_test.Designer.cs" />
+    <Compile Remove="Migrations\20200217072756_AjoutCategoryEnum.cs" />
+    <Compile Remove="Migrations\20200217072756_AjoutCategoryEnum.Designer.cs" />
+    <Compile Remove="Migrations\20200217073720_Slight.cs" />
+    <Compile Remove="Migrations\20200217073720_Slight.Designer.cs" />
   </ItemGroup>
 
 

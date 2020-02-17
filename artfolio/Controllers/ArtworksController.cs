@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using artfolio.Data;
 using artfolio.Models;
+using artfolio.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -41,6 +42,7 @@ namespace artfolio.Controllers
         // GET: Artworks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -56,6 +58,13 @@ namespace artfolio.Controllers
             return View(artwork);
         }
 
+        // Add of tag AJAX
+        [HttpPost]
+        public int AddTag(int number1, int number2)
+        {
+            return number1 + number2;
+        }
+
         // GET: Artworks/Create
         [Authorize]
         public IActionResult Create()
@@ -69,15 +78,41 @@ namespace artfolio.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ArtworkId,Title,Description,CreationDate,ReleaseDate,Privacy,License")] Artwork artwork)
+        public async Task<IActionResult> Create(ArtworkCreateViewModel viewModel)
         {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+            Artist artist = _context.Artists.Single(x => x.User == user);
+
+            Artwork artwork = new Artwork 
+            {
+                Title = viewModel.Artwork.Title,
+                Description = viewModel.Artwork.Description,
+                CreationDate = DateTime.Now,
+                ReleaseDate = viewModel.Artwork.ReleaseDate,
+                Privacy = viewModel.Artwork.Privacy,
+                License = viewModel.Artwork.License,
+                Category = viewModel.Artwork.Category,
+                Artist = artist
+            };
+
+            Tag tag = new Tag { Name = viewModel.Tag.Name };
+
+            ArtworkTag artworkTag = new ArtworkTag
+            {
+                Artwork = artwork,
+                Tag = tag
+            };
+
             if (ModelState.IsValid)
             {
                 _context.Add(artwork);
+                _context.Add(tag);
+                _context.Add(artworkTag);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(artwork);
+            return View(viewModel);
         }
 
         // GET: Artworks/Edit/5

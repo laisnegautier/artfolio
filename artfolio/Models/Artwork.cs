@@ -13,8 +13,6 @@ namespace artfolio.Models
         [Required]
         public string Title { get; set; }
         public string Description { get; set; }
-        [Required]
-        [Display(Name = "Creation Date")]
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
         [Required]
@@ -25,9 +23,10 @@ namespace artfolio.Models
         public Visibility Privacy { get; set; }
         [Required]
         public CreativeCommonsLicense License { get; set; }
+        [Required]
+        public Category Category { get; set; }
 
         public Artist Artist { get; set; }
-        public ArtworkCategory ArtworkCategory { get; set; }
 
         public IList<Document> Documents { get; set; }
         public IList<Support> Supports { get; set; }
@@ -59,5 +58,21 @@ namespace artfolio.Models
         Public = 1,
         [Display(Name = "I'm the only one")]
         Private = 2
+    }
+
+    public enum Category
+    {
+        [Display(Name = "Painting")]
+        Painting = 1,
+        [Display(Name = "Photography")]
+        Photography = 2,
+        [Display(Name = "Drawing")]
+        Drawing = 3,
+        [Display(Name = "Writing")]
+        Writing = 4,
+        [Display(Name = "Sheet music")]
+        SheetMusic = 5,
+        [Display(Name = "Audio")]
+        Audio = 6
     }
 }

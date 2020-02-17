@@ -1,4 +1,4 @@
-﻿@model artfolio.Models.Artwork
+﻿@model artfolio.ViewModels.ArtworkCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -14,34 +14,39 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="@Model.Artwork.Title" class="control-label"></label>
+                <input asp-for="@Model.Artwork.Title" class="form-control" />
+                <span asp-validation-for="@Model.Artwork.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="@Model.Artwork.Description" class="control-label"></label>
+                <input asp-for="@Model.Artwork.Description" class="form-control" />
+                <span asp-validation-for="@Model.Artwork.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control" />
-                <span asp-validation-for="CreationDate" class="text-danger"></span>
+                <label asp-for="@Model.Artwork.ReleaseDate" class="control-label"></label>
+                <input asp-for="@Model.Artwork.ReleaseDate" class="form-control" />
+                <span asp-validation-for="@Model.Artwork.ReleaseDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                <label asp-for="@Model.Artwork.Privacy" class="control-label"></label>
+                <select asp-for="@Model.Artwork.Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control"></select>
+                <span asp-validation-for="@Model.Artwork.Privacy" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Privacy" class="control-label"></label>
-                <select asp-for="@Model.Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control"></select>
-                <span asp-validation-for="Privacy" class="text-danger"></span>
+                <label asp-for="@Model.Artwork.License" class="control-label"></label>
+                <select asp-for="@Model.Artwork.License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control"></select>
+                <span asp-validation-for="@Model.Artwork.License" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="License" class="control-label"></label>
-                <select asp-for="@Model.License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control"></select>
-                <span asp-validation-for="License" class="text-danger"></span>
+                <label asp-for="@Model.Artwork.Category" class="control-label"></label>
+                <select asp-for="@Model.Artwork.Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+                <span asp-validation-for="@Model.Artwork.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Tag.Name" class="control-label">Tag name</label>
+                <input asp-for="@Model.Tag.Name" class="form-control" />
+                <span asp-validation-for="@Model.Tag.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
