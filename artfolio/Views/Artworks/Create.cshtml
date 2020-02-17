@@ -11,8 +11,30 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- DOCUMENT -->
+            <div class="form-group">
+                <label asp-for="@Model.Document.IsMainDocument" class="form-check-label"></label>
+                <input type="checkbox" asp-for="@Model.Document.IsMainDocument" class="form-check-input" />
+                <span asp-validation-for="@Model.Document.IsMainDocument" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Document.Media" class="control-label"></label>
+                <select asp-for="@Model.Document.Media" asp-items="Html.GetEnumSelectList<DocumentMedia>()" class="form-control"></select>
+                <span asp-validation-for="@Model.Document.Media" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.File" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="@Model.File" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+                <span asp-validation-for="@Model.File" class="text-danger"></span>
+            </div>
+
+
+            <!-- ARTWORK -->
             <div class="form-group">
                 <label asp-for="@Model.Artwork.Title" class="control-label"></label>
                 <input asp-for="@Model.Artwork.Title" class="form-control" />
@@ -44,6 +66,7 @@
                 <span asp-validation-for="@Model.Artwork.Category" class="text-danger"></span>
             </div>
 
+            <!-- TAGS -->
             <!-- Il suffit juste d'indexer dans l'ordre et tout marche correctement -->
             <div class="form-group">
                 <label asp-for="@Model.Tags[0].Name" class="control-label">Tag name</label>
@@ -73,5 +96,13 @@
 </div>
 
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

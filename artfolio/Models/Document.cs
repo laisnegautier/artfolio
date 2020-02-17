@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace artfolio.Models
 {
@@ -14,14 +15,13 @@ namespace artfolio.Models
     {
         public int DocumentId { get; set; }
 
-        [Required]
+        [Display(Name = "Main document")]
         public bool IsMainDocument { get; set; }
-        [Required] // 0 is the main document
+        // 0 is the main document
         public int Position { get; set; }
-        [Required]
         public DocumentMedia Media { get; set; }
+        public string FilePath { get; set; }
 
-        [Required]
         public Artwork Artwork { get; set; }
     }
 

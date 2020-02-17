@@ -10,6 +10,10 @@ using artfolio.Models;
 using artfolio.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
+using System.IO;
 
 namespace artfolio.Controllers
 {
@@ -18,11 +22,13 @@ namespace artfolio.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnv;
 
-        public ArtworksController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public ArtworksController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnv)
         {
             _userManager = userManager;
             _context = context;
+            _hostingEnv = hostingEnv;
         }
 
         // GET: Artworks
@@ -84,6 +90,16 @@ namespace artfolio.Controllers
         {
             if (ModelState.IsValid)
             {
+                // FILE
+                string uniqueFileName = null;
+                if(viewModel.File != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, "images/artworks");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.File.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
                 // Link to the current user (who is the artist)
                 ApplicationUser user = await _userManager.GetUserAsync(User);
                 Artist artist = _context.Artists.Single(x => x.User == user);
@@ -99,8 +115,17 @@ namespace artfolio.Controllers
                     Category = viewModel.Artwork.Category,
                     Artist = artist
                 };
+                
+                Document documentToAdd = new Document
+                {
+                    IsMainDocument = viewModel.Document.IsMainDocument,
+                    Media = viewModel.Document.Media,
+                    FilePath = uniqueFileName,
+                    Artwork = artworkToAdd
+                };
 
                 _context.Add(artworkToAdd);
+                _context.Add(documentToAdd);
 
                 // Tag and linking many-to-many
                 foreach (Tag tag in viewModel.Tags)
