@@ -43,6 +43,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ArtworkTags)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documents)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -75,6 +78,14 @@
                 @foreach (var artworkTag in item.ArtworkTags)
                 {
                     @artworkTag.Tag.Name
+                    <br />
+                }
+            </td>
+            <td>
+                @foreach (var document in item.Documents)
+                {
+                    <img src="~/images/artworks/@document.FilePath" style="width: 50px; height: 50px" />
+                    @document.IsMainDocument;
                     <br />
                 }
             </td>

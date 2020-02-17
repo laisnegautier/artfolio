@@ -67,21 +67,11 @@
             </div>
 
             <!-- TAGS -->
-            <!-- Il suffit juste d'indexer dans l'ordre et tout marche correctement -->
+            <!-- Separation des tags par , ou ; -->
             <div class="form-group">
-                <label asp-for="@Model.Tags[0].Name" class="control-label">Tag name</label>
-                <input asp-for="@Model.Tags[0].Name" class="form-control" />
-                <span asp-validation-for="@Model.Tags[0].Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Tags[1].Name" class="control-label">Tag name2</label>
-                <input asp-for="@Model.Tags[1].Name" class="form-control" />
-                <span asp-validation-for="@Model.Tags[1].Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Tags[2].Name" class="control-label">Tag name3</label>
-                <input asp-for="@Model.Tags[2].Name" class="form-control" />
-                <span asp-validation-for="@Model.Tags[2].Name" class="text-danger"></span>
+                <label asp-for="@Model.Tags.Name" class="control-label">Associated tags</label>
+                <input asp-for="@Model.Tags.Name" class="form-control" data-role="tagsinput" />
+                <span asp-validation-for="@Model.Tags.Name" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -104,5 +94,20 @@
             });
         });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous">
+    </script>
+    <script src="~/js/tagsinput.js"></script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

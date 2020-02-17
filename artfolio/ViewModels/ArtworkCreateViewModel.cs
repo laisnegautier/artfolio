@@ -15,8 +15,9 @@ namespace artfolio.ViewModels
     {
         public Artwork Artwork { get; set; }
         public Document Document { get; set; }
-        public List<Tag> Tags { get; set; }
+        public Tag Tags { get; set; }
         public ArtworkTag ArtworkTag { get; set; }
+        [Required]
         public IFormFile File { get; set; }
         //public List<Document> Documents { get; set; }
     }

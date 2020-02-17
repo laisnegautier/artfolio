@@ -34,23 +34,18 @@ namespace artfolio.Controllers
         // GET: Artworks
         public async Task<IActionResult> Index()
         {
-            var artworks = await _context.Artworks.Include(x => x.ArtworkTags).ThenInclude(artworkTags => artworkTags.Tag).ToListAsync();
+            var artworks = await _context.Artworks
+                .Include(x => x.ArtworkTags)
+                    .ThenInclude(artworkTags => artworkTags.Tag)
+                .Include(x => x.Documents)
+                .ToListAsync();
 
             return View(artworks);
         }
 
-        // GET: MyArtworks
-        /*public async Task<IActionResult> MyArtworks()
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-            
-            return View(await _context.Artworks.Where(a => a.Artist.User == user).ToListAsync());
-        }*/
-
         // GET: Artworks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
@@ -90,7 +85,7 @@ namespace artfolio.Controllers
         {
             if (ModelState.IsValid)
             {
-                // FILE
+                // FILE UPLOAD
                 string uniqueFileName = null;
                 if(viewModel.File != null)
                 {
@@ -128,9 +123,13 @@ namespace artfolio.Controllers
                 _context.Add(documentToAdd);
 
                 // Tag and linking many-to-many
-                foreach (Tag tag in viewModel.Tags)
+                char[] delimiterChars = { ',', '.', ';' };
+
+                string[] tags = viewModel.Tags.Name.Split(delimiterChars);
+
+                foreach (string tag in tags)
                 {
-                    Tag tagToAdd = new Tag { Name = tag.Name };
+                    Tag tagToAdd = new Tag { Name = tag };
                     ArtworkTag artworkTagToAdd = new ArtworkTag { Artwork = artworkToAdd, Tag = tagToAdd };
 
                     _context.Add(tagToAdd);
