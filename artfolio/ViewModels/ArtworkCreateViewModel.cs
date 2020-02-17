@@ -13,7 +13,8 @@ namespace artfolio.ViewModels
     public class ArtworkCreateViewModel
     {
         public Artwork Artwork { get; set; }
-        public Tag Tag { get; set; }
+        public List<Tag> Tags { get; set; }
         public ArtworkTag ArtworkTag { get; set; }
+        //public List<Document> Documents { get; set; }
     }
 }

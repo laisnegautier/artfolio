@@ -19,19 +19,19 @@ namespace artfolio.Models
         [Required] // 0 is the main document
         public int Position { get; set; }
         [Required]
-        public DocumentCategory Category { get; set; }
+        public DocumentMedia Media { get; set; }
 
         [Required]
         public Artwork Artwork { get; set; }
     }
 
-    public enum DocumentCategory
+    public enum DocumentMedia
     {
-        Photography = 1,
-        Painting = 2,
-        Drawing = 3,
-        Writing = 4,
-        Audio = 5,
-        SheetMusic = 6
+        [Display(Name = "Picture (.jpeg or .png)")]
+        Picture = 1,
+        [Display(Name = "Audio (.wav, .aac or .mp3)")]
+        Audio = 2,
+        [Display(Name = "PDF")]
+        PDF = 3
     }
 }

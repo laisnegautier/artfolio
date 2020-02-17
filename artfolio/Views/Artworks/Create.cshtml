@@ -43,11 +43,24 @@
                 <select asp-for="@Model.Artwork.Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
                 <span asp-validation-for="@Model.Artwork.Category" class="text-danger"></span>
             </div>
+
+            <!-- Il suffit juste d'indexer dans l'ordre et tout marche correctement -->
             <div class="form-group">
-                <label asp-for="@Model.Tag.Name" class="control-label">Tag name</label>
-                <input asp-for="@Model.Tag.Name" class="form-control" />
-                <span asp-validation-for="@Model.Tag.Name" class="text-danger"></span>
+                <label asp-for="@Model.Tags[0].Name" class="control-label">Tag name</label>
+                <input asp-for="@Model.Tags[0].Name" class="form-control" />
+                <span asp-validation-for="@Model.Tags[0].Name" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="@Model.Tags[1].Name" class="control-label">Tag name2</label>
+                <input asp-for="@Model.Tags[1].Name" class="form-control" />
+                <span asp-validation-for="@Model.Tags[1].Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Tags[2].Name" class="control-label">Tag name3</label>
+                <input asp-for="@Model.Tags[2].Name" class="form-control" />
+                <span asp-validation-for="@Model.Tags[2].Name" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -40,6 +40,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtworkTags)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -67,6 +70,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @foreach (var artworkTag in item.ArtworkTags)
+                {
+                    @artworkTag.Tag.Name
+                    <br />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ArtworkId">Edit</a> |
