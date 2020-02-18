@@ -37,7 +37,7 @@ namespace artfolio.Controllers
             if (!String.IsNullOrEmpty(search))
             {
                 search = search.ToLower();
-                artworks = _context.Artworks.Where(x => x.Title.Contains(search));
+                artworks = artworks.Where(x => x.Title.Contains(search));
             }
 
             // CATEGORY
