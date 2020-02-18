@@ -34,13 +34,15 @@ namespace artfolio.Controllers
         // GET: Artworks
         public async Task<IActionResult> Index()
         {
-            var artworks = await _context.Artworks
+            var artworks = from a in _context.Artworks
+                           select a;
+            
+            artworks = _context.Artworks
                 .Include(x => x.ArtworkTags)
                     .ThenInclude(artworkTags => artworkTags.Tag)
-                .Include(x => x.Documents)
-                .ToListAsync();
+                .Include(x => x.Documents);
 
-            return View(artworks);
+            return View(await artworks.ToListAsync());
         }
 
         // GET: Artworks/Details/5
