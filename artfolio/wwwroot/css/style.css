@@ -7,6 +7,9 @@ body {
     position: relative;
 }
 
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
 header { 
     border-bottom: 0px solid lightgray;
     box-shadow: 0 3px 16px rgba(0,0,0,.1);
