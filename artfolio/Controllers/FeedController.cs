@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using artfolio.Models;
+using artfolio.ViewModels;
+using artfolio.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace artfolio.Controllers
+{
+    public class FeedController : Controller
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<HomeController> _logger;
+
+        public FeedController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            _context = context;
+            _logger = logger;
+            _userManager = userManager;
+        }
+
+        public async Task<IActionResult> Index(string search, string category)
+        {
+            // ARTWORKS REQUESTS
+            var artworks = from a in _context.Artworks
+                           select a;
+
+            // Sort: search
+            if (!String.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                artworks = artworks.Where(x => x.Title.Contains(search));
+            }
+
+            // Sort: category
+            if (!String.IsNullOrEmpty(category)) category = category.ToLower();
+            switch (category)
+            {
+                case "photography":
+                    artworks = artworks.Where(x => x.Category == Category.Photography);
+                    break;
+                case "drawing":
+                    artworks = artworks.Where(x => x.Category == Category.Drawing);
+                    break;
+                case "painting":
+                    artworks = artworks.Where(x => x.Category == Category.Painting);
+                    break;
+                case "writing":
+                    artworks = artworks.Where(x => x.Category == Category.Writing);
+                    break;
+                case "audio":
+                    artworks = artworks.Where(x => x.Category == Category.Audio);
+                    break;
+                case "sheetmusic":
+                    artworks = artworks.Where(x => x.Category == Category.SheetMusic);
+                    break;
+                default:
+                    break;
+            }
+
+            artworks = artworks
+                    .Include(x => x.ArtworkTags)
+                        .ThenInclude(artworkTag => artworkTag.Tag)
+                    .Include(x => x.Documents)
+                    .OrderByDescending(x => x.ReleaseDate);
+
+            // FOLLOWING REQUESTS
+            var following = from a in _context.Artists
+                           select a;
+
+            // What is actually send to the view
+            FeedIndexViewModel viewModel = new FeedIndexViewModel
+            {
+                // AsNoTracking means no caching. Useful for read-only queries.
+                Artworks = await artworks.AsNoTracking().ToListAsync(),
+                Following = await following.ToListAsync()
+            };
+
+            return View(viewModel);
+        }
+    }
+}

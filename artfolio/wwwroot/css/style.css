@@ -1,3 +1,68 @@
-﻿body {
-    border: 1px solid red;
+﻿html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+}
+
+header { 
+    border-bottom: 0px solid lightgray;
+    box-shadow: 0 3px 16px rgba(0,0,0,.1);
+}
+
+.btn-artfolio {
+    color: #F9A585;
+    background-color: #fff;
+    border-color: #F9A585;
+}
+
+    .btn-artfolio:hover {
+        color: #fff;
+        background-color: #F9A585;
+        border-color: #F9A585;
+    }
+
+    .btn-artfolio:focus, .btn-artfolio.focus {
+        box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
+}
+
+.form-artfolio:focus, .form-artfolio.focus {
+    border-color: #F9A585;
+    box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
+}
+
+
+.btn-search {
+    color: #F9A585;
+    border-color: #F9A585;
+}
+
+    .btn-search:hover {
+        background-color: #F9A585;
+        border-color: #F9A585;
+    }
+
+    .btn-search:active, .btn-serch:focus {
+        background-color: #F9A585;
+        border-color: #F9A585;
+        outline: #F9A585;
+    }
+
+main {
+    padding-bottom: 15rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fafafa;
+}
+
+@media (max-width: 767.98px) {
+    main {
+        padding-bottom: 25rem;
+    }
 }

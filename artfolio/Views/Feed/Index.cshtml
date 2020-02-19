@@ -1,0 +1,88 @@
+﻿@model artfolio.ViewModels.FeedIndexViewModel
+
+@{
+    ViewData["Title"] = "Feed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-2 border-info d-none d-lg-block">
+        <h2 class="font-weight-lighter">following</h2>
+        @if (!Model.Following.Any())
+        {
+            <h3>Follow an artist to contact him!</h3>
+        }
+        else
+        {
+        <ul class="list-unstyled">
+            @foreach (var artist in Model.Following)
+            {
+               <li><a asp-area="" asp-controller="Home" asp-action="Contact">@artist.Name</a></li>
+            }
+        </ul>
+        }
+    </div>
+    <div class="col-md-8">
+        <div class="row justify-content-between">
+            <h2 class="font-weight-lighter">feed</h2>
+            <div>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" class="btn btn-artfolio font-weight-light" role="button">none</a>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" asp-route-category="photography" class="btn btn-artfolio font-weight-light" role="button">photography</a>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" asp-route-category="drawing" class="btn btn-artfolio font-weight-light" role="button">drawing</a>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" asp-route-category="painting" class="btn btn-artfolio font-weight-light" role="button">painting</a>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" asp-route-category="writing" class="btn btn-artfolio font-weight-light" role="button">writing</a>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" asp-route-category="audio" class="btn btn-artfolio font-weight-light" role="button">audio</a>
+                <a asp-area="" asp-controller="Feed" asp-action="Index" asp-route-category="sheetmusic" class="btn btn-artfolio font-weight-light" role="button">sheet music</a>
+            </div>
+        </div>
+        <h5>Filter (artwork title)</h5>
+        <form asp-controller="Feed" asp-action="Index" method="get">
+            <p>
+                Title: <input type="text" name="search">
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
+
+        <div class="col-12 d-flex flex-wrap">
+            @if (!Model.Artworks.Any())
+            {
+                <h3>No match for your request!</h3>
+            }
+            else
+                @foreach (var artwork in Model.Artworks)
+                {
+                <div class="card m-2" style="width:200px">
+                    @if (artwork.Documents.Count != 0)
+                    {
+                        <img class="card-img-top" src="~/images/artworks/@artwork.Documents[0].FilePath" alt="Card image">
+                    }
+                    else
+                    {
+                        //TEXTE
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => artwork.Title)</h5>
+                        <h6>@Html.DisplayFor(modelItem => @artwork.Category)</h6><br />
+                        <p class="card-text">
+                            @Html.DisplayFor(modelItem => artwork.Description)
+                            <br /><em class="small">Release date: @Html.DisplayFor(modelItem => artwork.ReleaseDate)</em>
+                        </p>
+                        @if (artwork.ArtworkTags.Count != 0)
+                        {
+                            <div class="row">
+                                @foreach (var artworkTag in artwork.ArtworkTags)
+                                {
+                                    <span style="font-size: .7rem; background-color: cadetblue; color: white; padding: 3px 10px; border-radius: 50px; margin-left: 5px; margin-bottom: 5px;">@artworkTag.Tag.Name</span>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            //TEXTE
+                        }
+                        <a asp-action="Edit" asp-route-id="@artwork.ArtworkId" class="btn btn-artfolio stretched-link">See more</a>
+                    </div>
+                </div>
+                }
+        </div>
+</div>

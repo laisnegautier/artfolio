@@ -12,29 +12,65 @@
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="nav-left">
-                <a class="brand" asp-area="" asp-controller="Home" asp-action="Index"><span>art</span>folio</a>
+    <header class="mb-4">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand font-weight-light" asp-area="" asp-controller="Home" asp-action="Index"><span style="color: #F9A585;">art</span>folio</a>
 
-                <form class="search-box">
-                    <img src="~/images/design/home/search.png" alt="search for an artist, an artwork..." />
-                    <input type="text"
-                           placeholder="search for an artist, an artwork..." />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2 form-artfolio" type="search" placeholder="search for an artist, an artwork...">
+                    <button class="btn btn-artfolio my-2 my-sm-0" type="submit">search</button>
                 </form>
+
+                <partial name="_LoginPartialTest" />
             </div>
-            <partial name="_LoginPartialHome" />
         </nav>
     </header>
 
-    <div>
+    <main role="main" class="col-12">
         @RenderBody()
-    </div>
+    </main>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/ajaxRequests.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
+    <footer class="footer fixed-bottom font-small pt-4">
+
+            <div class="container text-center text-md-left">
+
+                <div class="row">         
+                    <div class="col-md-6 mx-auto">
+                        <h5 class="font-weight-lighter">artfolio</h5>
+                        <p>
+                            Description du projet de l'ENSC. Fait par Gautier LAISNE. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                            harum esse fugiat. Itaque, culpa?
+                        </p>
+                    </div>
+
+                    <hr class="clearfix w-100 d-md-none">
+
+                    <div class="col-md-3 mx-auto">
+                        <h5 class="font-weight-lighter">infos</h5>
+                        <ul class="list-unstyled">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-copyright text-muted text-center small py-3">
+                © 2020 Copyright:
+                <a href="https://mdbootstrap.com/education/bootstrap/">artfolio</a>
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/ajaxRequests.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>
