@@ -69,3 +69,74 @@ main {
         padding-bottom: 25rem;
     }
 }
+
+.card {
+    border-color: lightgray;
+    background-color: white;
+    transition: all .15s ease-in-out;
+}
+
+.card:hover {
+    border-color: white;
+    box-shadow: 0 2px 7px lightgray;
+}
+
+
+/*GALLERY*/
+.row-card {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column-card {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 6px;
+}
+
+.artwork-card {
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px lightgray;
+    /*position: relative;
+    z-index: 1;*/
+}
+
+.description-card {
+    width: 100%;
+    background: white;
+    color: black;
+    padding: 10px;
+    /*position: absolute;
+    bottom: 0px;
+    z-index: 3;*/
+}
+
+.column-card img {
+    vertical-align: middle;
+    width: 100%;
+}
+
+.tag {
+    border: 1px solid lightgray;
+    padding: 1px 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column-card {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column-card {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
