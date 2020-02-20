@@ -44,24 +44,31 @@ namespace artfolio.Controllers
             switch (category)
             {
                 case "photography":
+                    ViewData["selection"] = "photography";
                     artworks = artworks.Where(x => x.Category == Category.Photography);
                     break;
                 case "drawing":
+                    ViewData["selection"] = "drawing";
                     artworks = artworks.Where(x => x.Category == Category.Drawing);
                     break;
                 case "painting":
+                    ViewData["selection"] = "painting";
                     artworks = artworks.Where(x => x.Category == Category.Painting);
                     break;
                 case "writing":
+                    ViewData["selection"] = "writing";
                     artworks = artworks.Where(x => x.Category == Category.Writing);
                     break;
                 case "audio":
+                    ViewData["selection"] = "audio";
                     artworks = artworks.Where(x => x.Category == Category.Audio);
                     break;
                 case "sheetmusic":
+                    ViewData["selection"] = "sheetmusic";
                     artworks = artworks.Where(x => x.Category == Category.SheetMusic);
                     break;
                 default:
+                    ViewData["selection"] = "";
                     break;
             }
 
@@ -69,6 +76,7 @@ namespace artfolio.Controllers
                     .Include(x => x.ArtworkTags)
                         .ThenInclude(artworkTag => artworkTag.Tag)
                     .Include(x => x.Documents)
+                    .Include(x => x.Artist)
                     .OrderByDescending(x => x.ReleaseDate);
 
             // FOLLOWING REQUESTS

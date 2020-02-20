@@ -125,6 +125,23 @@ main {
     border-radius: 3px;
 }
 
+.btn-category {
+    border: 0;
+}
+
+.btn-category:hover {
+    background-color: #f3f3f3;
+}
+
+.btn-category:focus, .btn-category.focus {
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 6px lightgray;
+}
+
+.selected {
+    background-color: #f3f3f3;
+}
+
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
     .column-card {
