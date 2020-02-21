@@ -40,6 +40,13 @@ header {
         box-shadow: none;
     }
 
+.profile-pic-nav {
+    width: 70px;
+    height: 70px;
+    background-color: #F3F3F3;
+    border-radius: 100px;
+}
+
 .btn-artfolio {
     color: #F9A585;
     background-color: #fff;
