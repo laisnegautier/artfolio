@@ -12,8 +12,33 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 header { 
     border-bottom: 0px solid lightgray;
-    box-shadow: 0 3px 16px rgba(0,0,0,.1);
+    /*box-shadow: 0 3px 16px rgba(0,0,0,.1);*/
 }
+.navbar-brand {
+    font-size: 3.5rem !important;
+    color: #747474 !important;
+    font-weight: lighter !important;
+    padding: 0 !important;
+    margin-top: -14px;
+}
+
+.search-box-header {
+    border: 1px solid #DEDEDE;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    border-radius: 5px;
+}
+
+    .search-box-header input {
+        border: 0px;
+        width: 90% !important;
+    }
+    .search-box-header input:focus, .search-box-header input.focus {
+        box-shadow: none;
+    }
 
 .btn-artfolio {
     color: #F9A585;
