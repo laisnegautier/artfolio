@@ -6,13 +6,13 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a asp-area="" asp-controller="Feed" asp-action="Index" class="nav-link">feed</a>
+            <a asp-area="" asp-controller="Feed" asp-action="Index" class="nav-link sign-in primary-underline">feed</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">publish artwork</a>
+            <a class="nav-link sign-up" href="#">publish artwork</a>
         </li>
         <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="nav-link" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="d-inline-block d-lg-none">profile</span><div class="profile-pic-nav d-none d-lg-inline-block"></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -34,10 +34,10 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">sign in</a>
+            <a class="nav-link sign-in primary-underline" asp-area="Identity" asp-page="/Account/Login">sign in</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">sign up</a>
+            <a class="nav-link sign-up" asp-area="Identity" asp-page="/Account/Register">sign up</a>
         </li>
     }
 </ul>

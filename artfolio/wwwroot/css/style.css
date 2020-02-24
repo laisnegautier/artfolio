@@ -8,7 +8,7 @@ body {
 }
 
 p, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Source Sans Pro', sans-serif !important;
+    font-family: "Source Sans Pro", sans-serif !important;
 }
 header { 
     border-bottom: 0px solid lightgray;
@@ -28,8 +28,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    box-shadow: 0;
     border-radius: 5px;
+    transition: all .15s ease-in-out;
 }
 
     .search-box-header input {
@@ -40,12 +41,69 @@ header {
         box-shadow: none;
     }
 
+    .search-box-header:hover, .search-box-header:focus-within {
+        box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    }
+
 .profile-pic-nav {
     width: 70px;
     height: 70px;
     background-color: #F3F3F3;
     border-radius: 100px;
 }
+
+.menu-btn1 {
+    background: blue;
+}
+
+.sign-in {
+    background-color: #fff;
+    padding: 10px 15px;
+    font-family: "Source Sans Pro";
+    font-weight: 300 !important;
+    font-size: 1.1rem;
+    transition: all .15s ease-in-out;
+}
+
+.primary-underline {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+    .primary-underline:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        height: 0;
+        border: 2px solid #f9a585;
+        border-radius: 10px;
+        transition: all .15s ease-in-out;
+    }
+
+    .primary-underline:hover:before {
+        border: 2px solid #fc8b5e;
+    }
+
+.sign-up {
+    color: white !important;
+    background-color: #f9a585;
+    font-family: "Source Sans Pro";
+    padding: 10px 15px !important;
+    border-radius: 5px;
+    font-weight: 300 !important;
+    margin-left: 30px;
+    margin-right: 20px;
+    font-size: 1.1rem;
+    transition: all .15s ease-in-out;
+}
+
+    .sign-up:hover {
+        background-color: #fc8b5e;
+    }
 
 .btn-artfolio {
     color: #F9A585;
