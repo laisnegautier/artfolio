@@ -37,6 +37,27 @@ namespace artfolio
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            // Google authentication
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                })
+                .AddMicrosoftAccount(microsoftOptions =>
+                {
+                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                })
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
