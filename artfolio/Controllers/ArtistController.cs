@@ -11,12 +11,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace artfolio.Controllers
 {
-    public class ArtistsController : Controller
+    public class ArtistController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public ArtistsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public ArtistController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;

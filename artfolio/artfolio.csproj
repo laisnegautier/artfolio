@@ -52,7 +52,6 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\NewFolder\" />
     <Folder Include="wwwroot\images\artworks\" />
   </ItemGroup>
 

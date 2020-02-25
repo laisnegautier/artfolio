@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700&display=swap"
           rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/publish.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/tagsinput.css" type="text/css">
 </head>
@@ -42,40 +43,40 @@
 
     <footer class="footer fixed-bottom font-small pt-4">
 
-            <div class="container text-center text-md-left">
+        <div class="container text-center text-md-left">
 
-                <div class="row">         
-                    <div class="col-md-6 mx-auto">
-                        <h5 class="font-weight-lighter">artfolio</h5>
-                        <p>
-                            Description du projet de l'ENSC. Fait par Gautier LAISNE. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                            harum esse fugiat. Itaque, culpa?
-                        </p>
-                    </div>
-
-                    <hr class="clearfix w-100 d-md-none">
-
-                    <div class="col-md-3 mx-auto">
-                        <h5 class="font-weight-lighter">infos</h5>
-                        <ul class="list-unstyled">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
-                        </ul>
-                    </div>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <h5 class="font-weight-lighter">artfolio</h5>
+                    <p>
+                        Description du projet de l'ENSC. Fait par Gautier LAISNE. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        harum esse fugiat. Itaque, culpa?
+                    </p>
                 </div>
 
+                <hr class="clearfix w-100 d-md-none">
+
+                <div class="col-md-3 mx-auto">
+                    <h5 class="font-weight-lighter">infos</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="footer-copyright text-muted text-center small py-3">
-                © 2020 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/">artfolio</a>
-            </div>
-        </footer>
+        </div>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/ajaxRequests.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
-    </body>
+        <div class="footer-copyright text-muted text-center small py-3">
+            © 2020 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/">artfolio</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/ajaxRequests.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
 </html>

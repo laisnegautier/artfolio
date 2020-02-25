@@ -18,13 +18,13 @@ using System.IO;
 namespace artfolio.Controllers
 {
     [Authorize]
-    public class ArtworksController : Controller
+    public class ArtworkController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnv;
 
-        public ArtworksController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnv)
+        public ArtworkController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnv)
         {
             _userManager = userManager;
             _context = context;
@@ -63,16 +63,9 @@ namespace artfolio.Controllers
             return View(artwork);
         }
 
-        // Add of tag AJAX
-        [HttpPost]
-        public int AddTag(int number1, int number2)
-        {
-            return number1 + number2;
-        }
-
         // GET: Artworks/Create
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Publish()
         {
             return View();
         }
@@ -83,7 +76,7 @@ namespace artfolio.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ArtworkCreateViewModel viewModel)
+        public async Task<IActionResult> Publish(ArtworkCreateViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
