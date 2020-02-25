@@ -76,7 +76,7 @@ namespace artfolio.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Publish(ArtworkCreateViewModel viewModel)
+        public async Task<IActionResult> Publish(ArtworkPublishViewModel viewModel)
         {
             if (ModelState.IsValid)
             {

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 namespace artfolio.ViewModels
 {
     // ControllerActionViewModel
-    public class ArtworkCreateViewModel
+    public class ArtworkPublishViewModel
     {
         public Artwork Artwork { get; set; }
         public Document Document { get; set; }
