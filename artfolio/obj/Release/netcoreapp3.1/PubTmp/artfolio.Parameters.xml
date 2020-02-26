@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="artfolioP2I" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="artfolio.Data.ApplicationDbContext" description="" value="Data Source=tcp:artfoliop2idbserver.database.windows.net,1433;Initial Catalog=artfolioP2I_db;User Id=laisnegautier@artfoliop2idbserver;Password=Y2drnstine3" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\artfolio\.Data\.ApplicationDbContext\.sql$" />
+  </parameter>
+</parameters>

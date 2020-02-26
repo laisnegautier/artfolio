@@ -1,0 +1,566 @@
+﻿html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+}
+
+.body-home {
+    background: url("../images/design/home/background.svg") left top;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: "Source Sans Pro", sans-serif !important;
+}
+
+h1, h3 {
+    font-weight: 200 !important;
+}
+
+.container-publish {
+    border: 1px solid #DEDEDE;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header { 
+    border-bottom: 0px solid lightgray;
+    z-index: 5;
+    position: relative;
+    background: #fff;
+    /*box-shadow: 0 3px 16px rgba(0,0,0,.1);*/
+}
+
+.navbar-collapse {
+    background: #fff;
+}
+
+.home-main {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-brand {
+    font-size: 6rem !important;
+    color: #747474 !important;
+    font-weight: lighter !important;
+    padding: 0 !important;
+    margin-top: -14px;
+    font-family: "Source Sans Pro" !important;
+    /*margin-bottom: 0;*/
+}
+
+.navbar-brand {
+    font-size: 3.5rem !important;
+    color: #747474 !important;
+    font-weight: lighter !important;
+    padding: 0 !important;
+    margin-top: -14px;
+    font-family: "Source Sans Pro" !important;
+}
+
+.search-box-header {
+    border: 1px solid #DEDEDE;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0;
+    border-radius: 5px;
+    transition: all .15s ease-in-out;
+}
+
+    .search-box-header input {
+        border: 0px;
+        width: 90% !important;
+    }
+    .search-box-header input:focus, .search-box-header input.focus {
+        box-shadow: none;
+    }
+
+    .search-box-header:hover, .search-box-header:focus-within {
+        box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    }
+    
+.profile-pic-nav {
+    width: 70px;
+    height: 70px;
+    background-color: #F3F3F3;
+    border-radius: 100px;
+}
+
+.menu-btn1 {
+    background: blue;
+}
+
+.sign-in {
+    background-color: #fff;
+    padding: 10px 15px;
+    font-family: "Source Sans Pro";
+    font-weight: 300 !important;
+    font-size: 1.15rem;
+    color: black !important;
+    transition: all .15s ease-in-out;
+}
+
+.primary-underline {
+    position: relative;
+    display: inline-block;
+    z-index: 0;
+}
+
+    .primary-underline:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        height: 0;
+        border: 2px solid #f9a585;
+        border-radius: 10px;
+        transition: all .15s ease-in-out;
+    }
+
+    .primary-underline:hover:before {
+        border: 2px solid #fc8b5e;
+    }
+
+.sign-up {
+    color: white !important;
+    background-color: #f9a585;
+    font-family: "Source Sans Pro";
+    padding: 10px 15px !important;
+    border-radius: 5px;
+    font-weight: 300 !important;
+    margin-left: 30px;
+    margin-right: 20px;
+    font-size: 1.15rem;
+    transition: all .15s ease-in-out;
+}
+
+    .sign-up:hover {
+        background-color: #fc8b5e;
+    }
+
+.btn-artfolio {
+    color: #F9A585;
+    background-color: #fff;
+    border-color: #F9A585;
+}
+
+    .btn-artfolio:hover {
+        color: #fff;
+        background-color: #F9A585;
+        border-color: #F9A585;
+    }
+
+    .btn-artfolio:focus, .btn-artfolio.focus {
+        box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
+}
+
+.form-artfolio:focus, .form-artfolio.focus {
+    border-color: #F9A585;
+    box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
+}
+
+
+.btn-search {
+    color: #F9A585;
+    border-color: #F9A585;
+}
+
+    .btn-search:hover {
+        background-color: #F9A585;
+        border-color: #F9A585;
+    }
+
+    .btn-search:active, .btn-serch:focus {
+        background-color: #F9A585;
+        border-color: #F9A585;
+        outline: #F9A585;
+    }
+
+main {
+    padding-bottom: 15rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fafafa;
+}
+
+@media (max-width: 767.98px) {
+    main {
+        padding-bottom: 25rem;
+    }
+}
+
+.card {
+    border-color: lightgray;
+    background-color: white;
+    transition: all .15s ease-in-out;
+}
+
+.card:hover {
+    border-color: white;
+    box-shadow: 0 2px 7px lightgray;
+}
+
+
+/*GALLERY*/
+.row-card {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column-card {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 6px;
+}
+
+.artwork-card {
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px lightgray;
+    /*position: relative;
+    z-index: 1;*/
+}
+
+.description-card {
+    width: 100%;
+    background: white;
+    color: black;
+    padding: 10px;
+    /*position: absolute;
+    bottom: 0px;
+    z-index: 3;*/
+}
+
+.column-card img {
+    vertical-align: middle;
+    width: 100%;
+}
+
+.tag {
+    border: 1px solid lightgray;
+    padding: 1px 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.btn-category {
+    border: 0;
+}
+
+.btn-category:hover {
+    background-color: #f3f3f3;
+}
+
+.btn-category img {
+}
+
+.btn-category:focus, .btn-category.focus {
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 6px lightgray;
+}
+
+.selected {
+    background-color: #f3f3f3;
+}
+
+.dropdown-menu {
+    border-radius: 5px;
+    border: 0px;
+    box-shadow: 0 2px 6px lightgray;
+}
+
+.btn-logout-form {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.dropdown-item > button {
+    background-color: transparent;
+    border: 0px;
+    width: 100%;
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.dropdown-item:focus, dropdown-item.focus {
+    color: black;
+    background-color: lightgray;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column-card {
+        flex: 50%;
+        max-width: 50%;
+    }
+
+    .sign-in {
+        background-color: #fff;
+        color: black !important;
+        padding: 10px 15px;
+        font-family: "Source Sans Pro";
+        font-weight: 300 !important;
+        font-size: 1.15rem;
+        transition: all .15s ease-in-out;
+    }
+
+    .primary-underline {
+        position: relative;
+        display: inline-block;
+        z-index: 0;
+    }
+
+        .primary-underline:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            height: 0;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            transition: none;
+        }
+
+        .primary-underline:hover:before {
+            border: 2px solid #fff;
+        }
+
+    .sign-up {
+        color: black !important;
+        background-color: #fff;
+        font-family: "Source Sans Pro";
+        padding: 0px 0px !important;
+        border-radius: 5px;
+        font-weight: 300 !important;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 1.15rem;
+        transition: all .15s ease-in-out;
+    }
+
+        .sign-up:hover {
+            background-color: #fff;
+        }
+}
+
+.discover-link {
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+    .discover-link a {
+        display: flex;
+        height: 90px;
+        padding: 20px;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        color: black;
+        font-family: "Source Sans Pro";
+        font-size: 1.5rem;
+        font-weight: 300 !important;
+        border: 1px solid transparent;
+        transition: all .15s ease-in-out;
+        box-shadow: 0;
+    }
+
+        .discover-link a:hover {
+            background: white;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,.1);
+            border-radius: 5px;
+            border: 1px solid #DEDEDE;
+            font-weight: 300 !important;
+        }
+
+    .discover-link img {
+        width: 20px;
+        height: 20px;
+    }
+
+.footer-home {
+    background: transparent;
+    font-weight: 300;
+    font-family: "Source Sans Pro";
+    z-index: 1;
+}
+
+.footer-home ul li {
+    margin-left: 20px;
+}
+
+    .footer-home a {
+        color: gray;
+        transition: all .15s ease-in-out;
+    }
+
+        .footer-home a:hover {
+            color: black;
+            text-decoration: none;
+        }
+
+    .footer-home a:focus, .footer-home a.focus {
+        color: black;
+    }
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column-card {
+        flex: 100%;
+        max-width: 100%;
+    }
+
+    .discover-link a {
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,.1);
+        border-radius: 5px;
+        border: 1px solid #fff;
+    }
+
+    .sign-in {
+        background-color: #fff;
+        color: black !important;
+        padding: 10px 15px;
+        font-family: "Source Sans Pro";
+        font-weight: 300 !important;
+        font-size: 1.15rem;
+        transition: all .15s ease-in-out;
+    }
+
+    .primary-underline {
+        position: relative;
+        display: inline-block;
+        z-index: 0;
+    }
+
+        .primary-underline:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            height: 0;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            transition: none;
+        }
+
+        .primary-underline:hover:before {
+            border: 2px solid #fff;
+        }
+
+    .sign-up {
+        color: black !important;
+        background-color: #fff;
+        font-family: "Source Sans Pro";
+        padding: 0px 0px !important;
+        border-radius: 5px;
+        font-weight: 300 !important;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 1.15rem;
+        transition: all .15s ease-in-out;
+    }
+
+        .sign-up:hover {
+            background-color: #fff;
+        }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 991.98px) {
+    .column-card {
+        flex: 100%;
+        max-width: 100%;
+    }
+
+    .discover-link a {
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,.1);
+        border-radius: 5px;
+        border: 1px solid #fff;
+    }
+
+    .sign-in {
+        background-color: #fff;
+        color: black !important;
+        padding: 10px 15px;
+        font-family: "Source Sans Pro";
+        font-weight: 300 !important;
+        font-size: 1.15rem;
+        transition: all .15s ease-in-out;
+    }
+
+    .primary-underline {
+        position: relative;
+        display: inline-block;
+        z-index: 0;
+    }
+
+        .primary-underline:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            height: 0;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            transition: none;
+        }
+
+        .primary-underline:hover:before {
+            border: 2px solid #fff;
+        }
+
+    .sign-up {
+        color: black !important;
+        background-color: #fff;
+        font-family: "Source Sans Pro";
+        padding: 0px 0px !important;
+        border-radius: 5px;
+        font-weight: 300 !important;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 1.15rem;
+        transition: all .15s ease-in-out;
+    }
+
+        .sign-up:hover {
+            background-color: #fff;
+        }
+}
