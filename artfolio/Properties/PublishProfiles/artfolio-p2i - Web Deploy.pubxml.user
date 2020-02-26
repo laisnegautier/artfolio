@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAai4lwCbCf0qG+2L5ALapYAAAAAACAAAAAAAQZgAAAAEAACAAAAAoY2CzY1i5DeHZJVl1c62zjkkC3oMb34MrV0G8pA5bnAAAAAAOgAAAAAIAACAAAABkapJvPwpPVAj2S4B8dW9mRySq3nozG6J+xOf7tKLlWoAAAABST7dUJq5wKqdGdugK68/+brJwCwGTMUe7SvAN/TOVZ0w0QYlml+LdmVy3GkGoitrctWpv8z2+9dSJFlhmoIFKjhb+QKiihzl6aByl0qkjEDpvGysolB+NEh1w0ssR1a4IPpZ+6W3EcsxzZPQzAoouGko4xVNNIBDrl3PwyOvOlUAAAADJIIuKeicQI9qSuG+eGLX568exykiFiRgLjKpvZYMri4pAUD4etQqj9Kth2M9ipCwrOMbEETJdd2QaAm2xSevX</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:artfolio-p2idbserver.database.windows.net,1433%3bInitial Catalog=artfolio-p2i_db%3bUser Id=laisnegautier%40artfolio-p2idbserver%3bPassword=Y2drnstine3</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="artfolio.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:artfolio-p2idbserver.database.windows.net,1433%3bInitial Catalog=artfolio-p2i_db%3bUser Id=laisnegautier%40artfolio-p2idbserver%3bPassword=Y2drnstine3</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="artfolioensc" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolioensc\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="artfolioensc.Data.ApplicationDbContext" description="" value="Data Source=tcp:artfolioenscdbserver.database.windows.net,1433;Initial Catalog=artfolioensc_db;User Id=laisnegautier@artfolioenscdbserver;Password=Y2drnstine3" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolioensc\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\artfolioensc\.Data\.ApplicationDbContext\.sql$" />
-  </parameter>
-</parameters>

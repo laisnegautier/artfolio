@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Artwork>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10" style="border: 1px solid green">
+            <h2 class="font-weight-lighter">discover</h2>
+
+            <h5>Choose category</h5>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index">none</a></button>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index" asp-route-category="photography">photography</a></button>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index" asp-route-category="drawing">drawing</a></button>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index" asp-route-category="painting">painting</a></button>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index" asp-route-category="writing">writing</a></button>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index" asp-route-category="audio">audio</a></button>
+            <button><a asp-area="" asp-controller="Discover" asp-action="Index" asp-route-category="sheetmusic">sheet music</a></button>
+
+            <h5>Filter (artwork title)</h5>
+            <form asp-controller="Discover" asp-action="Index" method="get">
+                <p>
+                    Title: <input type="text" name="search">
+                    <input type="submit" value="Filter" />
+                </p>
+            </form>
+
+            <div style="border: 1px solid green; width: 400px;">
+                @if (!Model.Any())
+                {
+                    <script type="text/javascript">
+                        alert("Model empty");
+                    </script>
+                }
+                else
+                    @foreach (var artwork in Model)
+                    {
+                        <div style="border: 4px solid #f3f3f3">
+                            <b>@Html.DisplayFor(modelItem => @artwork.Category)</b><br />
+                            <em>@Html.DisplayFor(modelItem => artwork.Title)</em>
+                            <br />
+                            <b>TAGS:</b>
+                            @foreach (var artworkTag in artwork.ArtworkTags)
+                            {
+                                @artworkTag.Tag.Name
+                                <br />
+                            }
+                            <br />
+                            <b>DOCUMENT:</b>
+                            @foreach (var document in artwork.Documents)
+                            {
+                                <img src="~/images/artworks/@document.FilePath" style="width: 50px; height: 50px" />
+                                @document.IsMainDocument;
+                                <br />
+                            }
+
+                            <br />
+                            <a asp-action="Edit" asp-route-id="@artwork.ArtworkId">See more</a>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
