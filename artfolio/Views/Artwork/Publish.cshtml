@@ -31,8 +31,86 @@
                 <div class="multisteps-form__panel p-4 js-active" data-animation="slideHorz">
                     <h3 class="multisteps-form__title">choose a category</h3>
                     <div class="multisteps-form__content">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Artwork</h4>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form asp-action="Publish" enctype="multipart/form-data" method="post">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <!-- DOCUMENT -->
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Document.IsMainDocument" class="form-check-label"></label>
+                                                <input type="checkbox" asp-for="@Model.Document.IsMainDocument" class="form-check-input" />
+                                                <span asp-validation-for="@Model.Document.IsMainDocument" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Document.Media" class="control-label"></label>
+                                                <select asp-for="@Model.Document.Media" asp-items="Html.GetEnumSelectList<DocumentMedia>()" class="form-control"></select>
+                                                <span asp-validation-for="@Model.Document.Media" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.File" class="control-label"></label>
+                                                <div class="custom-file">
+                                                    <input asp-for="@Model.File" class="form-control custom-file-input" />
+                                                    <label class="custom-file-label">Choose file</label>
+                                                </div>
+                                                <span asp-validation-for="@Model.File" class="text-danger"></span>
+                                            </div>
 
-                        <div class="row justify-content-center">
+
+                                            <!-- ARTWORK -->
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Artwork.Title" class="control-label"></label>
+                                                <input asp-for="@Model.Artwork.Title" class="form-control" />
+                                                <span asp-validation-for="@Model.Artwork.Title" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Artwork.Description" class="control-label"></label>
+                                                <input asp-for="@Model.Artwork.Description" class="form-control" />
+                                                <span asp-validation-for="@Model.Artwork.Description" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Artwork.ReleaseDate" class="control-label"></label>
+                                                <input asp-for="@Model.Artwork.ReleaseDate" class="form-control" />
+                                                <span asp-validation-for="@Model.Artwork.ReleaseDate" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Artwork.Privacy" class="control-label"></label>
+                                                <select asp-for="@Model.Artwork.Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control"></select>
+                                                <span asp-validation-for="@Model.Artwork.Privacy" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Artwork.License" class="control-label"></label>
+                                                <select asp-for="@Model.Artwork.License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control"></select>
+                                                <span asp-validation-for="@Model.Artwork.License" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Artwork.Category" class="control-label"></label>
+                                                <select asp-for="@Model.Artwork.Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+                                                <span asp-validation-for="@Model.Artwork.Category" class="text-danger"></span>
+                                            </div>
+
+                                            <!-- TAGS -->
+                                            <!-- Separation des tags par , ou ; -->
+                                            <div class="form-group">
+                                                <label asp-for="@Model.Tags.Name" class="control-label">Associated tags</label>
+                                                <input asp-for="@Model.Tags.Name" class="form-control" data-role="tagsinput" />
+                                                <span asp-validation-for="@Model.Tags.Name" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        @*<div class="row justify-content-center">
 
                             <div class="form-group">
                                 <label>
@@ -63,9 +141,9 @@
                                 </label>
                             </div>
 
-                        </div>
+                        </div>*@
 
-                        <div class="form-row">
+                        @*<div class="form-row">
                             <div class="col-4">
                                 <h3>upload your artwork</h3>
                                 <div class="form-group">
@@ -90,41 +168,44 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="@Model.Artwork.Description" class="control-label"></label>
-                                    <textarea asp-for="@Model.Artwork.Description" class="form-control" ></textarea>
+                                    <textarea asp-for="@Model.Artwork.Description" class="form-control"></textarea>
                                     <span asp-validation-for="@Model.Artwork.Description" class="text-danger"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
 
 
-                            <div class="form-row mt-4">
-                                <div class="col-12 col-sm-6">
-                                    <input class="multisteps-form__input form-control" type="text" placeholder="First Name" />
-                                </div>
-                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                    <input class="multisteps-form__input form-control" type="text" placeholder="Last Name" />
-                                </div>
+                        @*<div class="form-row mt-4">
+                            <div class="col-12 col-sm-6">
+                                <input class="multisteps-form__input form-control" type="text" placeholder="First Name" />
                             </div>
-                            <div class="form-row mt-4">
-                                <div class="col-12 col-sm-6">
-                                    <input class="multisteps-form__input form-control" type="text" placeholder="Login" />
-                                </div>
-                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                    <input class="multisteps-form__input form-control" type="email" placeholder="Email" />
-                                </div>
-                            </div>
-                            <div class="form-row mt-4">
-                                <div class="col-12 col-sm-6">
-                                    <input class="multisteps-form__input form-control" type="password" placeholder="Password" />
-                                </div>
-                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                    <input class="multisteps-form__input form-control" type="password" placeholder="Repeat Password" />
-                                </div>
-                            </div>
-                            <div class="button-row d-flex mt-4">
-                                <button class="btn ml-auto btn-artfolio js-btn-next" type="button" title="Next">next</button>
+                            <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                <input class="multisteps-form__input form-control" type="text" placeholder="Last Name" />
                             </div>
                         </div>
+                        <div class="form-row mt-4">
+                            <div class="col-12 col-sm-6">
+                                <input class="multisteps-form__input form-control" type="text" placeholder="Login" />
+                            </div>
+                            <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                <input class="multisteps-form__input form-control" type="email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="form-row mt-4">
+                            <div class="col-12 col-sm-6">
+                                <input class="multisteps-form__input form-control" type="password" placeholder="Password" />
+                            </div>
+                            <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                <input class="multisteps-form__input form-control" type="password" placeholder="Repeat Password" />
+                            </div>
+                        </div>
+                         *@
+
+                        <div class="button-row d-flex mt-4">
+                            <button class="btn ml-auto btn-artfolio js-btn-next" type="button" title="Next">next</button>
+                        </div>
+
+                    </div>
                 </div>
                 <!--single form panel-->
                 <div class="multisteps-form__panel  p-4  " data-animation="slideHorz">
@@ -207,89 +288,6 @@
         </div>
     </div>
 </div>
-
-@*
-    <div class="row">
-        <div class="col-12">
-            <h4>Artwork</h4>
-            <hr />
-            <div class="row">
-                <div class="col-md-4">
-                    <form asp-action="Publish" enctype="multipart/form-data" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <!-- DOCUMENT -->
-                        <div class="form-group">
-                            <label asp-for="@Model.Document.IsMainDocument" class="form-check-label"></label>
-                            <input type="checkbox" asp-for="@Model.Document.IsMainDocument" class="form-check-input" />
-                            <span asp-validation-for="@Model.Document.IsMainDocument" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Document.Media" class="control-label"></label>
-                            <select asp-for="@Model.Document.Media" asp-items="Html.GetEnumSelectList<DocumentMedia>()" class="form-control"></select>
-                            <span asp-validation-for="@Model.Document.Media" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.File" class="control-label"></label>
-                            <div class="custom-file">
-                                <input asp-for="@Model.File" class="form-control custom-file-input" />
-                                <label class="custom-file-label">Choose file</label>
-                            </div>
-                            <span asp-validation-for="@Model.File" class="text-danger"></span>
-                        </div>
-
-
-                        <!-- ARTWORK -->
-                        <div class="form-group">
-                            <label asp-for="@Model.Artwork.Title" class="control-label"></label>
-                            <input asp-for="@Model.Artwork.Title" class="form-control" />
-                            <span asp-validation-for="@Model.Artwork.Title" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Artwork.Description" class="control-label"></label>
-                            <input asp-for="@Model.Artwork.Description" class="form-control" />
-                            <span asp-validation-for="@Model.Artwork.Description" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Artwork.ReleaseDate" class="control-label"></label>
-                            <input asp-for="@Model.Artwork.ReleaseDate" class="form-control" />
-                            <span asp-validation-for="@Model.Artwork.ReleaseDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Artwork.Privacy" class="control-label"></label>
-                            <select asp-for="@Model.Artwork.Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control"></select>
-                            <span asp-validation-for="@Model.Artwork.Privacy" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Artwork.License" class="control-label"></label>
-                            <select asp-for="@Model.Artwork.License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control"></select>
-                            <span asp-validation-for="@Model.Artwork.License" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="@Model.Artwork.Category" class="control-label"></label>
-                            <select asp-for="@Model.Artwork.Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
-                            <span asp-validation-for="@Model.Artwork.Category" class="text-danger"></span>
-                        </div>
-
-                        <!-- TAGS -->
-                        <!-- Separation des tags par , ou ; -->
-                        <div class="form-group">
-                            <label asp-for="@Model.Tags.Name" class="control-label">Associated tags</label>
-                            <input asp-for="@Model.Tags.Name" class="form-control" data-role="tagsinput" />
-                            <span asp-validation-for="@Model.Tags.Name" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div>
-                <a asp-action="Index">Back to List</a>
-            </div>
-        </div>
-    </div>*@
 
 @section Scripts {
     <script>

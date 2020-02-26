@@ -18,12 +18,9 @@ namespace artfolio.Models
 
         public ApplicationUser User { get; set; }
 
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string PublicLink { get; set; }
         public byte[] Photo { get; set; }
-        [Required]
         public bool IsPubliclyVisible { get; set; }
 
         public ICollection<Artwork> Artworks { get; set; }

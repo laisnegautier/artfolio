@@ -274,14 +274,12 @@ namespace artfolio.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Photo")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("PublicLink")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

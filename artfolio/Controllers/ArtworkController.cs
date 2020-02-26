@@ -34,14 +34,17 @@ namespace artfolio.Controllers
         // GET: Artworks
         public async Task<IActionResult> Index()
         {
+            // Getting all artworks
             var artworks = from a in _context.Artworks
                            select a;
             
+            // Including related data (tags and document)
             artworks = _context.Artworks
                 .Include(x => x.ArtworkTags)
                     .ThenInclude(artworkTags => artworkTags.Tag)
                 .Include(x => x.Documents);
 
+            // Injecting these data into the associated view
             return View(await artworks.ToListAsync());
         }
 
@@ -92,7 +95,7 @@ namespace artfolio.Controllers
 
                 // Link to the current user (who is the artist)
                 ApplicationUser user = await _userManager.GetUserAsync(User);
-                Artist artist = _context.Artists.Single(x => x.User == user);
+                Artist artist = await _context.Artists.SingleAsync(x => x.User == user);
 
                 Artwork artworkToAdd = new Artwork
                 {
