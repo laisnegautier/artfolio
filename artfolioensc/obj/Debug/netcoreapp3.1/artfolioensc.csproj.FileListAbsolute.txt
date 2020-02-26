@@ -92,7 +92,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolioensc\obj\Debug\netcoreapp3.1\Razo
 C:\Users\Gautier\source\repos\artfolio\artfolioensc\obj\Debug\netcoreapp3.1\Razor\Views\Feed\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolioensc\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index2.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolioensc\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutHome.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolioensc\obj\Debug\netcoreapp3.1\artfolioensc.csprojAssemblyReference.cache
 C:\Users\Gautier\source\repos\artfolio\artfolioensc\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\Gautier\source\repos\artfolio\artfolioensc\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
 C:\Users\Gautier\source\repos\artfolio\artfolioensc\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
