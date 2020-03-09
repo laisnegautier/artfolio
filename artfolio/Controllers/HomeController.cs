@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using artfolio.Models;
+using artfolio.ViewModels;
 using artfolio.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,13 +27,44 @@ namespace artfolio.Controllers
         }
 
         public async Task<IActionResult> Index()
+        {            
+            return View(await _userManager.Users.ToListAsync());
+        }
+        
+        public async Task<IActionResult> Index2()
         {
             return View(await _userManager.Users.ToListAsync());
         }
 
-        public async Task<IActionResult> Index2()
+        public async Task<IActionResult> Search(string id)
         {
-            return View(await _userManager.Users.ToListAsync());
+            if (String.IsNullOrEmpty(id)) return NotFound();
+
+            // REQUESTS
+            var artworks = from a in _context.Artworks
+                           select a;
+            var artists = from a in _context.Artists
+                          select a;
+
+            // QUERIES
+            artworks = artworks.Where(x => x.Title.Contains(id));
+            artists = artists.Where(x => x.Name.Contains(id));
+
+            // SORT
+            artworks = artworks
+                    .Include(x => x.ArtworkTags)
+                        .ThenInclude(artworkTag => artworkTag.Tag)
+                    .Include(x => x.Documents)
+                    .Include(x => x.Artist)
+                    .OrderByDescending(x => x.ReleaseDate);
+
+            SearchIndexViewModel viewModel = new SearchIndexViewModel
+            {
+                Artworks = await artworks.ToListAsync(),
+                Artists = await artists.ToListAsync()
+            };
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> CurrentUser()

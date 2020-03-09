@@ -43,10 +43,10 @@
     <main class="home-main">
         <div class="centered col-12 col-md-10">
             <h1 class="home-brand font-weight-light d-none d-lg-block"><span style="color: #F9A585;">art</span>folio</h1>
-            <form class="form-inline my-lg-0 search-box-header px-1 py-1 col-lg-9 col-xl-6">
+            <form asp-controller="Search" asp-action="Index" method="get" class="form-inline my-lg-0 search-box-header px-1 py-1 col-lg-9 col-xl-6">
                 <div class="col-10 d-flex flex-row col-sm-9 col-lg-10">
                     <img src="~/images/icons/search-outline.svg" width="20" class="d-inline-block" />
-                    <input class="form-control mr-md-2 form-artfolio" type="search" placeholder="search for an artist, an artwork... (NOT WORKING)">
+                    <input class="form-control mr-md-2 form-artfolio" type="search" name="q" placeholder="search for an artist, an artwork...">
                 </div>
                 <button class="btn btn-artfolio my-0 btn-category" type="submit">
                     <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
