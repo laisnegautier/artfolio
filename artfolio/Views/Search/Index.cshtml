@@ -18,19 +18,44 @@
 }
 
 <div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="row justify-content-between">
+    <div class="col-md-3 d-none d-lg-block">
+        <h2 class="font-weight-lighter">artists</h2>
+
+        @if (!Model.Artists.Any())
+        {
+            <h5>No artist found</h5>
+        }
+        else
+        {
+            <div class="row-card p-0 m-0">
+                @foreach (var artist in Model.Artists)
+                {
+                    @Html.DisplayForModel(artist.Name);
+                }
+            </div>
+        }
+    </div>
+    <div class="col-md-9">
+        <div class="d-flex justify-content-between">
             <h2 class="font-weight-lighter">artworks</h2>
             <div>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("photography")" class="btn btn-artfolio font-weight-light btn-category @selection("photography")" role="button" alt="photography" title="photography"><img src="~/images/icons/camera-outline.svg" width="25" alt="photography" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("painting")" class="btn btn-artfolio font-weight-light btn-category @selection("painting")" role="button" alt="painting" title="painting"><img src="~/images/icons/color-palette-outline.svg" width="25" alt="painting" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("drawing")" class="btn btn-artfolio font-weight-light btn-category @selection("drawing")" role="button" alt="drawing" title="drawing"><img src="~/images/icons/brush-outline.svg" width="25" alt="drawing" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("writing")" class="btn btn-artfolio font-weight-light btn-category @selection("writing")" role="button" alt="writing" title="writing"><img src="~/images/icons/book-outline.svg" width="25" alt="writing" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("audio")" class="btn btn-artfolio font-weight-light btn-category @selection("audio")" role="button" alt="audio" title="audio"><img src="~/images/icons/play-circle-outline.svg" width="25" alt="audio" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("sheetmusic")" class="btn btn-artfolio font-weight-light btn-category @selection("sheetmusic")" role="button" alt="sheet music" title="sheet music"><img src="~/images/icons/musical-notes-outline.svg" width="25" alt="sheet music" /></a>
+                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("photography")" class="btn btn-artfolio font-weight-light btn-category @selection("photography")" role="button" alt="photography" title="photography"><img src="~/images/icons/camera-outline.svg" width="25" alt="photography" /></a>
+                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("painting")" class="btn btn-artfolio font-weight-light btn-category @selection("painting")" role="button" alt="painting" title="painting"><img src="~/images/icons/color-palette-outline.svg" width="25" alt="painting" /></a>
+                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("drawing")" class="btn btn-artfolio font-weight-light btn-category @selection("drawing")" role="button" alt="drawing" title="drawing"><img src="~/images/icons/brush-outline.svg" width="25" alt="drawing" /></a>
+                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("writing")" class="btn btn-artfolio font-weight-light btn-category @selection("writing")" role="button" alt="writing" title="writing"><img src="~/images/icons/book-outline.svg" width="25" alt="writing" /></a>
+                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("audio")" class="btn btn-artfolio font-weight-light btn-category @selection("audio")" role="button" alt="audio" title="audio"><img src="~/images/icons/play-circle-outline.svg" width="25" alt="audio" /></a>
+                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("sheetmusic")" class="btn btn-artfolio font-weight-light btn-category @selection("sheetmusic")" role="button" alt="sheet music" title="sheet music"><img src="~/images/icons/musical-notes-outline.svg" width="25" alt="sheet music" /></a>
             </div>
         </div>
 
+        <form asp-controller="Search" asp-action="Index" method="get">
+            <p>
+                <input type="hidden" name="q" value="@ViewData["q"]" />
+                <input type="search" name="tag" placeholder="@ViewData["tag"]" style="padding: 7px 12px; border: 1px solid lightgray; border-radius: 5px;">
+                <input type="hidden" name="category" value="@ViewData["category"]" />
+                <input type="submit" value="filter" class="btn btn-artfolio" />
+            </p>
+        </form>
         @if (!Model.Artworks.Any())
         {
             <h5>No artwork found</h5>
@@ -178,27 +203,4 @@
             </div>
         }
     </div>
-</div>
-
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="row justify-content-between">
-            <h2 class="font-weight-lighter">artists</h2>
-        </div>
-
-        @if (!Model.Artists.Any())
-        {
-            <h5>No artist found</h5>
-        }
-        else
-        {
-            <div class="row-card p-0 m-0">
-                @foreach(var artist in Model.Artists)
-                {
-                    @Html.DisplayForModel(artist.Name);
-                }
-            </div>
-        }
     </div>
-</div>

@@ -26,19 +26,21 @@ namespace artfolio.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(string search, string category)
+        public async Task<IActionResult> Index(string tag, string category)
         {
             // ARTWORKS REQUESTS
             var artworks = from a in _context.Artworks
                            select a;
 
-            // Sort: search
-            if (!String.IsNullOrEmpty(search))
+            if (!String.IsNullOrEmpty(tag))
             {
-                search = search.ToLower();
-                artworks = artworks.Where(x => x.Title.Contains(search));
+                tag = tag.ToLower();
+                artworks = artworks
+                    .Include(x => x.ArtworkTags)
+                        .ThenInclude(artworkTag => artworkTag.Tag)
+                    .Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag)));
             }
-
+            
             // Sort: category
             if (!String.IsNullOrEmpty(category)) category = category.ToLower();
             switch (category)
@@ -83,6 +85,8 @@ namespace artfolio.Controllers
             var following = from a in _context.Artists
                            select a;
 
+            following = following.OrderBy(x => x.Name);
+
             // What is actually send to the view
             FeedIndexViewModel viewModel = new FeedIndexViewModel
             {
@@ -90,6 +94,9 @@ namespace artfolio.Controllers
                 Artworks = await artworks.AsNoTracking().ToListAsync(),
                 Following = await following.ToListAsync()
             };
+
+            ViewData["tag"] = tag;
+            ViewData["category"] = category;
 
             return View(viewModel);
         }

@@ -22,7 +22,7 @@ namespace artfolio.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string q, string category)
+        public async Task<IActionResult> Index(string q, string category, string tag)
         {
             if (String.IsNullOrEmpty(q)) return NotFound();
 
@@ -35,6 +35,16 @@ namespace artfolio.Controllers
             // QUERIES
             artworks = artworks.Where(x => x.Title.Contains(q));
             artists = artists.Where(x => x.Name.Contains(q));
+
+
+            if (!String.IsNullOrEmpty(tag))
+            {
+                tag = tag.ToLower();
+                artworks = artworks
+                    .Include(x => x.ArtworkTags)
+                        .ThenInclude(artworkTag => artworkTag.Tag)
+                    .Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag)));
+            }
 
             // Sort: category
             if (!String.IsNullOrEmpty(category)) category = category.ToLower();
@@ -83,6 +93,8 @@ namespace artfolio.Controllers
             };
 
             ViewData["q"] = q;
+            ViewData["tag"] = tag;
+            ViewData["category"] = category;
 
             return View(viewModel);
         }
