@@ -34,7 +34,7 @@ namespace artfolio.Controllers
 
             // QUERIES
             artworks = artworks.Where(x => x.Title.Contains(q));
-            artists = artists.Where(x => x.Name.Contains(q));
+            artists = artists.Include(x => x.User).Where(x => x.User.Email.Contains(q));
 
 
             if (!String.IsNullOrEmpty(tag))
@@ -85,6 +85,8 @@ namespace artfolio.Controllers
                     .Include(x => x.Documents)
                     .Include(x => x.Artist)
                     .OrderByDescending(x => x.ReleaseDate);
+
+            artists = artists.Include(x => x.User);
 
             SearchIndexViewModel viewModel = new SearchIndexViewModel
             {

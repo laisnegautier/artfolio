@@ -30,7 +30,8 @@
             <div class="row-card p-0 m-0">
                 @foreach (var artist in Model.Artists)
                 {
-                    @Html.DisplayForModel(artist.Name);
+                    @Html.DisplayFor(modelItem => artist.User.Email);
+                    <br />
                 }
             </div>
         }
@@ -51,7 +52,7 @@
         <form asp-controller="Search" asp-action="Index" method="get">
             <p>
                 <input type="hidden" name="q" value="@ViewData["q"]" />
-                <input type="search" name="tag" placeholder="@ViewData["tag"]" style="padding: 7px 12px; border: 1px solid lightgray; border-radius: 5px;">
+                <input type="search" name="tag" placeholder="Filter by tag" style="padding: 7px 12px; border: 1px solid lightgray; border-radius: 5px;">
                 <input type="hidden" name="category" value="@ViewData["category"]" />
                 <input type="submit" value="filter" class="btn btn-artfolio" />
             </p>
