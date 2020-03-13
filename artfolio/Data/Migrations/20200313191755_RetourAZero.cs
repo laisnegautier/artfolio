@@ -2,7 +2,7 @@
 
 namespace artfolio.Data.Migrations
 {
-    public partial class reset2 : Migration
+    public partial class RetourAZero : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

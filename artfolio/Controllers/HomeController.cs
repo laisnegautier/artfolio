@@ -17,12 +17,10 @@ namespace artfolio.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _context = context;
-            _logger = logger;
             _userManager = userManager;
         }
 

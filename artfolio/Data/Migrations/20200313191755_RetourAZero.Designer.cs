@@ -10,8 +10,8 @@ using artfolio.Data;
 namespace artfolio.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200313191020_changes")]
-    partial class changes
+    [Migration("20200313191755_RetourAZero")]
+    partial class RetourAZero
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

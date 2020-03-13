@@ -80,11 +80,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\static
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\staticwebassets\artfolio.StaticWebAssets.xml
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.pdb
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\Create.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\Delete.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\Details.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\Edit.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Delete.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Details.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Edit.cshtml.g.cs

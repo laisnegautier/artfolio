@@ -16,14 +16,12 @@ namespace artfolio.Controllers
     public class FeedController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<HomeController> _logger;
 
-        public FeedController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public FeedController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _context = context;
             _logger = logger;
-            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(string tag, string category)
