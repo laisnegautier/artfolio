@@ -85,7 +85,7 @@ namespace artfolio.Controllers
             var following = from a in _context.Artists
                            select a;
 
-            following = following.OrderBy(x => x.Name);
+            following = following.OrderBy(x => x.Lastname);
 
             // What is actually send to the view
             FeedIndexViewModel viewModel = new FeedIndexViewModel

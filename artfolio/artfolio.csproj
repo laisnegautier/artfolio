@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
 
@@ -317,21 +318,6 @@
 
 
   <ItemGroup>
-    <Watch Remove="Views\Artist\Create.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Artist\Create.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Artist\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Artist\Delete.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Artist\Details.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Artist\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Artist\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Artwork\Delete.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Artwork\Details.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Artwork\Edit.cshtml" />
@@ -344,46 +330,6 @@
     <_ContentIncludedByDefault Remove="Views\Home\Index2.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\mainStyle.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\publish.css" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Watch Remove="Views\Artist\Delete.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Artist\Delete.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Watch Remove="Views\Artist\Details.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Artist\Details.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Watch Remove="Views\Artist\Edit.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Artist\Edit.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Watch Remove="Views\Artist\Index.cshtml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Artist\Index.cshtml" />
   </ItemGroup>
 
 
@@ -484,6 +430,12 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Home\Index2.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\artworks\thumbnails\" />
+    <Folder Include="wwwroot\images\avatars\thumbnails\" />
   </ItemGroup>
 
 </Project>

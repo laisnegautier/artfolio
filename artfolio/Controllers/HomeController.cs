@@ -48,7 +48,7 @@ namespace artfolio.Controllers
 
             // QUERIES
             artworks = artworks.Where(x => x.Title.Contains(id));
-            artists = artists.Where(x => x.Name.Contains(id));
+            artists = artists.Where(x => x.Lastname.Contains(id));
 
             // SORT
             artworks = artworks

@@ -4,33 +4,86 @@
     ViewData["Title"] = "Register";
 }
 
-
-
 <div class="row justify-content-center">
     <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" method="post">
             <h1>@ViewData["Title"]</h1>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <label asp-for="Input.Avatar" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Input.Avatar" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+                <span asp-validation-for="Input.Avatar" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <label asp-for="Input.Artist.Lastname"></label>
+                <input asp-for="Input.Artist.Lastname" class="form-control" />
+                <span asp-validation-for="Input.Artist.Lastname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                <label asp-for="Input.Artist.Firstname"></label>
+                <input asp-for="Input.Artist.Firstname" class="form-control" />
+                <span asp-validation-for="Input.Artist.Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Artist.DateOfBirth"></label>
+                <input asp-for="Input.Artist.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Input.Artist.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Artist.Nationality"></label>
+                <select asp-for="Input.Artist.Nationality" asp-items="Html.GetEnumSelectList<Nationality>()" class="form-control">
+                    <option selected disabled>Please select one</option>
+                </select>
+                <span asp-validation-for="Input.Artist.Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Artist.Gender"></label>
+                <select asp-for="Input.Artist.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                    <option selected disabled>Please select one</option>
+                </select>
+                <span asp-validation-for="Input.Artist.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AspNetUser.Email"></label>
+                <input asp-for="Input.AspNetUser.Email" class="form-control" />
+                <span asp-validation-for="Input.AspNetUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AspNetUser.ConfirmEmail"></label>
+                <input asp-for="Input.AspNetUser.ConfirmEmail" class="form-control" />
+                <span asp-validation-for="Input.AspNetUser.ConfirmEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AspNetUser.Password"></label>
+                <input asp-for="Input.AspNetUser.Password" class="form-control" />
+                <span asp-validation-for="Input.AspNetUser.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.AspNetUser.ConfirmPassword"></label>
+                <input asp-for="Input.AspNetUser.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.AspNetUser.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-inline">
+                <label asp-for="Input.Artist.IsPubliclyVisible"></label>
+                <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="true" id="IsPubliclyVisible" checked />Yes<br />
+                <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="false" id="IsPubliclyVisible" />No<br />
+                <span asp-validation-for="Input.Artist.IsPubliclyVisible" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Artist.PublicLink"></label>
+                <input asp-for="Input.Artist.PublicLink" class="form-control" />
+                <span asp-validation-for="Input.Artist.PublicLink" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-    @*<div class="col-md-6 col-md-offset-2">
+</div>
+
+@*<div class="col-md-6 col-md-offset-2">
         <section>
             <h4>Use another service to register.</h4>
             <hr />
@@ -60,8 +113,16 @@
             }
         </section>
     </div>*@
-</div>
 
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
 }

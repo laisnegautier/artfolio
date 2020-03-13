@@ -5,17 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace artfolio.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string Gender { get; set; }
-    }
+        //[DataType(DataType.DateTime)]
+        //public DateTime Creation { get; set; }
 
-    /*public enum Gender
-    {
-        Male = 1,
-        Female = 2
-    }*/
+        public Artist Artist { get; set; }
+    }
 }

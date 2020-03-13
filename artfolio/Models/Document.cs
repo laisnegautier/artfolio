@@ -20,6 +20,8 @@ namespace artfolio.Models
         // 0 is the main document
         public int Position { get; set; }
         public DocumentMedia Media { get; set; }
+
+        [DataType(DataType.Url)]
         public string FilePath { get; set; }
 
         public Artwork Artwork { get; set; }

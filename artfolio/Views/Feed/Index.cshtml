@@ -30,7 +30,7 @@
         wait
         @foreach (var artist in Model.Following)
         {
-            <li><a asp-area="" asp-controller="Home" asp-action="Contact">@artist.Name</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">@artist.Lastname</a></li>
         }
     </ul>
         }
@@ -89,7 +89,7 @@
                                     </p>
                                 }
                                 <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Name)" alt="">@artwork.Artist.Name</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
                             </div>
                             </div>
                         }
@@ -124,7 +124,7 @@
                                     </p>
                                 }
                                 <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Name)" alt="">@artwork.Artist.Name</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
                             </div>
                             </div>
                         }
@@ -158,7 +158,7 @@
                                     </p>
                                 }
                                 <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Name)" alt="">@artwork.Artist.Name</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
                             </div>
                             </div>
                         }
@@ -193,7 +193,7 @@
                                     </p>
                                 }
                                 <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Name)" alt="">@artwork.Artist.Name</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
                             </div>
                             </div>
                         }
