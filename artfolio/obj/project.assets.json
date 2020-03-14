@@ -1173,6 +1173,18 @@
           }
         }
       },
+      "SendGrid/9.13.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4543,6 +4555,26 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "SendGrid/9.13.0": {
+      "sha512": "ZkYkdZ/4KYdu6Ewrf8ZGSc8WIScVq8+CtPgf3tUlvVxtFKJ+zld0Ki6Nv4Z2Drt5qbK3TDmFNIRwiKXnrtVfTQ==",
+      "type": "package",
+      "path": "sendgrid/9.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/SendGrid.dll",
+        "lib/net452/SendGrid.pdb",
+        "lib/net452/SendGrid.xml",
+        "lib/netstandard1.3/SendGrid.dll",
+        "lib/netstandard1.3/SendGrid.pdb",
+        "lib/netstandard1.3/SendGrid.xml",
+        "lib/netstandard2.0/SendGrid.dll",
+        "lib/netstandard2.0/SendGrid.pdb",
+        "lib/netstandard2.0/SendGrid.xml",
+        "sendgrid.9.13.0.nupkg.sha512",
+        "sendgrid.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -8701,6 +8733,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.2",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
+      "SendGrid >= 9.13.0",
       "System.Drawing.Common >= 4.7.0"
     ]
   },
@@ -8710,11 +8743,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gautier\\source\\repos\\te\\artfolio\\artfolio\\artfolio.csproj",
+      "projectUniqueName": "C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\artfolio.csproj",
       "projectName": "artfolio",
-      "projectPath": "C:\\Users\\Gautier\\source\\repos\\te\\artfolio\\artfolio\\artfolio.csproj",
+      "projectPath": "C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\artfolio.csproj",
       "packagesPath": "C:\\Users\\Gautier\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gautier\\source\\repos\\te\\artfolio\\artfolio\\obj\\",
+      "outputPath": "C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Gautier\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8764,6 +8797,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.1, )"
+          },
+          "SendGrid": {
+            "target": "Package",
+            "version": "[9.13.0, )"
           },
           "System.Drawing.Common": {
             "target": "Package",
