@@ -102,7 +102,13 @@ header {
     height: 70px;
     background-color: #F3F3F3;
     border-radius: 100px;
+    transition: all .15s ease-in-out;
+    opacity: .85;
 }
+
+    .profile-pic-nav:hover {
+        opacity: unset;
+    }
 
 .menu-btn1 {
     background: blue;
