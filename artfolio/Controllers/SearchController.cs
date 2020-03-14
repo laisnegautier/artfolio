@@ -29,12 +29,13 @@ namespace artfolio.Controllers
             // REQUESTS
             var artworks = from a in _context.Artworks
                            select a;
-            var artists = from a in _context.Artists
+            
+            var artists = from a in _context.Artworks
                           select a;
 
             // QUERIES
             artworks = artworks.Where(x => x.Title.Contains(q));
-            artists = artists.Include(x => x.User).Where(x => x.User.Email.Contains(q));
+            //artists = artists.Include(x => x.User).Where(x => x.User.Email.Contains(q));
 
 
             if (!String.IsNullOrEmpty(tag))
@@ -85,13 +86,10 @@ namespace artfolio.Controllers
                     .Include(x => x.Documents)
                     .Include(x => x.Artist)
                     .OrderByDescending(x => x.ReleaseDate);
-
-            artists = artists.Include(x => x.User);
-
+            
             SearchIndexViewModel viewModel = new SearchIndexViewModel
             {
-                Artworks = await artworks.ToListAsync(),
-                Artists = await artists.ToListAsync()
+                Artworks = await artworks.ToListAsync()
             };
 
             ViewData["q"] = q;

@@ -15,10 +15,10 @@ namespace artfolio.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<Artist> _userManager;
+        private readonly SignInManager<Artist> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Artist> userManager, SignInManager<Artist> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

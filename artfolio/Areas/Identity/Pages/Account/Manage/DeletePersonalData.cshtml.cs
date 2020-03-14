@@ -11,13 +11,13 @@ namespace artfolio.Areas.Identity.Pages.Account.Manage
 {
     public class DeletePersonalDataModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<Artist> _userManager;
+        private readonly SignInManager<Artist> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
 
         public DeletePersonalDataModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<Artist> userManager,
+            SignInManager<Artist> signInManager,
             ILogger<DeletePersonalDataModel> logger)
         {
             _userManager = userManager;

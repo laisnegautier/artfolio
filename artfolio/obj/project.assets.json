@@ -8710,11 +8710,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\artfolio.csproj",
+      "projectUniqueName": "C:\\Users\\Gautier\\source\\repos\\te\\artfolio\\artfolio\\artfolio.csproj",
       "projectName": "artfolio",
-      "projectPath": "C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\artfolio.csproj",
+      "projectPath": "C:\\Users\\Gautier\\source\\repos\\te\\artfolio\\artfolio\\artfolio.csproj",
       "packagesPath": "C:\\Users\\Gautier\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gautier\\source\\repos\\artfolio\\artfolio\\obj\\",
+      "outputPath": "C:\\Users\\Gautier\\source\\repos\\te\\artfolio\\artfolio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Gautier\\AppData\\Roaming\\NuGet\\NuGet.Config",

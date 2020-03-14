@@ -7,7 +7,7 @@ using artfolio.Models;
 
 namespace artfolio.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<Artist>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -19,7 +19,7 @@ namespace artfolio.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Artist> Artists { get; set; }
+        //public DbSet<Artist> Artists { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
 
         public DbSet<Document> Documents { get; set; }
@@ -35,7 +35,7 @@ namespace artfolio.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Report> Reports { get; set; }
 
-       // public DbSet<Follower> Followers { get; set; }
+        // public DbSet<Follower> Followers { get; set; }
         public DbSet<Support> Supports { get; set; }
     }
 }

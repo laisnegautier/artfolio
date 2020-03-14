@@ -12,30 +12,35 @@ namespace artfolio.Models
     /// <summary>
     /// An artist is the publicly visible part of a user
     /// </summary>
-    public class Artist
+    public class Artist : IdentityUser
     {
-        public int ArtistId { get; set; }
+        //public int ArtistId { get; set; }
 
         [Required]
+        [PersonalData]
         [Display(Name = "Last name")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Characters are not allowed.")]
         public string Lastname { get; set; }
 
         [Required]
+        [PersonalData]
         [Display(Name = "First name")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Characters are not allowed.")]
         public string Firstname { get; set; }
 
         [Required]
+        [PersonalData]
         [DataType(DataType.Date)]
         [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
+        [PersonalData]
         [Display(Name = "Nationnality")]
         public Nationality Nationality { get; set; }
 
         [Required]
+        [PersonalData]
         [Display(Name = "Gender")]
         public Gender Gender { get; set; }
         
@@ -53,8 +58,8 @@ namespace artfolio.Models
 
 
         // 1-to-1 RELATIONSHIP TO USER
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        //public string UserId { get; set; }
+        //public ApplicationUser User { get; set; }
 
 
         public ICollection<Artwork> Artworks { get; set; }

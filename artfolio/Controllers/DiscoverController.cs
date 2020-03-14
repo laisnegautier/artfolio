@@ -18,10 +18,10 @@ namespace artfolio.Controllers
     /// </summary>
     public class DiscoverController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<Artist> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public DiscoverController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public DiscoverController(UserManager<Artist> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;

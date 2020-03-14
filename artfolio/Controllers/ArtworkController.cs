@@ -20,11 +20,11 @@ namespace artfolio.Controllers
     [Authorize]
     public class ArtworkController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<Artist> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnv;
 
-        public ArtworkController(UserManager<ApplicationUser> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnv)
+        public ArtworkController(UserManager<Artist> userManager, ApplicationDbContext context, IWebHostEnvironment hostingEnv)
         {
             _userManager = userManager;
             _context = context;
@@ -94,8 +94,9 @@ namespace artfolio.Controllers
                 }
 
                 // Link to the current user (who is the artist)
-                ApplicationUser user = await _userManager.GetUserAsync(User);
-                Artist artist = await _context.Artists.SingleAsync(x => x.User == user);
+                Artist user = await _userManager.GetUserAsync(User);
+                //Artist artist = await _context.Artists.SingleAsync(x => x.User == user);
+                Artist artist = null; //to get rid of
 
                 Artwork artworkToAdd = new Artwork
                 {

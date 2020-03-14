@@ -27,16 +27,16 @@ namespace artfolio.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<Artist> _signInManager;
+        private readonly UserManager<Artist> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IWebHostEnvironment _hostingEnv;
 
         public RegisterModel(
             ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<Artist> userManager,
+            SignInManager<Artist> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IWebHostEnvironment hostingEnv)
@@ -101,62 +101,54 @@ namespace artfolio.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
+
+                // FILE UPLOAD
+                string uniquePhotoFileName = null;
+                if (Input.Avatar != null)
+                {
+                    string uploadsAvatarFolder = Path.Combine(_hostingEnv.WebRootPath, "images/avatars");
+                    uniquePhotoFileName = Guid.NewGuid().ToString() + "_" + Input.Avatar.FileName;
+                    string photoFilePath = Path.Combine(uploadsAvatarFolder, uniquePhotoFileName);
+                    Input.Avatar.CopyTo(new FileStream(photoFilePath, FileMode.Create));
+
+                    string uploadsThumbnailAvatarFolder = Path.Combine(_hostingEnv.WebRootPath, "images/avatars/thumbnails");
+                    string thumbnailFilePath = Path.Combine(uploadsThumbnailAvatarFolder, uniquePhotoFileName);
+
+                    Image image = Image.FromStream(Input.Avatar.OpenReadStream(), true, true);
+
+                    double ratio = 200 * 1.0 / image.Width;
+                    int newHeight = (int)Math.Floor(image.Height * ratio);
+
+                    var newImage = new Bitmap(200, newHeight);
+                    using (var thumbnail = Graphics.FromImage(newImage))
+                    {
+                        thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
+                        thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        thumbnail.CompositingMode = CompositingMode.SourceCopy;
+                        thumbnail.DrawImage(image, 0, 0, 200, newHeight);
+
+                        newImage.Save(thumbnailFilePath);
+                    }
+                }
+
+                var user = new Artist 
                 { 
                     UserName = Input.AspNetUser.Email, 
-                    Email = Input.AspNetUser.Email 
+                    Email = Input.AspNetUser.Email,
+                    Lastname = Input.Artist.Lastname,
+                    Firstname = Input.Artist.Firstname,
+                    DateOfBirth = Input.Artist.DateOfBirth,
+                    Nationality = Input.Artist.Nationality,
+                    Gender = Input.Artist.Gender,
+                    IsPubliclyVisible = Input.Artist.IsPubliclyVisible,
+                    PublicLink = Input.Artist.PublicLink,
+                    PhotoFilePath = uniquePhotoFileName
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.AspNetUser.Password);
 
                 if (result.Succeeded)
-                {                
-                    // FILE UPLOAD
-                    string uniquePhotoFileName = null;
-                    if (Input.Avatar != null)
-                    {
-                        string uploadsAvatarFolder = Path.Combine(_hostingEnv.WebRootPath, "images/avatars");
-                        uniquePhotoFileName = Guid.NewGuid().ToString() + "_" + Input.Avatar.FileName;
-                        string photoFilePath = Path.Combine(uploadsAvatarFolder, uniquePhotoFileName);
-                        Input.Avatar.CopyTo(new FileStream(photoFilePath, FileMode.Create));
-
-                        string uploadsThumbnailAvatarFolder = Path.Combine(_hostingEnv.WebRootPath, "images/avatars/thumbnails");
-                        string thumbnailFilePath = Path.Combine(uploadsThumbnailAvatarFolder, uniquePhotoFileName);
-
-                        Image image = Image.FromStream(Input.Avatar.OpenReadStream(), true, true);
-
-                        double ratio = 200 * 1.0 / image.Width;
-                        int newHeight = (int)Math.Floor(image.Height * ratio);
-
-                        var newImage = new Bitmap(200, newHeight);
-                        using (var thumbnail = Graphics.FromImage(newImage))
-                        {
-                            thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
-                            thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            thumbnail.CompositingMode = CompositingMode.SourceCopy;
-                            thumbnail.DrawImage(image, 0, 0, 200, newHeight);
-                            
-                            newImage.Save(thumbnailFilePath);
-                        }
-                    }
-
-                    // IF EVERYTHING OK, LINKING ARTIST TO USER IN 1-to-1 RELATIONSHIP
-                    Artist artist = new Artist
-                    {
-                        Lastname = Input.Artist.Lastname,
-                        Firstname = Input.Artist.Firstname,
-                        DateOfBirth = Input.Artist.DateOfBirth,
-                        Nationality = Input.Artist.Nationality,
-                        Gender = Input.Artist.Gender,
-                        IsPubliclyVisible = Input.Artist.IsPubliclyVisible,
-                        PublicLink = Input.Artist.PublicLink,
-                        PhotoFilePath = uniquePhotoFileName,
-                        User = user
-                    };
-
-                    _context.Add(artist);
-                    await _context.SaveChangesAsync();
-                    
+                {                 
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

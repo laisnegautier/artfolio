@@ -16,9 +16,9 @@ namespace artfolio.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<Artist> _userManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public HomeController(UserManager<Artist> userManager, ApplicationDbContext context)
         {
             _context = context;
             _userManager = userManager;
@@ -41,12 +41,11 @@ namespace artfolio.Controllers
             // REQUESTS
             var artworks = from a in _context.Artworks
                            select a;
-            var artists = from a in _context.Artists
+            var artists = from a in _context.Artworks
                           select a;
 
             // QUERIES
             artworks = artworks.Where(x => x.Title.Contains(id));
-            artists = artists.Where(x => x.Lastname.Contains(id));
 
             // SORT
             artworks = artworks
@@ -58,8 +57,7 @@ namespace artfolio.Controllers
 
             SearchIndexViewModel viewModel = new SearchIndexViewModel
             {
-                Artworks = await artworks.ToListAsync(),
-                Artists = await artists.ToListAsync()
+                Artworks = await artworks.ToListAsync()
             };
 
             return View(viewModel);
@@ -67,7 +65,7 @@ namespace artfolio.Controllers
 
         public async Task<IActionResult> CurrentUser()
         {
-            ApplicationUser myself = await _userManager.GetUserAsync(User);
+            Artist myself = await _userManager.GetUserAsync(User);
 
             return View(myself);
         }

@@ -16,11 +16,13 @@ namespace artfolio.Controllers
     public class FeedController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Artist> _userManager;
         private readonly ILogger<HomeController> _logger;
 
-        public FeedController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public FeedController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<Artist> userManager)
         {
             _context = context;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -80,10 +82,9 @@ namespace artfolio.Controllers
                     .OrderByDescending(x => x.ReleaseDate);
 
             // FOLLOWING REQUESTS
-            var following = from a in _context.Artists
+            var following = from a in _userManager.Users
                            select a;
-
-            following = following.OrderBy(x => x.Lastname);
+            following = following.Include(x => x.Artworks);
 
             // What is actually send to the view
             FeedIndexViewModel viewModel = new FeedIndexViewModel
