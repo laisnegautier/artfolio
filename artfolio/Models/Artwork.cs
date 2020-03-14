@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace artfolio.Models
 {
@@ -11,6 +12,7 @@ namespace artfolio.Models
         public int ArtworkId { get; set; }
 
         [Required]
+        [Remote(action: "VerifyTitle", controller: "ArtworkController")]
         public string Title { get; set; }
         public string Description { get; set; }
         [DataType(DataType.Date)]

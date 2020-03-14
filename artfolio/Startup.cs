@@ -68,9 +68,23 @@ namespace artfolio
 
             app.UseEndpoints(endpoints =>
             {
+                // Specific endpoints
+                endpoints.MapControllerRoute(
+                    name: "artist",
+                    pattern: "{publicLink}",
+                    defaults: new { controller = "Artist", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "artwork",
+                    pattern: "{artistPublicLink}/{title}",
+                    defaults: new { controller = "Artwork", action = "Index" },
+                    constraints: new { title = @"^.*-.*$" });
+
+                // Default endpoints 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

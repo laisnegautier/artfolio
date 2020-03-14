@@ -20,6 +20,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Security.Claims;
 
 namespace artfolio.Areas.Identity.Pages.Account
 {
@@ -101,7 +102,6 @@ namespace artfolio.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-
                 // FILE UPLOAD
                 string uniquePhotoFileName = null;
                 if (Input.Avatar != null)
@@ -144,11 +144,11 @@ namespace artfolio.Areas.Identity.Pages.Account
                     PublicLink = Input.Artist.PublicLink,
                     PhotoFilePath = uniquePhotoFileName
                 };
-
+                
                 var result = await _userManager.CreateAsync(user, Input.AspNetUser.Password);
 
                 if (result.Succeeded)
-                {                 
+                {
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

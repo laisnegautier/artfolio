@@ -32,7 +32,7 @@ namespace artfolio.Controllers
         }
 
         // GET: Artworks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string artistPublicLink, string artworkTitle)
         {
             // Getting all artworks
             var artworks = from a in _context.Artworks

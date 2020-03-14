@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace artfolio.Models
 {
@@ -47,6 +47,13 @@ namespace artfolio.Models
         [Required]
         [Display(Name = "Url defining your profile")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Characters are not allowed.")]
+        //[Remote(controller: "Artist", action: "VerifyPublicLink")]
+        [PageRemote(
+    ErrorMessage = "Email Address already exists",
+    AdditionalFields = "__RequestVerificationToken",
+    HttpMethod = "post",
+    PageHandler = "CheckPublicLink"
+)]
         public string PublicLink { get; set; }
 
         [DataType(DataType.ImageUrl)]

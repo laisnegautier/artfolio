@@ -17,6 +17,11 @@ namespace artfolio.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Necessary to have uniqueness of routing for an artist
+            //modelBuilder.Entity<Artist>()
+            //    .HasIndex(p => new { p.Id, p.PublicLink })
+            //    .IsUnique();
         }
 
         //public DbSet<Artist> Artists { get; set; }

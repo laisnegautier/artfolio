@@ -406,3 +406,5 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\SendGrid.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artist\Index.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\libman.json

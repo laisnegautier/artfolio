@@ -33,7 +33,7 @@ namespace artfolio.Controllers
         {
             return View(await _userManager.Users.ToListAsync());
         }
-
+        
         public async Task<IActionResult> Search(string id)
         {
             if (String.IsNullOrEmpty(id)) return NotFound();
