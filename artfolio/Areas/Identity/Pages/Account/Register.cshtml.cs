@@ -57,10 +57,12 @@ namespace artfolio.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+
         public class InputViewModel
         {
             public InputModel AspNetUser { get; set; }
             public Artist Artist { get; set; }
+
             public IFormFile Avatar { get; set; }
         }
 
@@ -131,9 +133,9 @@ namespace artfolio.Areas.Identity.Pages.Account
                     }
                 }
 
-                var user = new Artist 
-                { 
-                    UserName = Input.AspNetUser.Email, 
+                var user = new Artist
+                {
+                    UserName = Input.AspNetUser.Email,
                     Email = Input.AspNetUser.Email,
                     Lastname = Input.Artist.Lastname,
                     Firstname = Input.Artist.Firstname,
@@ -144,7 +146,7 @@ namespace artfolio.Areas.Identity.Pages.Account
                     PublicLink = Input.Artist.PublicLink,
                     PhotoFilePath = uniquePhotoFileName
                 };
-                
+
                 var result = await _userManager.CreateAsync(user, Input.AspNetUser.Password);
 
                 if (result.Succeeded)
@@ -176,6 +178,7 @@ namespace artfolio.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
             }
 
             // If we got this far, something failed, redisplay form

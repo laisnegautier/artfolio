@@ -30,7 +30,7 @@ namespace artfolio.Models
 
         public Artist Artist { get; set; }
 
-        public IList<ArtworkTag> ArtworkTags { get; set; }
+        public ICollection<ArtworkTag> ArtworkTags { get; set; }
         public IList<Document> Documents { get; set; }
         public IList<Support> Supports { get; set; }
     }

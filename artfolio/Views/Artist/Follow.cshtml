@@ -1,0 +1,23 @@
+﻿@model Artist
+@inject UserManager<Artist> UserManager
+
+@{
+    ViewData["Title"] = "Follow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Follow</h1>
+@Html.DisplayFor(modelItem => modelItem.Gender)
+<br />
+@Html.DisplayFor(modelItem => modelItem.Following)
+<br />Following :
+@Model.Following.Count
+<hr />
+@foreach (var item in Model.FollowedBy)
+{
+            @item.FromArtistId
+    @*@UserManager.FindById(item.FromArtistId)*@
+    <br />
+}
+<br />Followed by :
+@Model.FollowedBy.Count

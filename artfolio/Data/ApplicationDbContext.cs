@@ -22,6 +22,42 @@ namespace artfolio.Data
             //modelBuilder.Entity<Artist>()
             //    .HasIndex(p => new { p.Id, p.PublicLink })
             //    .IsUnique();
+            
+            // MANY-TO-MANY Artwork and Tag
+            modelBuilder.Entity<ArtworkTag>()
+                .HasKey(x => new { x.ArtworkId, x.TagId });
+
+            modelBuilder.Entity<ArtworkTag>()
+                .HasOne(x => x.Artwork)
+                .WithMany(y => y.ArtworkTags)
+                .HasForeignKey(y => y.ArtworkId);
+
+            modelBuilder.Entity<ArtworkTag>()
+                .HasOne(bc => bc.Tag)
+                .WithMany(c => c.ArtworkTags)
+                .HasForeignKey(bc => bc.TagId);
+
+
+
+            
+     //.HasOne(pt => pt.Sinonym)
+     //.WithMany(p => p.SinonymOf) // <--
+     //.HasForeignKey(pt => pt.SinonymId)
+    // .OnDelete(DeleteBehavior.Restrict); // see the note at the end
+
+            modelBuilder.Entity<FollowRelation>()
+                .HasKey(x => new { x.FromArtistId, x.ToArtistId });
+
+            modelBuilder.Entity<FollowRelation>()
+                .HasOne(x => x.ToArtist)
+                .WithMany(y => y.FollowedBy)
+                .HasForeignKey(x => x.ToArtistId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FollowRelation>()
+                .HasOne(y => y.FromArtist)
+                .WithMany(x => x.Following)
+                .HasForeignKey(x => x.FromArtistId);
         }
 
         //public DbSet<Artist> Artists { get; set; }
@@ -40,7 +76,7 @@ namespace artfolio.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Report> Reports { get; set; }
 
-        // public DbSet<Follower> Followers { get; set; }
+        public DbSet<FollowRelation> FollowRelations { get; set; }
         public DbSet<Support> Supports { get; set; }
     }
 }

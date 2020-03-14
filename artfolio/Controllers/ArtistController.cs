@@ -32,5 +32,18 @@ namespace artfolio.Controllers
 
             return View(artist);
         }
+
+
+        public async Task<IActionResult> Follow()
+        {
+            Artist user = await _userManager.GetUserAsync(User);
+            Artist artist = await _userManager.Users
+                .Where(u => u.Id == user.Id)
+                .Include(x => x.Following)
+                .Include(x => x.FollowedBy)
+                .FirstOrDefaultAsync();
+
+            return View(artist);
+        }
     }
 }

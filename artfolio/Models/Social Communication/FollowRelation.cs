@@ -7,11 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace artfolio.Models
 {
-    public class Follower
+    public class FollowRelation
     {
-        public int FollowedArtistId { get; set; }
-        public Artist FollowedArtist { get; set; }
-        public int FollowerArtistId { get; set; }
-        public Artist FollowerArtist { get; set; }
+        public string FromArtistId { get; set; }
+        public Artist FromArtist { get; set; }
+
+        public string ToArtistId { get; set; }
+        public Artist ToArtist { get; set; }
     }
 }

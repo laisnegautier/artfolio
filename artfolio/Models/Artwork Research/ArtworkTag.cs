@@ -8,11 +8,10 @@ namespace artfolio.Models
 {
     public class ArtworkTag
     {
-        public int ArtworkTagId { get; set; }
-
-        [Required]
+        public int ArtworkId { get; set; }
         public Artwork Artwork { get; set; }
-        [Required]
+
+        public int TagId { get; set; }
         public Tag Tag { get; set; }
     }
 }

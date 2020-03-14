@@ -47,13 +47,6 @@ namespace artfolio.Models
         [Required]
         [Display(Name = "Url defining your profile")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Characters are not allowed.")]
-        //[Remote(controller: "Artist", action: "VerifyPublicLink")]
-        [PageRemote(
-    ErrorMessage = "Email Address already exists",
-    AdditionalFields = "__RequestVerificationToken",
-    HttpMethod = "post",
-    PageHandler = "CheckPublicLink"
-)]
         public string PublicLink { get; set; }
 
         [DataType(DataType.ImageUrl)]
@@ -63,15 +56,13 @@ namespace artfolio.Models
         [Display(Name = "Keep your profile public")]
         public bool IsPubliclyVisible { get; set; }
 
-
-        // 1-to-1 RELATIONSHIP TO USER
-        //public string UserId { get; set; }
-        //public ApplicationUser User { get; set; }
-
-
+               
         public ICollection<Artwork> Artworks { get; set; }
         public ICollection<Collection> Collections { get; set; }
-        //public ICollection<Follower> Following { get; set; }
+
+
+        public ICollection<FollowRelation> Following { get; set; }
+        public ICollection<FollowRelation> FollowedBy { get; set; }
     }
 
     public enum Gender

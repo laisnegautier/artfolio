@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using artfolio.Data;
 
 namespace artfolio.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200314160446_ArtworkTagsModif")]
+    partial class ArtworkTagsModif
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -421,21 +423,6 @@ namespace artfolio.Data.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("artfolio.Models.FollowRelation", b =>
-                {
-                    b.Property<string>("FromArtistId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ToArtistId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("FromArtistId", "ToArtistId");
-
-                    b.HasIndex("ToArtistId");
-
-                    b.ToTable("FollowRelations");
-                });
-
             modelBuilder.Entity("artfolio.Models.Message", b =>
                 {
                     b.Property<int>("MessageId")
@@ -620,21 +607,6 @@ namespace artfolio.Data.Migrations
                     b.HasOne("artfolio.Models.Artwork", "Artwork")
                         .WithMany("Documents")
                         .HasForeignKey("ArtworkId");
-                });
-
-            modelBuilder.Entity("artfolio.Models.FollowRelation", b =>
-                {
-                    b.HasOne("artfolio.Models.Artist", "FromArtist")
-                        .WithMany("Following")
-                        .HasForeignKey("FromArtistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("artfolio.Models.Artist", "ToArtist")
-                        .WithMany("FollowedBy")
-                        .HasForeignKey("ToArtistId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("artfolio.Models.Report", b =>
