@@ -15,83 +15,56 @@ namespace artfolio.Controllers
 {
     public class SearchController : Controller
     {
+        private readonly SignInManager<Artist> _signInManager;
+        private readonly UserManager<Artist> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public SearchController(ApplicationDbContext context)
+        public SearchController(SignInManager<Artist> signInManager, UserManager<Artist> userManager, ApplicationDbContext context)
         {
+            _signInManager = signInManager;
+            _userManager = userManager;
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string q, string category, string tag)
+        public async Task<IActionResult> Index(string q, string tag, string category)
         {
+            // Parameters check
             if (String.IsNullOrEmpty(q)) return NotFound();
 
-            // REQUESTS
-            var artworks = from a in _context.Artworks
-                           select a;
+            // Queries
+            IQueryable<Artwork> artworks = 
+                _context.Artworks
+                .Where(x => x.Title.Contains(q))
+                .Include(x => x.Documents)
+                .Include(x => x.Artist)
+                .Include(x => x.ArtworkTags)
+                    .ThenInclude(artworkTag => artworkTag.Tag)
+                .OrderByDescending(x => x.ReleaseDate);
+
+            IQueryable<Artist> artists = 
+                _userManager.Users
+                .Where(x => x.Lastname.Contains(q) || x.Firstname.Contains(q))
+                .Include(x => x.FollowedBy)
+                .OrderByDescending(x => x.Lastname);
             
-            var artists = from a in _context.Artworks
-                          select a;
+            if (!String.IsNullOrEmpty(tag)) 
+                artworks = artworks.Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag))); 
 
-            // QUERIES
-            artworks = artworks.Where(x => x.Title.Contains(q));
-            //artists = artists.Include(x => x.User).Where(x => x.User.Email.Contains(q));
+            if (!String.IsNullOrEmpty(category)) 
+                artworks = artworks.Where(x => x.Category == (Category)Enum.Parse(typeof(Category), category, true));
 
+            // Get rid of himself if connected
+            if (_signInManager.IsSignedIn(User))
+                artists = artists.Where(x => x.Id != _userManager.GetUserId(User));
 
-            if (!String.IsNullOrEmpty(tag))
-            {
-                tag = tag.ToLower();
-                artworks = artworks
-                    .Include(x => x.ArtworkTags)
-                        .ThenInclude(artworkTag => artworkTag.Tag)
-                    .Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag)));
-            }
-
-            // Sort: category
-            if (!String.IsNullOrEmpty(category)) category = category.ToLower();
-            switch (category)
-            {
-                case "photography":
-                    ViewData["selection"] = "photography";
-                    artworks = artworks.Where(x => x.Category == Category.Photography);
-                    break;
-                case "drawing":
-                    ViewData["selection"] = "drawing";
-                    artworks = artworks.Where(x => x.Category == Category.Drawing);
-                    break;
-                case "painting":
-                    ViewData["selection"] = "painting";
-                    artworks = artworks.Where(x => x.Category == Category.Painting);
-                    break;
-                case "writing":
-                    ViewData["selection"] = "writing";
-                    artworks = artworks.Where(x => x.Category == Category.Writing);
-                    break;
-                case "audio":
-                    ViewData["selection"] = "audio";
-                    artworks = artworks.Where(x => x.Category == Category.Audio);
-                    break;
-                case "sheetmusic":
-                    ViewData["selection"] = "sheetmusic";
-                    artworks = artworks.Where(x => x.Category == Category.SheetMusic);
-                    break;
-                default:
-                    ViewData["selection"] = "";
-                    break;
-            }
-
-            artworks = artworks
-                    .Include(x => x.ArtworkTags)
-                        .ThenInclude(artworkTag => artworkTag.Tag)
-                    .Include(x => x.Documents)
-                    .Include(x => x.Artist)
-                    .OrderByDescending(x => x.ReleaseDate);
-            
+            // Adding to view model
             SearchIndexViewModel viewModel = new SearchIndexViewModel
             {
-                Artworks = await artworks.ToListAsync()
+                Artworks = await artworks.ToListAsync(),
+                Artists = await artists.ToListAsync()
             };
 
+            // Sending data to the view
             ViewData["q"] = q;
             ViewData["tag"] = tag;
             ViewData["category"] = category;

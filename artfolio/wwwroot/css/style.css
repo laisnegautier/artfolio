@@ -114,6 +114,25 @@ header {
     background: blue;
 }
 
+.list-group a {
+    border: 0px solid red;
+    transition: all .15s ease-in-out;
+    margin-left: 0px;
+    border-radius: 5px;
+    box-shadow: none;
+    background: none;
+}
+
+    .list-group a:hover {
+        margin-left: -10px;
+        background: transparent;
+        box-shadow: 0 2px 6px lightgray;
+    }
+
+    .list-group a:focus, .list-group a:active {
+        background: transparent;
+    }
+
 .sign-in {
     background-color: #fff;
     padding: 10px 15px;
@@ -278,17 +297,18 @@ main {
     border: 0;
 }
 
-.btn-category:hover {
-    background-color: #f3f3f3;
-}
+    .btn-category:hover {
+        background-color: #f3f3f3;
+    }
+
+    .btn-category:focus, .btn-category:active {
+        box-shadow: 0 2px 6px lightgray;
+        background-color: #f3f3f3;
+    }
 
 .btn-category img {
 }
 
-.btn-category:focus, .btn-category.focus {
-    background-color: #f3f3f3;
-    box-shadow: 0 2px 6px lightgray;
-}
 
 .selected {
     background-color: #f3f3f3;

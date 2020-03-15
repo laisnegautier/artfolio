@@ -1,15 +1,20 @@
 ﻿@model SearchIndexViewModel
+@inject SignInManager<Artist> SignInManager
+@inject UserManager<Artist> UserManager
 
 @{
     ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string categoryImageUrl = null;
     int i1 = 0;
     int i2 = 0;
     int i3 = 0;
     int i4 = 0;
-    string selection(string category)
+
+    string selection(string selection)
     {
-        return (category == (string)ViewData["selection"]) ? "selected" : "";
+        return (selection == (string)ViewData["category"]) ? "selected" : "";
     }
     string redirectCategory(string category)
     {
@@ -23,185 +28,219 @@
 
         @if (!Model.Artists.Any())
         {
-            <h5>No artist found</h5>
+            <h6>No artist found</h6>
         }
         else
         {
-            <div class="row-card p-0 m-0">
+            <div class="list-group">
                 @foreach (var artist in Model.Artists)
                 {
-                    @*@Html.DisplayFor(modelItem => artist.User.Email);*@
-                    <br />
-                }
-            </div>
-        }
-    </div>
-    <div class="col-md-9">
-        <div class="d-flex justify-content-between">
-            <h2 class="font-weight-lighter">artworks</h2>
-            <div>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("photography")" class="btn btn-artfolio font-weight-light btn-category @selection("photography")" role="button" alt="photography" title="photography"><img src="~/images/icons/camera-outline.svg" width="25" alt="photography" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("painting")" class="btn btn-artfolio font-weight-light btn-category @selection("painting")" role="button" alt="painting" title="painting"><img src="~/images/icons/color-palette-outline.svg" width="25" alt="painting" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("drawing")" class="btn btn-artfolio font-weight-light btn-category @selection("drawing")" role="button" alt="drawing" title="drawing"><img src="~/images/icons/brush-outline.svg" width="25" alt="drawing" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("writing")" class="btn btn-artfolio font-weight-light btn-category @selection("writing")" role="button" alt="writing" title="writing"><img src="~/images/icons/book-outline.svg" width="25" alt="writing" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("audio")" class="btn btn-artfolio font-weight-light btn-category @selection("audio")" role="button" alt="audio" title="audio"><img src="~/images/icons/play-circle-outline.svg" width="25" alt="audio" /></a>
-                <a asp-area="" asp-controller="Search" asp-action="Index" asp-route-tag="@ViewData["tag"]" asp-route-q="@ViewData["q"]" asp-route-category="@redirectCategory("sheetmusic")" class="btn btn-artfolio font-weight-light btn-category @selection("sheetmusic")" role="button" alt="sheet music" title="sheet music"><img src="~/images/icons/musical-notes-outline.svg" width="25" alt="sheet music" /></a>
-            </div>
-        </div>
-
-        <form asp-controller="Search" asp-action="Index" method="get">
-            <p>
-                <input type="hidden" name="q" value="@ViewData["q"]" />
-                <input type="search" name="tag" placeholder="Filter by tag" style="padding: 7px 12px; border: 1px solid lightgray; border-radius: 5px;">
-                <input type="hidden" name="category" value="@ViewData["category"]" />
-                <input type="submit" value="filter" class="btn btn-artfolio" />
-            </p>
-        </form>
-        @if (!Model.Artworks.Any())
-        {
-            <h5>No artwork found</h5>
-        }
-        else
-        {
-            <div class="row-card p-0 m-0">
-                <div class="column-card">
-
-                    @foreach (var artwork in Model.Artworks)
-                    {
-                        if (i1 % 4 == 0)
-                        {
-                            <div class="artwork-card">
-                                @if (artwork.Documents.Count > 0)
-                                {
-                                    <img src="~/images/artworks/@artwork.Documents[0].FilePath">
-                                }
-                                else
-                                {
-                                    <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
-                                }
-                                <div class="description-card">
-                                    @if (artwork.ArtworkTags.Count > 0)
-                                    {
-                                        <p class="m-0 small pb-1">
-                                            @foreach (var artworkTag in artwork.ArtworkTags)
-                                            {
-                                                <span class="tag">@artworkTag.Tag.Name</span>
-                                            }
-                                        </p>
-                                    }
-                                    <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                    <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
-                                </div>
+                    <a asp-controller="Artist" asp-action="Index" asp-route-publicLink="@artist.PublicLink" class="artists-list list-group-item list-group-item-action flex-column align-items-start pl-2 pr-3 py-2">
+                        <div class="d-flex w-100 align-items-center">
+                            <div class="profile-pic-nav d-none d-lg-flex" style="overflow: hidden; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center">
+                                <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
                             </div>
-                        }
-                        i1++;
-                    }
-
-                </div>
-
-                <div class="column-card">
-
-                    @foreach (var artwork in Model.Artworks)
-                    {
-                        if (i2 % 4 == 1)
-                        {
-                            <div class="artwork-card">
-                                @if (artwork.Documents.Count > 0)
-                                {
-                                    <img src="~/images/artworks/@artwork.Documents[0].FilePath">
-                                }
-                                else
-                                {
-                                    <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
-                                }
-                                <div class="description-card">
-                                    @if (artwork.ArtworkTags.Count > 0)
-                                    {
-                                        <p class="m-0 small pb-1">
-                                            @foreach (var artworkTag in artwork.ArtworkTags)
-                                            {
-                                                <span class="tag">@artworkTag.Tag.Name</span>
-                                            }
-                                        </p>
-                                    }
-                                    <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                    <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                            <div class="d-flex justify-content-between flex-grow-1">
+                                <div class="ml-2 d-flex flex-column justify-content-center">
+                                    <h6 class="m-0">
+                                        @Html.DisplayFor(modelItem => artist.Firstname) @Html.DisplayFor(modelItem => artist.Lastname)
+                                    </h6>
+                                    <small class="m-0 text-muted">
+                                        artfolio.com/@Html.DisplayFor(modelItem => artist.PublicLink)
+                                    </small>
                                 </div>
+                                @if (artist.FollowedBy.Count > 0)
+                                {
+                                    if (SignInManager.IsSignedIn(User))
+                                    {
+                                        foreach (var followedBy in artist.FollowedBy)
+                                        {
+                                            if (followedBy.FromArtistId == UserManager.GetUserId(User))
+                                            {
+                                                <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                                            }
+                                        }
+                                    }
+                                }
                             </div>
+                            </div>
+                        </a>
                         }
-                        i2++;
+                    </div>
                     }
                 </div>
+                <div class="col-md-9">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="font-weight-lighter">artworks</h2>
 
-                <div class="column-card">
-
-                    @foreach (var artwork in Model.Artworks)
-                    {
-                        if (i3 % 4 == 2)
-                        {
-                            <div class="artwork-card">
-                                @if (artwork.Documents.Count > 0)
-                                {
-                                    <img src="~/images/artworks/@artwork.Documents[0].FilePath">
-                                }
-                                else
-                                {
-                                    <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
-                                }
-                                <div class="description-card">
-                                    @if (artwork.ArtworkTags.Count > 0)
-                                    {
-                                        <p class="m-0 small pb-1">
-                                            @foreach (var artworkTag in artwork.ArtworkTags)
-                                            {
-                                                <span class="tag">@artworkTag.Tag.Name</span>
-                                            }
-                                        </p>
-                                    }
-                                    <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                    <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+            @* --- CATEGORIES --- *@
+                        <div>
+                            @foreach(Category category in Enum.GetValues(typeof(Category)))
+                            {
+                                categoryImageUrl = "images/icons/categories/" + category.ToString() +".svg";
+                                <a asp-controller="Search" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-tag="@ViewData["tag"]" asp-route-category="@redirectCategory(category.ToString())" class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
+                                    <img src = "~/@categoryImageUrl" width="25" alt="@category.ToString()" />
+                                </a>
+                            }
+                        </div>
+            @* --- ENDCATEGORIES --- *@
                                 </div>
-                            </div>
-                        }
-                        i3++;
-                    }
 
-                </div>
+                                <form asp-controller="Search" asp-action="Index" method="get">
+                                    <input type="hidden" name="q" value="@ViewData["q"]" />
+                                    <input type="search" name="tag" placeholder="Filter by tag" style="padding: 7px 12px; border: 1px solid lightgray; border-radius: 5px;">
+                                    @if (!String.IsNullOrEmpty((string) ViewData["category"]))
+                                                    {
+                                    <input type="hidden" name="category" value="@ViewData["category"]" />
+                                                    }
+                                    <input type="submit" value="filter" class="btn btn-artfolio" />
+                                </form>
 
-                <div class="column-card">
+                                @if (!Model.Artworks.Any())
+                                        {
+                                <h5>No artwork found</h5>
+                                        }
+                                        else
+                                        {
+                                <div class="row-card p-0 m-0">
+                                    <div class="column-card">
 
-                    @foreach (var artwork in Model.Artworks)
-                    {
-                        if (i4 % 4 == 3)
-                        {
-                            <div class="artwork-card">
-                                @if (artwork.Documents.Count > 0)
-                                {
-                                    <img src="~/images/artworks/@artwork.Documents[0].FilePath">
-                                }
-                                else
-                                {
-                                    <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
-                                }
-                                <div class="description-card">
-                                    @if (artwork.ArtworkTags.Count > 0)
-                                    {
-                                        <p class="m-0 small pb-1">
-                                            @foreach (var artworkTag in artwork.ArtworkTags)
-                                            {
-                                                <span class="tag">@artworkTag.Tag.Name</span>
-                                            }
-                                        </p>
-                                    }
-                                    <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                                    <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                        @foreach (var artwork in Model.Artworks)
+                                                            {
+                                                                if (i1 % 4 == 0)
+                                                                {
+                                        <div class="artwork-card">
+                                            @if (artwork.Documents.Count > 0)
+                                                                            {
+                                            <img src="~/images/artworks/@artwork.Documents[0].FilePath">
+                                                                            }
+                                                                            else
+                                                                            {
+                                            <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
+                                                                            }
+                                            <div class="description-card">
+                                                @if (artwork.ArtworkTags.Count > 0)
+                                                                                    {
+                                                <p class="m-0 small pb-1">
+                                                    @foreach (var artworkTag in artwork.ArtworkTags)
+                                                                                                {
+                                                    <span class="tag">@artworkTag.Tag.Name</span>
+                                                                                                }
+                                                </p>
+                                                                                    }
+                                                <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
+                                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                            </div>
+                                        </div>
+                                                                }
+                                                                i1++;
+                                                            }
+
+                                    </div>
+
+                                    <div class="column-card">
+
+                                        @foreach (var artwork in Model.Artworks)
+                                                            {
+                                                                if (i2 % 4 == 1)
+                                                                {
+                                        <div class="artwork-card">
+                                            @if (artwork.Documents.Count > 0)
+                                                                            {
+                                            <img src="~/images/artworks/@artwork.Documents[0].FilePath">
+                                                                            }
+                                                                            else
+                                                                            {
+                                            <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
+                                                                            }
+                                            <div class="description-card">
+                                                @if (artwork.ArtworkTags.Count > 0)
+                                                                                    {
+                                                <p class="m-0 small pb-1">
+                                                    @foreach (var artworkTag in artwork.ArtworkTags)
+                                                                                                {
+                                                    <span class="tag">@artworkTag.Tag.Name</span>
+                                                                                                }
+                                                </p>
+                                                                                    }
+                                                <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
+                                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                            </div>
+                                        </div>
+                                                                }
+                                                                i2++;
+                                                            }
+                                    </div>
+
+                                    <div class="column-card">
+
+                                        @foreach (var artwork in Model.Artworks)
+                                                            {
+                                                                if (i3 % 4 == 2)
+                                                                {
+                                        <div class="artwork-card">
+                                            @if (artwork.Documents.Count > 0)
+                                                                            {
+                                            <img src="~/images/artworks/@artwork.Documents[0].FilePath">
+                                                                            }
+                                                                            else
+                                                                            {
+                                            <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
+                                                                            }
+                                            <div class="description-card">
+                                                @if (artwork.ArtworkTags.Count > 0)
+                                                                                    {
+                                                <p class="m-0 small pb-1">
+                                                    @foreach (var artworkTag in artwork.ArtworkTags)
+                                                                                                {
+                                                    <span class="tag">@artworkTag.Tag.Name</span>
+                                                                                                }
+                                                </p>
+                                                                                    }
+                                                <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
+                                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                            </div>
+                                        </div>
+                                                                }
+                                                                i3++;
+                                                            }
+
+                                    </div>
+
+                                    <div class="column-card">
+
+                                        @foreach (var artwork in Model.Artworks)
+                                                            {
+                                                                if (i4 % 4 == 3)
+                                                                {
+                                        <div class="artwork-card">
+                                            @if (artwork.Documents.Count > 0)
+                                                                            {
+                                            <img src="~/images/artworks/@artwork.Documents[0].FilePath">
+                                                                            }
+                                                                            else
+                                                                            {
+                                            <img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">
+                                                                            }
+                                            <div class="description-card">
+                                                @if (artwork.ArtworkTags.Count > 0)
+                                                                                    {
+                                                <p class="m-0 small pb-1">
+                                                    @foreach (var artworkTag in artwork.ArtworkTags)
+                                                                                                {
+                                                    <span class="tag">@artworkTag.Tag.Name</span>
+                                                                                                }
+                                                </p>
+                                                                                    }
+                                                <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
+                                                <h6 class="small mb-0">@Html.DisplayFor(modelItem => artwork.Category) by <a href="@Html.DisplayFor(modelItem => artwork.Artist.Lastname)" alt="">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
+                                            </div>
+                                        </div>
+                                                                }
+                                                                i4++;
+                                                            }
+                                    </div>
                                 </div>
+                                        }
                             </div>
-                        }
-                        i4++;
-                    }
-                </div>
-            </div>
-        }
-    </div>
-    </div>
+                    </div>
