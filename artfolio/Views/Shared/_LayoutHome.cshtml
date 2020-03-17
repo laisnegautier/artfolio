@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/tagsinput.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/animate.css" type="text/css" />
 </head>
-<body class="body-home">
+<body class="body-home animated fadeIn">
 
     <header class="mb-4">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -43,7 +44,7 @@
     <main class="home-main">
         <div class="centered col-12 col-md-10">
             <h1 class="home-brand font-weight-light d-none d-lg-block"><span style="color: #F9A585;">art</span>folio</h1>
-            <form asp-controller="Search" asp-action="Index" method="get" class="form-inline my-lg-0 search-box-header px-1 py-1 col-lg-9 col-xl-6">
+            <form asp-controller="Discover" asp-action="Index" method="get" class="form-inline my-lg-0 search-box-header px-1 py-1 col-lg-9 col-xl-6">
                 <div class="col-10 d-flex flex-row col-sm-9 col-lg-10">
                     <img src="~/images/icons/search-outline.svg" width="20" class="d-inline-block" />
                     <input class="form-control mr-md-2 form-artfolio" type="search" name="q" placeholder="search for an artist, an artwork...">
