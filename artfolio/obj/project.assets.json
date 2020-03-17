@@ -1219,6 +1219,15 @@
           "lib/netstandard2.0/SendGrid.dll": {}
         }
       },
+      "Slugify.Core/2.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Slugify.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Slugify.Core.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4700,6 +4709,20 @@
         "lib/netstandard2.0/SendGrid.xml",
         "sendgrid.9.13.0.nupkg.sha512",
         "sendgrid.nuspec"
+      ]
+    },
+    "Slugify.Core/2.3.0": {
+      "sha512": "M9TVnKaNwl2JweZxRZ6CcIB6Qx2Y+hCDIFZWnGlPhPEfJI1C/pirnvbVxXYc+IOzM1Ijxx7nOduz4mVdY14/MA==",
+      "type": "package",
+      "path": "slugify.core/2.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Slugify.Core.dll",
+        "lib/netstandard1.3/Slugify.Core.dll",
+        "lib/netstandard2.0/Slugify.Core.dll",
+        "slugify.core.2.3.0.nupkg.sha512",
+        "slugify.core.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -8972,6 +8995,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.1",
       "SendGrid >= 9.13.0",
+      "Slugify.Core >= 2.3.0",
       "System.Drawing.Common >= 4.7.0"
     ]
   },
@@ -9043,6 +9067,10 @@
           "SendGrid": {
             "target": "Package",
             "version": "[9.13.0, )"
+          },
+          "Slugify.Core": {
+            "target": "Package",
+            "version": "[2.3.0, )"
           },
           "System.Drawing.Common": {
             "target": "Package",

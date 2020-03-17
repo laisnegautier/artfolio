@@ -12,8 +12,8 @@ namespace artfolio.Models
         public int ArtworkId { get; set; }
 
         [Required]
-        [Remote(action: "VerifyTitle", controller: "ArtworkController")]
         public string Title { get; set; }
+        public string NormalizedTitle { get; set; }
         public string Description { get; set; }
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }

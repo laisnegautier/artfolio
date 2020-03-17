@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.IO;
+using Slugify;
 
 namespace artfolio.Controllers
 {
@@ -32,20 +33,9 @@ namespace artfolio.Controllers
         }
 
         // GET: Artworks
-        public async Task<IActionResult> Index(string artistPublicLink, string artworkTitle)
+        public async Task<IActionResult> Index(string userName, string title)
         {
-            // Getting all artworks
-            var artworks = from a in _context.Artworks
-                           select a;
-            
-            // Including related data (tags and document)
-            artworks = _context.Artworks
-                .Include(x => x.ArtworkTags)
-                    .ThenInclude(artworkTags => artworkTags.Tag)
-                .Include(x => x.Documents);
-
-            // Injecting these data into the associated view
-            return View(await artworks.ToListAsync());
+            return View(await _context.Artworks.ToListAsync());
         }
 
         // GET: Artworks/Details/5
@@ -93,21 +83,21 @@ namespace artfolio.Controllers
                     viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
 
-                // Link to the current user (who is the artist)
-                Artist user = await _userManager.GetUserAsync(User);
-                //Artist artist = await _context.Artists.SingleAsync(x => x.User == user);
-                Artist artist = null; //to get rid of
+                // SEO-friendly URL
+                SlugHelper helper = new SlugHelper();
+                string normalizedTitle = helper.GenerateSlug(viewModel.Artwork.Title);
 
                 Artwork artworkToAdd = new Artwork
                 {
                     Title = viewModel.Artwork.Title,
+                    NormalizedTitle = normalizedTitle,
                     Description = viewModel.Artwork.Description,
                     CreationDate = DateTime.Now,
                     ReleaseDate = viewModel.Artwork.ReleaseDate,
                     Privacy = viewModel.Artwork.Privacy,
                     License = viewModel.Artwork.License,
                     Category = viewModel.Artwork.Category,
-                    Artist = artist
+                    Artist = await _userManager.GetUserAsync(User)
                 };
                 
                 Document documentToAdd = new Document

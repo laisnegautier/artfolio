@@ -77,9 +77,9 @@ namespace artfolio
 
                 endpoints.MapControllerRoute(
                     name: "artwork",
-                    pattern: "{userName}/{title}",
-                    defaults: new { controller = "Artwork", action = "Index" },
-                    constraints: new { title = @"^.*-.*$" });
+                    pattern: "{userName}/{*title}",
+                    defaults: new { controller = "Artwork", action = "Index" });
+                   // constraints: new { title = @"^.*-.*$" });
 
                 // Default endpoints 
                 endpoints.MapControllerRoute(

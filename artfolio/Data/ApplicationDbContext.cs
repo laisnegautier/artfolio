@@ -39,12 +39,6 @@ namespace artfolio.Data
 
 
 
-            
-     //.HasOne(pt => pt.Sinonym)
-     //.WithMany(p => p.SinonymOf) // <--
-     //.HasForeignKey(pt => pt.SinonymId)
-    // .OnDelete(DeleteBehavior.Restrict); // see the note at the end
-
             modelBuilder.Entity<FollowRelation>()
                 .HasKey(x => new { x.FromArtistId, x.ToArtistId });
 

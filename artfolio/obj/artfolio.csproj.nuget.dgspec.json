@@ -70,6 +70,10 @@
               "target": "Package",
               "version": "[9.13.0, )"
             },
+            "Slugify.Core": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[4.7.0, )"

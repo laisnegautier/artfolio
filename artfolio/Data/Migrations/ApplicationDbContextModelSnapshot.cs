@@ -305,6 +305,9 @@ namespace artfolio.Data.Migrations
                     b.Property<int>("License")
                         .HasColumnType("int");
 
+                    b.Property<string>("NormalizedTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Privacy")
                         .HasColumnType("int");
 
