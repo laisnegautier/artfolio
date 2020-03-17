@@ -13,7 +13,7 @@ namespace artfolio.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime CreationDate { get; set; }
-        
-        public Artist Artist { get; set; }
-    }
+
+        public virtual Artist Artist { get; set; }
+    } 
 }

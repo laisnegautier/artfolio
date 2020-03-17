@@ -10,9 +10,9 @@ namespace artfolio.Models
     public class FollowRelation
     {
         public string FromArtistId { get; set; }
-        public Artist FromArtist { get; set; }
+        public virtual Artist FromArtist { get; set; }
 
         public string ToArtistId { get; set; }
-        public Artist ToArtist { get; set; }
+        public virtual Artist ToArtist { get; set; }
     }
 }

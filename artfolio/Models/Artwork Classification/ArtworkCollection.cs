@@ -11,7 +11,7 @@ namespace artfolio.Models
         public int ArtworkCollectionId { get; set; }
         public bool IsMasterpiece { get; set; }
 
-        public Artwork Artwork { get; set; }
-        public Collection Collection { get; set; }
+        public virtual Artwork Artwork { get; set; }
+        public virtual Collection Collection { get; set; }
     }
 }

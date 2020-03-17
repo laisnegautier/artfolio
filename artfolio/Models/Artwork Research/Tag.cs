@@ -13,6 +13,6 @@ namespace artfolio.Models
         [Required]
         public string Name { get; set; }
 
-        public ICollection<ArtworkTag> ArtworkTags { get; set; }
+        public virtual ICollection<ArtworkTag> ArtworkTags { get; set; }
     }
 }

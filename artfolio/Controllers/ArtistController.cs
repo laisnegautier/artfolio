@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using artfolio.Data;
 using artfolio.Models;
+using artfolio.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace artfolio.Controllers
@@ -24,26 +25,16 @@ namespace artfolio.Controllers
         // Display an artist profile
         public async Task<IActionResult> Index(string userName)
         {
-            Artist artist = await _userManager.Users
-                .Where(x => x.UserName == userName)
-                .FirstOrDefaultAsync();
-
+            Artist artist = await _userManager.FindByNameAsync(userName);
             if (artist == null) return NotFound();
 
-            return View(artist);
+            return View(viewModel);
         }
 
-
+        // TESTING PURPOSE
         public async Task<IActionResult> Follow()
         {
-            Artist user = await _userManager.GetUserAsync(User);
-            Artist artist = await _userManager.Users
-                .Where(u => u.Id == user.Id)
-                .Include(x => x.Following)
-                .Include(x => x.FollowedBy)
-                .FirstOrDefaultAsync();
-
-            return View(artist);
+            return View(await _userManager.GetUserAsync(User));
         }
     }
 }

@@ -9,9 +9,9 @@ namespace artfolio.Models
     public class ArtworkTag
     {
         public int ArtworkId { get; set; }
-        public Artwork Artwork { get; set; }
+        public virtual Artwork Artwork { get; set; }
 
         public int TagId { get; set; }
-        public Tag Tag { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

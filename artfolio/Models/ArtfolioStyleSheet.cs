@@ -19,6 +19,6 @@ namespace artfolio.Models
         public string FontParagraph { get; set; }
         public string FontTitles { get; set; }
 
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
     }
 }

@@ -52,12 +52,12 @@ namespace artfolio.Models
         public bool IsPubliclyVisible { get; set; }
 
                
-        public ICollection<Artwork> Artworks { get; set; }
-        public ICollection<Collection> Collections { get; set; }
+        public virtual ICollection<Artwork> Artworks { get; set; }
+        public virtual ICollection<Collection> Collections { get; set; }
 
 
-        public ICollection<FollowRelation> Following { get; set; }
-        public ICollection<FollowRelation> FollowedBy { get; set; }
+        public virtual ICollection<FollowRelation> Following { get; set; }
+        public virtual ICollection<FollowRelation> FollowedBy { get; set; }
     }
 
     public enum Gender

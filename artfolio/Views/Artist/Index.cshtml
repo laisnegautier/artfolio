@@ -1,4 +1,6 @@
 ﻿@model Artist
+@inject SignInManager<Artist> SignInManager
+@inject UserManager<Artist> UserManager
 @{
     ViewData["Title"] = "Artist";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,4 +8,44 @@
 
 <h1>Artist</h1>
 
-<p>@Html.DisplayFor(modelItem => modelItem.UserName)</p>
+<ul>
+    <li>@Html.DisplayFor(a => a.UserName)</li>
+    <li>@Html.DisplayFor(a => a.DateOfBirth)</li>
+    <li>@Html.DisplayFor(a => a.Firstname)</li>
+    <li>@Html.DisplayFor(a => a.Lastname)</li>
+    <li>@Html.DisplayFor(a => a.Nationality)</li>
+    <li><img src="~/images/avatars/thumbnails/@Html.DisplayFor(a => a.PhotoFilePath)" /></li>
+
+    @if (Model.FollowedBy.Count > 0)
+    {
+        <p>followedBy :</p>
+        foreach (var followedBy in Model.FollowedBy)
+        {
+            <p>@followedBy.FromArtist.Lastname @followedBy.FromArtist.Firstname @followedBy.FromArtist.UserName</p>
+        }
+    }
+
+    @if (Model.Following.Count > 0)
+    {
+        <p>following :</p>
+        foreach (var following in Model.Following)
+        {
+            <p>@following.FromArtist.Lastname @following.FromArtist.Firstname @following.FromArtist.UserName</p>
+        }
+    }
+
+
+
+    @*if (SignInManager.IsSignedIn(User))
+        {
+            var maliste = Model.FollowedBy.Where(x => x.FromArtistId == UserManager.GetUserId(User));
+            if (maliste != null)
+            {
+                foreach (var followedBy in maliste)
+                {
+                    <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                    }
+                }
+            }
+        }*@
+</ul>

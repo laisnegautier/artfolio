@@ -24,7 +24,7 @@ namespace artfolio.Models
         [DataType(DataType.Url)]
         public string FilePath { get; set; }
 
-        public Artwork Artwork { get; set; }
+        public virtual Artwork Artwork { get; set; }
     }
 
     public enum DocumentMedia

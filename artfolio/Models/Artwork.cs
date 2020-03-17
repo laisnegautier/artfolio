@@ -28,11 +28,11 @@ namespace artfolio.Models
         [Required]
         public Category Category { get; set; }
 
-        public Artist Artist { get; set; }
+        public virtual Artist Artist { get; set; }
 
-        public ICollection<ArtworkTag> ArtworkTags { get; set; }
-        public IList<Document> Documents { get; set; }
-        public IList<Support> Supports { get; set; }
+        public virtual ICollection<ArtworkTag> ArtworkTags { get; set; }
+        public virtual IList<Document> Documents { get; set; }
+        public virtual IList<Support> Supports { get; set; }
     }
 
     public enum CreativeCommonsLicense

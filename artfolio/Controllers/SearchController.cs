@@ -35,19 +35,14 @@ namespace artfolio.Controllers
             IQueryable<Artwork> artworks = 
                 _context.Artworks
                 .Where(x => x.Title.Contains(q))
-                .Include(x => x.Documents)
-                .Include(x => x.Artist)
-                .Include(x => x.ArtworkTags)
-                    .ThenInclude(artworkTag => artworkTag.Tag)
                 .OrderByDescending(x => x.ReleaseDate);
 
             IQueryable<Artist> artists = 
                 _userManager.Users
-                .Where(x => x.Lastname.Contains(q) || x.Firstname.Contains(q))
-                .Include(x => x.FollowedBy)
-                .OrderByDescending(x => x.Lastname);
+                .Where(x => x.UserName.Contains(q))
+                .OrderByDescending(x => x.UserName);
             
-            if (!String.IsNullOrEmpty(tag)) 
+            if (!String.IsNullOrEmpty(tag))
                 artworks = artworks.Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag))); 
 
             if (!String.IsNullOrEmpty(category)) 

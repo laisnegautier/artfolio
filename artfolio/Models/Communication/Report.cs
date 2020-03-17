@@ -12,7 +12,7 @@ namespace artfolio.Models
 
         public string Content { get; set; }
 
-        public Artwork Artwork { get; set; }
-        public Artist Artist { get; set; }
+        public virtual Artwork Artwork { get; set; }
+        public virtual Artist Artist { get; set; }
     }
 }
