@@ -33,21 +33,18 @@ namespace artfolio.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            [Display(Name = "User name")]
+            public string Username { get; set; }
         }
 
         private async Task LoadAsync(Artist user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Username = userName
             };
         }
 
@@ -77,16 +74,25 @@ namespace artfolio.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (Input.Username != user.UserName)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.Username);
+                if(!setUserNameResult.Succeeded)
                 {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+                    StatusMessage = "Error: This name is already taken";
+                    return RedirectToPage();
                 }
             }
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        var userId = await _userManager.GetUserIdAsync(user);
+            //        throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+            //    }
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

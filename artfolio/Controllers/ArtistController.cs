@@ -28,7 +28,7 @@ namespace artfolio.Controllers
             Artist artist = await _userManager.FindByNameAsync(userName);
             if (artist == null) return NotFound();
 
-            return View(viewModel);
+            return View(artist);
         }
 
         // TESTING PURPOSE
