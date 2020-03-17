@@ -43,11 +43,6 @@ namespace artfolio.Models
         [PersonalData]
         [Display(Name = "Gender")]
         public Gender Gender { get; set; }
-        
-        [Required]
-        [Display(Name = "Url defining your profile")]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Characters are not allowed.")]
-        public string PublicLink { get; set; }
 
         [DataType(DataType.ImageUrl)]
         public string PhotoFilePath { get; set; }

@@ -71,12 +71,12 @@ namespace artfolio
                 // Specific endpoints
                 endpoints.MapControllerRoute(
                     name: "artist",
-                    pattern: "{publicLink}",
+                    pattern: "{userName}",
                     defaults: new { controller = "Artist", action = "Index" });
 
                 endpoints.MapControllerRoute(
                     name: "artwork",
-                    pattern: "{artistPublicLink}/{title}",
+                    pattern: "{userName}/{title}",
                     defaults: new { controller = "Artwork", action = "Index" },
                     constraints: new { title = @"^.*-.*$" });
 

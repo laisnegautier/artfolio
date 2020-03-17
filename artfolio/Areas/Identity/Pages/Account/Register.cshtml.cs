@@ -69,6 +69,12 @@ namespace artfolio.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Url defining your profile")]
+            [StringLength(40, MinimumLength = 1)]
+            [RegularExpression(@"^[A-Za-z0-9_.+-]*$", ErrorMessage = "Characters are not allowed.")]
+            public string UserName { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -135,7 +141,7 @@ namespace artfolio.Areas.Identity.Pages.Account
 
                 var user = new Artist
                 {
-                    UserName = Input.AspNetUser.Email,
+                    UserName = Input.AspNetUser.UserName,
                     Email = Input.AspNetUser.Email,
                     Lastname = Input.Artist.Lastname,
                     Firstname = Input.Artist.Firstname,
@@ -143,7 +149,6 @@ namespace artfolio.Areas.Identity.Pages.Account
                     Nationality = Input.Artist.Nationality,
                     Gender = Input.Artist.Gender,
                     IsPubliclyVisible = Input.Artist.IsPubliclyVisible,
-                    PublicLink = Input.Artist.PublicLink,
                     PhotoFilePath = uniquePhotoFileName
                 };
 

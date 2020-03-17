@@ -22,10 +22,10 @@ namespace artfolio.Controllers
         }
 
         // Display an artist profile
-        public async Task<IActionResult> Index(string publicLink)
+        public async Task<IActionResult> Index(string userName)
         {
             Artist artist = await _userManager.Users
-                .Where(x => x.PublicLink == publicLink)
+                .Where(x => x.UserName == userName)
                 .FirstOrDefaultAsync();
 
             if (artist == null) return NotFound();

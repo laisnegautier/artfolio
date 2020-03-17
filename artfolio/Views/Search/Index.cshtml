@@ -35,7 +35,7 @@
             <div class="list-group">
                 @foreach (var artist in Model.Artists)
                 {
-                    <a asp-controller="Artist" asp-action="Index" asp-route-publicLink="@artist.PublicLink" class="artists-list list-group-item list-group-item-action flex-column align-items-start pl-2 pr-3 py-2">
+                    <a asp-controller="Artist" asp-action="Index" asp-route-publicLink="@artist.UserName" class="artists-list list-group-item list-group-item-action flex-column align-items-start pl-2 pr-3 py-2">
                         <div class="d-flex w-100 align-items-center">
                             <div class="profile-pic-nav d-none d-lg-flex" style="overflow: hidden; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center">
                                 <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
@@ -46,7 +46,7 @@
                                         @Html.DisplayFor(modelItem => artist.Firstname) @Html.DisplayFor(modelItem => artist.Lastname)
                                     </h6>
                                     <small class="m-0 text-muted">
-                                        artfolio.com/@Html.DisplayFor(modelItem => artist.PublicLink)
+                                        artfolio.com/@Html.DisplayFor(modelItem => artist.UserName)
                                     </small>
                                 </div>
                                 @if (artist.FollowedBy.Count > 0)
