@@ -79,7 +79,7 @@ namespace artfolio
                     name: "artwork",
                     pattern: "{userName}/{*title}",
                     defaults: new { controller = "Artwork", action = "Index" });
-                   // constraints: new { title = @"^.*-.*$" });
+                // constraints: new { title = @"^.*-.*$" });
 
                 // Default endpoints 
                 endpoints.MapControllerRoute(

@@ -1,78 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using artfolio.Models;
-using artfolio.Data;
 using artfolio.ViewModels;
-using Microsoft.AspNetCore.Authorization;
+using artfolio.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace artfolio.Controllers
 {
-    /// <summary>
-    /// Discover allows member and non-member to see the last artwork trend
-    /// </summary>
     public class DiscoverController : Controller
     {
+        private readonly SignInManager<Artist> _signInManager;
         private readonly UserManager<Artist> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public DiscoverController(UserManager<Artist> userManager, ApplicationDbContext context)
+        public DiscoverController(SignInManager<Artist> signInManager, UserManager<Artist> userManager, ApplicationDbContext context)
         {
+            _signInManager = signInManager;
             _userManager = userManager;
             _context = context;
         }
 
-        // GET: Discover
-        public async Task<IActionResult> Index(string search, string category)
+        public async Task<IActionResult> Index(string q, string tag, string category)
         {
-            var artworks = from a in _context.Artworks
-                            select a;
-            
-            // SEARCH
-            if (!String.IsNullOrEmpty(search))
+            // Initial queries
+            IQueryable<Artwork> artworks = _context.Artworks
+                .OrderByDescending(x => x.ReleaseDate);
+
+            IQueryable<Artist> artists = _userManager.Users
+                .OrderByDescending(x => x.UserName);
+
+            // Parameters check
+            if (!String.IsNullOrEmpty(q))
             {
-                search = search.ToLower();
-                artworks = artworks.Where(x => x.Title.Contains(search));
+                artworks = artworks.Where(x => x.Title.Contains(q));
+                artists = artists.Where(x => x.UserName.Contains(q));
             }
 
-            // CATEGORY
-            if (!String.IsNullOrEmpty(category)) category = category.ToLower();
-            switch (category)
+            if (!String.IsNullOrEmpty(tag))
+                artworks = artworks.Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag))); 
+
+            if (!String.IsNullOrEmpty(category)) 
+                artworks = artworks.Where(x => x.Category == (Category)Enum.Parse(typeof(Category), category, true));
+
+            // Get rid of himself if connected
+            if (_signInManager.IsSignedIn(User))
+                artists = artists.Where(x => x.Id != _userManager.GetUserId(User));
+
+            // Adding to view model
+            SearchIndexViewModel viewModel = new SearchIndexViewModel
             {
-                case "photography":
-                    artworks = artworks.Where(x => x.Category == Category.Photography);
-                    break;
-                case "drawing":
-                    artworks = artworks.Where(x => x.Category == Category.Drawing);
-                    break;
-                case "painting":
-                    artworks = artworks.Where(x => x.Category == Category.Painting);
-                    break;
-                case "writing":
-                    artworks = artworks.Where(x => x.Category == Category.Writing);
-                    break;
-                case "audio":
-                    artworks = artworks.Where(x => x.Category == Category.Audio);
-                    break;
-                case "sheetmusic":
-                    artworks = artworks.Where(x => x.Category == Category.SheetMusic);
-                    break;
-                default:
-                    break;
-            }
+                Artworks = await artworks.ToListAsync(),
+                Artists = await artists.ToListAsync()
+            };
 
-            artworks = artworks
-                    .Include(x => x.ArtworkTags)
-                        .ThenInclude(artworkTag => artworkTag.Tag)
-                    .Include(x => x.Documents);
+            // Sending data to the view
+            ViewData["q"] = q;
+            ViewData["tag"] = tag;
+            ViewData["category"] = category;
 
-            // AsNoTracking means no caching. Useful for read-only queries.
-            return View(await artworks.AsNoTracking().ToListAsync());
+            return View(viewModel);
         }
     }
 }

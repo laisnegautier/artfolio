@@ -275,7 +275,7 @@ main {
     z-index: 1;*/
 }
     .artwork-card a, .artwork-card a:hover, .artwork-card a:focus, .artwork-card a:visited, .artwork-card a:active {
-        text-decoration: none;
+        /*text-decoration: none;*/
         color: initial !important;
     }
 
@@ -325,6 +325,11 @@ main {
     margin-right: 5px;
     border-radius: 3px;
 }
+
+    .tag:hover {
+        text-decoration: none;
+        background-color: #f3f3f3;
+    }
 
 .btn-category {
     border: 0;
