@@ -58,9 +58,16 @@ namespace artfolio.Controllers
 
         // GET: Artworks/Create
         [Authorize]
-        public IActionResult Publish()
+        public async Task<IActionResult> Publish()
         {
-            return View();
+            IQueryable<CreativeCommons> creativeCommons = _context.CreativeCommons;
+
+            ArtworkPublishViewModel viewModel = new ArtworkPublishViewModel 
+            { 
+                CreativeCommons = await creativeCommons.ToListAsync()
+            };
+            
+            return View(viewModel);
         }
 
         // POST: Artworks/Create
@@ -82,11 +89,11 @@ namespace artfolio.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
-
+                
                 // SEO-friendly URL
                 SlugHelper helper = new SlugHelper();
                 string normalizedTitle = helper.GenerateSlug(viewModel.Artwork.Title);
-
+                
                 Artwork artworkToAdd = new Artwork
                 {
                     Title = viewModel.Artwork.Title,
@@ -95,7 +102,8 @@ namespace artfolio.Controllers
                     CreationDate = DateTime.Now,
                     ReleaseDate = viewModel.Artwork.ReleaseDate,
                     Privacy = viewModel.Artwork.Privacy,
-                    License = viewModel.Artwork.License,
+                    CCLicense = await _context.CreativeCommons.FirstAsync(x => x.CreativeCommonsId == viewModel.CreativeCommonsId),
+                    TerritorialJuridiction = viewModel.Artwork.TerritorialJuridiction,
                     Category = viewModel.Artwork.Category,
                     Artist = await _userManager.GetUserAsync(User)
                 };

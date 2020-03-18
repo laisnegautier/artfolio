@@ -293,6 +293,9 @@ namespace artfolio.Data.Migrations
                     b.Property<string>("ArtistId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("CCLicenseCreativeCommonsId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Category")
                         .HasColumnType("int");
 
@@ -301,9 +304,6 @@ namespace artfolio.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("License")
-                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedTitle")
                         .HasColumnType("nvarchar(max)");
@@ -314,6 +314,9 @@ namespace artfolio.Data.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("TerritorialJuridiction")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -321,6 +324,8 @@ namespace artfolio.Data.Migrations
                     b.HasKey("ArtworkId");
 
                     b.HasIndex("ArtistId");
+
+                    b.HasIndex("CCLicenseCreativeCommonsId");
 
                     b.ToTable("Artworks");
                 });
@@ -389,6 +394,148 @@ namespace artfolio.Data.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Collections");
+                });
+
+            modelBuilder.Entity("artfolio.Models.CreativeCommons", b =>
+                {
+                    b.Property<int>("CreativeCommonsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Acronym")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("BY")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LegalCodeUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LicenseDeedUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NC")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ND")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SA")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Zero")
+                        .HasColumnType("bit");
+
+                    b.HasKey("CreativeCommonsId");
+
+                    b.ToTable("CreativeCommons");
+
+                    b.HasData(
+                        new
+                        {
+                            CreativeCommonsId = 1,
+                            Acronym = "by",
+                            BY = true,
+                            Description = "This license lets others distribute, remix, tweak, and build upon your work, even commercially, as long as they credit you for the original creation. ",
+                            LegalCodeUrl = "https://creativecommons.org/licenses/by/4.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/licenses/by/4.0",
+                            NC = false,
+                            ND = false,
+                            SA = false,
+                            Title = "Attribution",
+                            Zero = false
+                        },
+                        new
+                        {
+                            CreativeCommonsId = 2,
+                            Acronym = "by-sa",
+                            BY = true,
+                            Description = "This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms.",
+                            LegalCodeUrl = "https://creativecommons.org/licenses/by-sa/4.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/licenses/by-sa/4.0",
+                            NC = false,
+                            ND = false,
+                            SA = true,
+                            Title = "Attribution-ShareAlike",
+                            Zero = false
+                        },
+                        new
+                        {
+                            CreativeCommonsId = 3,
+                            Acronym = "by-nd",
+                            BY = true,
+                            Description = "This license lets others reuse the work for any purpose, including commercially; however, it cannot be shared with others in adapted form, and credit must be provided to you.",
+                            LegalCodeUrl = "https://creativecommons.org/licenses/by-nd/4.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/licenses/by-nd/4.0",
+                            NC = false,
+                            ND = true,
+                            SA = false,
+                            Title = "Attribution-NoDerivs",
+                            Zero = false
+                        },
+                        new
+                        {
+                            CreativeCommonsId = 4,
+                            Acronym = "by-nc",
+                            BY = true,
+                            Description = "This license lets others remix, tweak, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms.",
+                            LegalCodeUrl = "https://creativecommons.org/licenses/by-nc/4.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/licenses/by-nc/4.0",
+                            NC = true,
+                            ND = false,
+                            SA = false,
+                            Title = "Attribution-NonCommercial",
+                            Zero = false
+                        },
+                        new
+                        {
+                            CreativeCommonsId = 5,
+                            Acronym = "by-nc-sa",
+                            BY = true,
+                            Description = "This license lets others remix, tweak, and build upon your work non-commercially, as long as they credit you and license their new creations under the identical terms.",
+                            LegalCodeUrl = "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/licenses/by-nc-sa/4.0",
+                            NC = true,
+                            ND = false,
+                            SA = true,
+                            Title = "Attribution-NonCommercial-ShareAlike",
+                            Zero = false
+                        },
+                        new
+                        {
+                            CreativeCommonsId = 6,
+                            Acronym = "by-nc-nd",
+                            BY = true,
+                            Description = "This license is the most restrictive of our six main licenses, only allowing others to download your works and share them with others as long as they credit you, but they can’t change them in any way or use them commercially.",
+                            LegalCodeUrl = "https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/licenses/by-nc-nd/4.0",
+                            NC = true,
+                            ND = true,
+                            SA = false,
+                            Title = "Attribution-NonCommercial-NoDerivs",
+                            Zero = false
+                        },
+                        new
+                        {
+                            CreativeCommonsId = 7,
+                            Acronym = "zero",
+                            BY = false,
+                            Description = "Use this universal tool if you are a holder of copyright or database rights, and you wish to waive all your interests that may exist in your work worldwide. Because copyright laws differ around the world, you may use this tool even though you may not have copyright in your jurisdiction, but want to be sure to eliminate any copyrights you may have in other jurisdictions.",
+                            LegalCodeUrl = "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+                            LicenseDeedUrl = "https://creativecommons.org/publicdomain/zero/1.0/",
+                            NC = false,
+                            ND = false,
+                            SA = false,
+                            Title = "CC0",
+                            Zero = true
+                        });
                 });
 
             modelBuilder.Entity("artfolio.Models.Document", b =>
@@ -579,6 +726,10 @@ namespace artfolio.Data.Migrations
                     b.HasOne("artfolio.Models.Artist", "Artist")
                         .WithMany("Artworks")
                         .HasForeignKey("ArtistId");
+
+                    b.HasOne("artfolio.Models.CreativeCommons", "CCLicense")
+                        .WithMany()
+                        .HasForeignKey("CCLicenseCreativeCommonsId");
                 });
 
             modelBuilder.Entity("artfolio.Models.ArtworkCollection", b =>

@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 using artfolio.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace artfolio.ViewModels
 {
@@ -19,6 +20,10 @@ namespace artfolio.ViewModels
         public ArtworkTag ArtworkTag { get; set; }
         [Required]
         public IFormFile File { get; set; }
+
+
+        public int CreativeCommonsId { get; set; }
+        public IEnumerable<CreativeCommons> CreativeCommons { get; set; }
         //public List<Document> Documents { get; set; }
     }
 }

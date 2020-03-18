@@ -21,18 +21,26 @@ namespace artfolio.Models
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
+
+
+        public string TerritorialJuridiction { get; set; }
+
         [Required]
         public Visibility Privacy { get; set; }
-        [Required]
-        public CreativeCommonsLicense License { get; set; }
+        
+        
+
         [Required]
         public Category Category { get; set; }
+
+        //public bool IsDerivating { get; set; }
 
         public virtual Artist Artist { get; set; }
 
         public virtual ICollection<ArtworkTag> ArtworkTags { get; set; }
         public virtual IList<Document> Documents { get; set; }
         public virtual IList<Support> Supports { get; set; }
+        public virtual CreativeCommons CCLicense { get; set; }
     }
 
     public enum CreativeCommonsLicense

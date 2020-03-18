@@ -41,6 +41,21 @@
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <!-- DOCUMENT -->
                                             <div class="form-group">
+                                                <label asp-for="Artwork.CCLicense" class="form-check-label"></label>
+                                                <select asp-for="CreativeCommonsId"
+                                                        asp-items="@(new SelectList(Model.CreativeCommons,"CreativeCommonsId","Title"))" class="custom-select">
+                                                    <option selected disabled>Please select one</option>
+                                                </select>
+                                                <span asp-validation-for="Artwork.CCLicense" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label asp-for="Artwork.TerritorialJuridiction"></label>
+                                                <input type="text" asp-for="Artwork.TerritorialJuridiction" class="form-control" />
+                                                <span asp-validation-for="Artwork.TerritorialJuridiction" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label asp-for="@Model.Document.IsMainDocument" class="form-check-label"></label>
                                                 <input type="checkbox" asp-for="@Model.Document.IsMainDocument" class="form-check-input" />
                                                 <span asp-validation-for="@Model.Document.IsMainDocument" class="text-danger"></span>
@@ -81,11 +96,7 @@
                                                 <select asp-for="@Model.Artwork.Privacy" asp-items="Html.GetEnumSelectList<Visibility>()" class="form-control"></select>
                                                 <span asp-validation-for="@Model.Artwork.Privacy" class="text-danger"></span>
                                             </div>
-                                            <div class="form-group">
-                                                <label asp-for="@Model.Artwork.License" class="control-label"></label>
-                                                <select asp-for="@Model.Artwork.License" asp-items="Html.GetEnumSelectList<CreativeCommonsLicense>()" class="form-control"></select>
-                                                <span asp-validation-for="@Model.Artwork.License" class="text-danger"></span>
-                                            </div>
+
                                             <div class="form-group">
                                                 <label asp-for="@Model.Artwork.Category" class="control-label"></label>
                                                 <select asp-for="@Model.Artwork.Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
