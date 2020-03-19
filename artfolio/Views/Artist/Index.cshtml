@@ -2,50 +2,79 @@
 @inject SignInManager<Artist> SignInManager
 @inject UserManager<Artist> UserManager
 @{
-    ViewData["Title"] = "Artist";
+    ViewData["Title"] = Model.Firstname + " " + Model.Lastname + "'s artfolio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Artist</h1>
 
-<ul>
-    <li>@Html.DisplayFor(a => a.UserName)</li>
-    <li>@Html.DisplayFor(a => a.DateOfBirth)</li>
-    <li>@Html.DisplayFor(a => a.Firstname)</li>
-    <li>@Html.DisplayFor(a => a.Lastname)</li>
-    <li>@Html.DisplayFor(a => a.Nationality)</li>
-    <li><img src="~/images/avatars/thumbnails/@Html.DisplayFor(a => a.PhotoFilePath)" /></li>
+<div class="row justify-content-center">
+    <div class="col-md-12" style="border: 1px solid red; height: 100px;">
+    </div>
+</div>
 
-    @if (Model.FollowedBy.Count > 0)
-    {
-        <p>followedBy :</p>
-        foreach (var followedBy in Model.FollowedBy)
+<div class="row justify-content-center">
+    <div class="col-md-2 d-none d-lg-block">
+        <h2 class="font-weight-lighter">collections</h2>
+        @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) == Model.UserName)
         {
-            <p>@followedBy.FromArtist.Lastname @followedBy.FromArtist.Firstname @followedBy.FromArtist.UserName</p>
+                <a href="#">add a collection</a>
         }
-    }
-
-    @if (Model.Following.Count > 0)
-    {
-        <p>following :</p>
-        foreach (var following in Model.Following)
-        {
-            <p>@following.FromArtist.Lastname @following.FromArtist.Firstname @following.FromArtist.UserName</p>
-        }
-    }
+    </div>
 
 
+    <div class="col-md-7">
+        <div class="d-flex justify-content-between">
+            <h2 class="font-weight-lighter">artworks</h2>
+            </div>
 
-    @*if (SignInManager.IsSignedIn(User))
-        {
-            var maliste = Model.FollowedBy.Where(x => x.FromArtistId == UserManager.GetUserId(User));
-            if (maliste != null)
+    </div>
+    <div class="col-md-2">
+        <h2 class="font-weight-lighter">filters</h2>
+    </div>
+
+    <div class="d-none">
+        <h1>Artist</h1>
+
+        <ul>
+            <li>@Html.DisplayFor(a => a.UserName)</li>
+            <li>@Html.DisplayFor(a => a.DateOfBirth)</li>
+            <li>@Html.DisplayFor(a => a.Firstname)</li>
+            <li>@Html.DisplayFor(a => a.Lastname)</li>
+            <li>@Html.DisplayFor(a => a.Nationality)</li>
+            <li><img src="~/images/avatars/thumbnails/@Model.PhotoFilePath" /></li>
+
+            @if (Model.FollowedBy.Count > 0)
             {
-                foreach (var followedBy in maliste)
+                <p>followedBy :</p>
+                foreach (var followedBy in Model.FollowedBy)
                 {
-                    <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
-                    }
+                    <p>@followedBy.FromArtist.Lastname @followedBy.FromArtist.Firstname @followedBy.FromArtist.UserName</p>
                 }
             }
-        }*@
-</ul>
+
+            @if (Model.Following.Count > 0)
+            {
+                <p>following :</p>
+                foreach (var following in Model.Following)
+                {
+                    <p>@following.FromArtist.Lastname @following.FromArtist.Firstname @following.FromArtist.UserName</p>
+                }
+            }
+
+z
+
+            @*if (SignInManager.IsSignedIn(User))
+            {
+                var maliste = Model.FollowedBy.Where(x => x.FromArtistId == UserManager.GetUserId(User));
+                if (maliste != null)
+                {
+                    foreach (var followedBy in maliste)
+                    {
+                        <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                        }
+                    }
+                }
+            }*@
+        </ul>
+    </div>
+</div>

@@ -29,7 +29,6 @@ namespace artfolio.Models
         public Visibility Privacy { get; set; }
         
         
-
         [Required]
         public Category Category { get; set; }
 
@@ -40,6 +39,7 @@ namespace artfolio.Models
         public virtual ICollection<ArtworkTag> ArtworkTags { get; set; }
         public virtual IList<Document> Documents { get; set; }
         public virtual IList<Support> Supports { get; set; }
+        public virtual Collection Collection { get; set; }
         public virtual CreativeCommons CCLicense { get; set; }
     }
 

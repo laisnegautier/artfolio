@@ -160,7 +160,6 @@ namespace artfolio.Data
 
         public DbSet<ArtfolioStyleSheet> ArtfolioStyleSheets { get; set; }
 
-        public DbSet<ArtworkCollection> ArtworkCollections { get; set; }
         public DbSet<Collection> Collections { get; set; }
 
         public DbSet<Message> Messages { get; set; }

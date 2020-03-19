@@ -15,5 +15,6 @@ namespace artfolio.Models
         public DateTime CreationDate { get; set; }
 
         public virtual Artist Artist { get; set; }
+        public virtual ICollection<Artwork> Artworks { get; set; }
     } 
 }
