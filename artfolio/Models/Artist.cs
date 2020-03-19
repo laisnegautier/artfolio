@@ -30,6 +30,11 @@ namespace artfolio.Models
 
         [Required]
         [PersonalData]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        [Required]
+        [PersonalData]
         [DataType(DataType.Date)]
         [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }

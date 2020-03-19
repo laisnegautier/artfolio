@@ -145,6 +145,7 @@ namespace artfolio.Areas.Identity.Pages.Account
                     Email = Input.AspNetUser.Email,
                     Lastname = Input.Artist.Lastname,
                     Firstname = Input.Artist.Firstname,
+                    Description = Input.Artist.Description,
                     DateOfBirth = Input.Artist.DateOfBirth,
                     Nationality = Input.Artist.Nationality,
                     Gender = Input.Artist.Gender,

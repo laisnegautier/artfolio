@@ -25,10 +25,17 @@ namespace artfolio.Controllers
         // Display an artist profile
         public async Task<IActionResult> Index(string userName)
         {
+            if (String.IsNullOrEmpty(userName)) return NotFound();
+
             Artist artist = await _userManager.FindByNameAsync(userName);
             if (artist == null) return NotFound();
 
-            return View(artist);
+            ArtistIndexViewModel viewModel = new ArtistIndexViewModel
+            {
+                Artist = artist
+            };
+
+            return View(viewModel);
         }
 
         // TESTING PURPOSE
