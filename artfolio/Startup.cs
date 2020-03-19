@@ -81,6 +81,11 @@ namespace artfolio
                     defaults: new { controller = "Artwork", action = "Index" });
                 // constraints: new { title = @"^.*-.*$" });
 
+                endpoints.MapControllerRoute(
+                    name: "messages",
+                    pattern: "Messages/{userName}",
+                    defaults: new { controller = "Messages", action = "Index" });
+
                 // Default endpoints 
                 endpoints.MapControllerRoute(
                     name: "default",

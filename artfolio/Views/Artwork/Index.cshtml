@@ -26,6 +26,7 @@
 <div>
     <h3>Details</h3>
     @Model.Artwork.Title
+    <a href="" >SIGNALER CETTE OEUVRE</a>
     @if (Model.Artwork.Documents != null && Model.Artwork.Documents.Count > 0)
     {
         <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@Model.Artist.UserName" asp-route-title="@Model.Artwork.NormalizedTitle" alt="See the details" title="See the details">

@@ -9,5 +9,11 @@ namespace artfolio.Models
     public class Message
     {
         public int MessageId { get; set; }
+        public string Content { get; set; }
+        public DateTime CreationDate { get; set; }
+        public bool IsRead { get; set; }
+
+        public virtual Artist Sender { get; set; }
+        public virtual Artist Receiver { get; set; }
     }
 }

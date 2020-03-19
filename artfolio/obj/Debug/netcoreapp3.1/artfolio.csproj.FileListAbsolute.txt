@@ -382,7 +382,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\Delete.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\Details.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\Edit.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\MyArtworks.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\Publish.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Discover\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Home\CurrentUser.cshtml.g.cs
@@ -430,4 +429,4 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\runtimes
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\Index.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Messages\Index.cshtml.g.cs
