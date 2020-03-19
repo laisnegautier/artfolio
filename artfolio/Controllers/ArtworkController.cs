@@ -60,12 +60,9 @@ namespace artfolio.Controllers
                 _context.Supports.Add(support);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            return View();
         }
 
         // GET: Artworks/Details/5
@@ -106,7 +103,7 @@ namespace artfolio.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Publish(ArtworkPublishViewModel viewModel)
+        public async Task<IActionResult> Publish([Bind("Artwork, Document, Tags, ArtworkTag, File, CreativeCommonsId")] ArtworkPublishViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -164,7 +161,7 @@ namespace artfolio.Controllers
                 }
                 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Publish));
             }
             return View(viewModel);
         }
