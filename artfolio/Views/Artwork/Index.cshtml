@@ -1,0 +1,80 @@
+﻿@model ArtworkIndexViewModel
+@{
+    ViewData["Title"] = Model.Artwork.Title + ", by " + @Model.Artist.Firstname + " " + @Model.Artist.Lastname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string formatToImg(string acromym)
+    {
+        return acromym + ".sm.png";
+    }
+}
+
+    <div>
+        <h3>Artwork by</h3>
+        <div class="profile-pic-nav d-none d-lg-flex" style="overflow: hidden; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center">
+            <img src="~/images/avatars/thumbnails/@Model.Artist.PhotoFilePath" width="80" style="margin: auto" alt="profile picture" />
+        </div>
+        <h6 class="m-0">
+            @Model.Artist.Firstname @Model.Artist.Lastname
+        </h6>
+        <small class="m-0 text-muted">
+            @Model.Artist.UserName
+        </small>
+    </div>
+
+<hr />
+
+<div>
+    <h3>Details</h3>
+    @Model.Artwork.Title
+    @if (Model.Artwork.Documents != null && Model.Artwork.Documents.Count > 0)
+    {
+        <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@Model.Artist.UserName" asp-route-title="@Model.Artwork.NormalizedTitle" alt="See the details" title="See the details">
+            <img src="~/images/artworks/@Model.Artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@Model.Artwork.Title, by @Model.Artist.Firstname @Model.Artist.Lastname">
+        </a>
+    }
+
+    @if (Model.Artwork.ArtworkTags.Count > 0)
+    {
+        <p>Tags : </p>
+        @foreach (var artworkTag in Model.Artwork.ArtworkTags)
+        {
+            @artworkTag.Tag.Name
+        }
+    }
+    <h5 class="mb-1">@Model.Artwork.Title</h5>
+    <h5 class="mb-1">@Model.Artwork.Description</h5>
+    <h6 class="small mb-1">@Model.Artwork.Category, released @Html.DisplayFor(modelItem => Model.Artwork.ReleaseDate)</h6>
+    <img style="width: 50px" src="~/images/ccicons/@formatToImg(Model.Artwork.CCLicense.Acronym)" alt="CC @Model.Artwork.CCLicense.Title License" title="CC @Model.Artwork.CCLicense.Title License" />
+
+    @if (Model.Artwork.Collection != null)
+    {
+        <p>Collection : @Model.Artwork.Collection.Name</p>
+    }
+</div>
+<hr />
+
+<div>
+    <h3>Supports</h3>
+    <form asp-controller="Artwork" asp-action="Index" method="post">
+        <input type="hidden" asp-for="@Model.ArtworkId" value="@Model.Artwork.ArtworkId" />
+        <textarea asp-for="Support.Content"></textarea>
+        <input type="submit" value="support" class="btn btn-artfolio" />
+    </form>
+
+    @if (Model.Artwork.Supports.Count > 0)
+    {
+        @foreach (var support in Model.Artwork.Supports)
+        {
+            <ul>
+                <li>Support by @support.Artist.Firstname @support.Artist.Lastname</li>
+                <li>@support.Content</li>
+                <li><em>Posted on @support.CreationDate</em></li>
+            </ul>
+        }
+    }
+    else
+    {
+        <h5 class="small"><b>be the 1st to support</b></h5>
+    }
+</div>
+

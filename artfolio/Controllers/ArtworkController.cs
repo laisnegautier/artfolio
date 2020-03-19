@@ -32,10 +32,40 @@ namespace artfolio.Controllers
             _hostingEnv = hostingEnv;
         }
 
-        // GET: Artworks
         public async Task<IActionResult> Index(string userName, string title)
         {
-            return View(await _context.Artworks.ToListAsync());
+            ArtworkIndexViewModel viewModel = new ArtworkIndexViewModel
+            {
+                Artist = await _userManager.FindByNameAsync(userName),
+                Artwork = await _context.Artworks.SingleAsync(x => x.NormalizedTitle == title)
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index([Bind("Support, ArtworkId")] ArtworkIndexViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Support support = new Support
+                {
+                    Content = viewModel.Support.Content,
+                    CreationDate = DateTime.Now,
+                    Artwork = await _context.Artworks.SingleAsync(x => x.ArtworkId == viewModel.ArtworkId),
+                    Artist = await _userManager.GetUserAsync(User)
+                };
+
+                _context.Supports.Add(support);
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: Artworks/Details/5
