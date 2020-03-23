@@ -13,11 +13,13 @@ namespace artfolio.Controllers
 {
     public class ArtistController : Controller
     {
+        private readonly SignInManager<Artist> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Artist> _userManager;
 
-        public ArtistController(UserManager<Artist> userManager, ApplicationDbContext context)
+        public ArtistController(SignInManager<Artist> signInManager, UserManager<Artist> userManager, ApplicationDbContext context)
         {
+            _signInManager = signInManager;
             _context = context;
             _userManager = userManager;
         }
@@ -35,13 +37,57 @@ namespace artfolio.Controllers
                 Artist = artist
             };
 
+            // Check if the viewer is following the artist
+            if(_signInManager.IsSignedIn(User))
+            {
+                Artist user = await _userManager.GetUserAsync(User);
+                Artist toFollow = await _userManager.FindByNameAsync(userName);
+                FollowRelation followRelation = await _context.FollowRelations.FirstOrDefaultAsync(x => x.FromArtistId == user.Id && x.ToArtistId == toFollow.Id);
+
+                ViewData["isFollowing"] = followRelation != null ? true : false;
+            }
+            
             return View(viewModel);
         }
 
-        // TESTING PURPOSE
-        public async Task<IActionResult> Follow()
+        public async Task<IActionResult> Follow(string userName)
         {
-            return View(await _userManager.GetUserAsync(User));
+            Artist user = await _userManager.GetUserAsync(User);
+            Artist toFollow = await _userManager.FindByNameAsync(userName);
+
+            FollowRelation followRelation = new FollowRelation
+            {
+                FromArtistId = user.Id,
+                FromArtist = user,
+                ToArtistId = toFollow.Id,
+                ToArtist = toFollow
+            };
+
+            FollowRelation duplicate = await _context.FollowRelations.FirstOrDefaultAsync(x => x.FromArtistId == user.Id && x.ToArtistId == toFollow.Id);
+            if (duplicate == null)
+            {
+                _context.Add(followRelation);
+                await _context.SaveChangesAsync();
+            }
+            else return NotFound();
+
+            return RedirectToAction(nameof(Index), toFollow.UserName);
+        }
+
+        public async Task<IActionResult> Unfollow(string userName)
+        {
+            Artist user = await _userManager.GetUserAsync(User);
+            Artist toFollow = await _userManager.FindByNameAsync(userName);
+            
+            FollowRelation followRelation = await _context.FollowRelations.FirstOrDefaultAsync(x => x.FromArtistId == user.Id && x.ToArtistId == toFollow.Id);
+            if (followRelation != null)
+            {
+                _context.Remove(followRelation);
+                await _context.SaveChangesAsync();
+            }
+            else return NotFound();
+
+            return RedirectToAction(nameof(Index), toFollow.UserName);
         }
     }
 }
