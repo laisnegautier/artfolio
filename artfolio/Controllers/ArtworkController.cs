@@ -105,16 +105,25 @@ namespace artfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Publish([Bind("Artwork, Document, Tags, ArtworkTag, File, CreativeCommonsId")] ArtworkPublishViewModel viewModel)
         {
+            // Reinitialisation
+            IQueryable<CreativeCommons> creativeCommons = _context.CreativeCommons;
+
+            viewModel.CreativeCommons = await creativeCommons.ToListAsync();
+
             if (ModelState.IsValid)
             {
+                
                 // FILE UPLOAD
                 string uniqueFileName = null;
                 if(viewModel.File != null)
                 {
-                    string uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, "images/artworks");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.File.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
+                    // Virus verification ?
+
+                    // Strong verification of extension and first bytes
+                        string uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, "images/artworks");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.File.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
                 
                 // SEO-friendly URL

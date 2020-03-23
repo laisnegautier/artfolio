@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using artfolio.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using artfolio.ValidationAttributes;
 
 namespace artfolio.ViewModels
 {
@@ -18,7 +19,9 @@ namespace artfolio.ViewModels
         public Document Document { get; set; }
         public Tag Tags { get; set; }
         public ArtworkTag ArtworkTag { get; set; }
+
         [Required]
+        [ArtfolioMedia]
         public IFormFile File { get; set; }
 
 
