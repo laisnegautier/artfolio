@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Slugify;
+using artfolio.ValidationAttributes;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace artfolio.Controllers
 {
@@ -112,18 +115,60 @@ namespace artfolio.Controllers
 
             if (ModelState.IsValid)
             {
-                
                 // FILE UPLOAD
                 string uniqueFileName = null;
                 if(viewModel.File != null)
                 {
+                    
                     // Virus verification ?
 
-                    // Strong verification of extension and first bytes
-                        string uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, "images/artworks");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.File.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    // Verifications content-type, mime-type, scripting etc
+                    string errorImage;
+                    bool isPicture = FormFileExtensions.IsPicture(viewModel.File, out errorImage);
+                    string errorAudio;
+                    bool isAudio = FormFileExtensions.IsAudio(viewModel.File, out errorAudio);
+                    string errorPdf;
+                    bool isPdf = FormFileExtensions.IsPDF(viewModel.File, out errorPdf);
+
+                    string folder = null;
+                    if (isPicture) folder = "artworks/picture/";
+                    else if (isAudio) folder = "artworks/audio/";
+                    else if (isPdf) folder = "artworks/pdf/";
+
+                    string uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, folder);
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.File.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    try
+                    {
                         viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                    catch(Exception e)
+                    {
+                        ModelState.AddModelError("error", "An unexpected error occurred");
+                    }
+                    
+                    // Creating thumbnails for pic
+                    if(isPicture)
+                    {
+                        string uploadsThumbnailAvatarFolder = Path.Combine(_hostingEnv.WebRootPath, "artworks/picture/thumbnails");
+                        string thumbnailFilePath = Path.Combine(uploadsThumbnailAvatarFolder, uniqueFileName);
+
+                        Image image = Image.FromStream(viewModel.File.OpenReadStream(), true, true);
+
+                        double ratio = 200 * 1.0 / image.Width;
+                        int newHeight = (int)Math.Floor(image.Height * ratio);
+
+                        var newImage = new Bitmap(200, newHeight);
+                        using (var thumbnail = Graphics.FromImage(newImage))
+                        {
+                            thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
+                            thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            thumbnail.CompositingMode = CompositingMode.SourceCopy;
+                            thumbnail.DrawImage(image, 0, 0, 200, newHeight);
+
+                            newImage.Save(thumbnailFilePath);
+                        }
+                    }
                 }
                 
                 // SEO-friendly URL

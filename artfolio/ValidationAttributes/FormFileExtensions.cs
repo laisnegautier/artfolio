@@ -12,7 +12,7 @@ namespace artfolio.ValidationAttributes
     {
         public const int FileMinimumBytes = 512;
 
-        public static bool IsImage(this IFormFile postedFile, out string error)
+        public static bool IsPicture(this IFormFile postedFile, out string error)
         {
             error = null;
 

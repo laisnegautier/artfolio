@@ -20,7 +20,6 @@ namespace artfolio.ViewModels
         public Tag Tags { get; set; }
         public ArtworkTag ArtworkTag { get; set; }
 
-        [Required]
         [ArtfolioMedia]
         public IFormFile File { get; set; }
 

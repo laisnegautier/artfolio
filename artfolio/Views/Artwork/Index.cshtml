@@ -30,7 +30,7 @@
     @if (Model.Artwork.Documents != null && Model.Artwork.Documents.Count > 0)
     {
         <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@Model.Artist.UserName" asp-route-title="@Model.Artwork.NormalizedTitle" alt="See the details" title="See the details">
-            <img src="~/images/artworks/@Model.Artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@Model.Artwork.Title, by @Model.Artist.Firstname @Model.Artist.Lastname">
+            <img src="~/artworks/picture/@Model.Artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@Model.Artwork.Title, by @Model.Artist.Firstname @Model.Artist.Lastname">
         </a>
     }
 

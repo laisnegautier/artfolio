@@ -68,7 +68,9 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\artworks\thumbnails\" />
+    <Folder Include="wwwroot\artworks\audio\" />
+    <Folder Include="wwwroot\artworks\picture\thumbnails\" />
+    <Folder Include="wwwroot\artworks\pdf\" />
     <Folder Include="wwwroot\images\ccicons\" />
   </ItemGroup>
 

@@ -109,9 +109,16 @@
                         <div class="artwork-card">
                             @if (artwork.Documents.Count > 0)
                             {
-                                <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@artwork.Artist.UserName" asp-route-title="@artwork.NormalizedTitle" alt="See the details" title="See the details">
-                                    <img src="~/images/artworks/@artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@artwork.Title, by @artwork.Artist.Firstname @artwork.Artist.Lastname">
-                                </a>
+                            <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@artwork.Artist.UserName" asp-route-title="@artwork.NormalizedTitle" alt="See the details" title="See the details">
+                                @if (artwork.Documents[0].Media == DocumentMedia.Picture)
+                                {
+                                    <img src="~/artworks/picture/thumbnails/@artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@artwork.Title, by @artwork.Artist.Firstname @artwork.Artist.Lastname">
+                                }
+                                else
+                                {
+                                    <p>@artwork.Documents[0].Media et oui</p>
+                                }
+                            </a>
 
                             }
                             else

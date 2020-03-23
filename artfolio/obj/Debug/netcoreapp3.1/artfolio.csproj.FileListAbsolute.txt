@@ -428,7 +428,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\runtimes
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artwork\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Messages\Index.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cache

@@ -14,7 +14,7 @@ namespace artfolio.ValidationAttributes
             IFormFile file = value as IFormFile;
 
             string errorImage;
-            bool isImage = FormFileExtensions.IsImage(file, out errorImage);
+            bool isImage = FormFileExtensions.IsPicture(file, out errorImage);
             string errorAudio;
             bool isAudio = FormFileExtensions.IsAudio(file, out errorAudio);
             string errorPdf;
@@ -22,7 +22,7 @@ namespace artfolio.ValidationAttributes
 
             if (!isImage && !isAudio && !isPdf) return new ValidationResult("The uploaded file must be an image, an audio or a PDF.");
             else if ((!isImage && isAudio && isPdf) || (isImage && isAudio && !isPdf) || (isImage && !isAudio && isPdf)) 
-                return new ValidationResult("The uploaded file is corrupted.");
+                return new ValidationResult("The file uploaded is corrupted.");
 
             return ValidationResult.Success;
         }
