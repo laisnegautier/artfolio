@@ -149,6 +149,7 @@ namespace artfolio.Controllers
                     IsMainDocument = viewModel.Document.IsMainDocument,
                     Media = viewModel.Document.Media,
                     FilePath = uniqueFileName,
+                    ContentType = viewModel.File.ContentType.ToLower(),
                     Artwork = artworkToAdd
                 };
 

@@ -23,6 +23,7 @@ namespace artfolio.Models
 
         [DataType(DataType.Url)]
         public string FilePath { get; set; }
+        public string ContentType { get; set; }
 
         public virtual Artwork Artwork { get; set; }
     }
