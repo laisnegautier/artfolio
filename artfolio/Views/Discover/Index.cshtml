@@ -114,9 +114,12 @@
                                 {
                                     <img src="~/artworks/picture/thumbnails/@artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@artwork.Title, by @artwork.Artist.Firstname @artwork.Artist.Lastname">
                                 }
-                                else
+                                else if (artwork.Documents[0].Media == DocumentMedia.Audio)
                                 {
-                                    <p>@artwork.Documents[0].Media et oui</p>
+                                    <audio controls preload="metadata" style=" width:200px;">
+                                        <source src="~/artworks/audio/@artwork.Documents[0].FilePath" type="@artwork.Documents[0].ContentType">
+                                        Your browser does not support the audio element.
+                                    </audio>
                                 }
                             </a>
 

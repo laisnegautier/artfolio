@@ -6,15 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200314162242_FollowingImplementation.cs" />
-    <Compile Remove="Data\Migrations\20200314162242_FollowingImplementation.Designer.cs" />
-    <Compile Remove="Data\Migrations\20200318180119_cc2.cs" />
-    <Compile Remove="Data\Migrations\20200318180119_cc2.Designer.cs" />
-    <Compile Remove="Data\Migrations\20200318190322_te.cs" />
-    <Compile Remove="Data\Migrations\20200318190322_te.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />

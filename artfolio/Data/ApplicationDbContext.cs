@@ -158,8 +158,6 @@ namespace artfolio.Data
         public DbSet<ArtworkTag> ArtworkTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
-        public DbSet<ArtfolioStyleSheet> ArtfolioStyleSheets { get; set; }
-
         public DbSet<Collection> Collections { get; set; }
 
         public DbSet<Message> Messages { get; set; }

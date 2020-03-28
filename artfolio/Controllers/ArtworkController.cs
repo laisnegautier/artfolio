@@ -119,9 +119,6 @@ namespace artfolio.Controllers
                 string uniqueFileName = null;
                 if(viewModel.File != null)
                 {
-                    
-                    // Virus verification ?
-
                     // Verifications content-type, mime-type, scripting etc
                     string errorImage;
                     bool isPicture = FormFileExtensions.IsPicture(viewModel.File, out errorImage);
@@ -129,7 +126,7 @@ namespace artfolio.Controllers
                     bool isAudio = FormFileExtensions.IsAudio(viewModel.File, out errorAudio);
                     string errorPdf;
                     bool isPdf = FormFileExtensions.IsPDF(viewModel.File, out errorPdf);
-
+                    
                     string folder = null;
                     if (isPicture) folder = "artworks/picture/";
                     else if (isAudio) folder = "artworks/audio/";
