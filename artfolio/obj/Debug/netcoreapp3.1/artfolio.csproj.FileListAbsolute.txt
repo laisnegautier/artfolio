@@ -444,3 +444,4 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
