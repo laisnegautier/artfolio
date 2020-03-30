@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using artfolio.Data;
+﻿using artfolio.Data;
 using artfolio.Models;
+using artfolio.ValidationAttributes;
 using artfolio.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using System.Net.Http.Headers;
-using System.IO;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Slugify;
-using artfolio.ValidationAttributes;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace artfolio.Controllers
 {
@@ -92,16 +88,16 @@ namespace artfolio.Controllers
         {
             IQueryable<CreativeCommons> creativeCommons = _context.CreativeCommons;
 
-            ArtworkPublishViewModel viewModel = new ArtworkPublishViewModel 
-            { 
+            ArtworkPublishViewModel viewModel = new ArtworkPublishViewModel
+            {
                 CreativeCommons = await creativeCommons.ToListAsync()
             };
-            
+
             return View(viewModel);
         }
 
         // POST: Artworks/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize]
@@ -117,16 +113,13 @@ namespace artfolio.Controllers
             {
                 // FILE UPLOAD
                 string uniqueFileName = null;
-                if(viewModel.File != null)
+                if (viewModel.File != null)
                 {
                     // Verifications content-type, mime-type, scripting etc
-                    string errorImage;
-                    bool isPicture = FormFileExtensions.IsPicture(viewModel.File, out errorImage);
-                    string errorAudio;
-                    bool isAudio = FormFileExtensions.IsAudio(viewModel.File, out errorAudio);
-                    string errorPdf;
-                    bool isPdf = FormFileExtensions.IsPDF(viewModel.File, out errorPdf);
-                    
+                    bool isPicture = FormFileExtensions.IsPicture(viewModel.File, out string errorImage);
+                    bool isAudio = FormFileExtensions.IsAudio(viewModel.File, out string errorAudio);
+                    bool isPdf = FormFileExtensions.IsPDF(viewModel.File, out string errorPdf);
+
                     string folder = null;
                     if (isPicture) folder = "artworks/picture/";
                     else if (isAudio) folder = "artworks/audio/";
@@ -139,13 +132,13 @@ namespace artfolio.Controllers
                     {
                         viewModel.File.CopyTo(new FileStream(filePath, FileMode.Create));
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
-                        ModelState.AddModelError("error", "An unexpected error occurred");
+                        ModelState.AddModelError("error", $"An unexpected error occurred : + {e.Message}");
                     }
-                    
+
                     // Creating thumbnails for pic
-                    if(isPicture)
+                    if (isPicture)
                     {
                         string uploadsThumbnailAvatarFolder = Path.Combine(_hostingEnv.WebRootPath, "artworks/picture/thumbnails");
                         string thumbnailFilePath = Path.Combine(uploadsThumbnailAvatarFolder, uniqueFileName);
@@ -156,22 +149,21 @@ namespace artfolio.Controllers
                         int newHeight = (int)Math.Floor(image.Height * ratio);
 
                         var newImage = new Bitmap(200, newHeight);
-                        using (var thumbnail = Graphics.FromImage(newImage))
-                        {
-                            thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
-                            thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            thumbnail.CompositingMode = CompositingMode.SourceCopy;
-                            thumbnail.DrawImage(image, 0, 0, 200, newHeight);
 
-                            newImage.Save(thumbnailFilePath);
-                        }
+                        using var thumbnail = Graphics.FromImage(newImage);
+                        thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
+                        thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        thumbnail.CompositingMode = CompositingMode.SourceCopy;
+                        thumbnail.DrawImage(image, 0, 0, 200, newHeight);
+
+                        newImage.Save(thumbnailFilePath);
                     }
                 }
-                
+
                 // SEO-friendly URL
                 SlugHelper helper = new SlugHelper();
                 string normalizedTitle = helper.GenerateSlug(viewModel.Artwork.Title);
-                
+
                 Artwork artworkToAdd = new Artwork
                 {
                     Title = viewModel.Artwork.Title,
@@ -185,7 +177,7 @@ namespace artfolio.Controllers
                     Category = viewModel.Artwork.Category,
                     Artist = await _userManager.GetUserAsync(User)
                 };
-                
+
                 Document documentToAdd = new Document
                 {
                     IsMainDocument = viewModel.Document.IsMainDocument,
@@ -211,7 +203,7 @@ namespace artfolio.Controllers
                     _context.Add(tagToAdd);
                     _context.Add(artworkTagToAdd);
                 }
-                
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Publish));
             }
@@ -235,7 +227,7 @@ namespace artfolio.Controllers
         }
 
         // POST: Artworks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

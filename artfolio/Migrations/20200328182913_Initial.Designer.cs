@@ -10,14 +10,14 @@ using artfolio.Data;
 namespace artfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200328104123_Initial")]
+    [Migration("20200328182913_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

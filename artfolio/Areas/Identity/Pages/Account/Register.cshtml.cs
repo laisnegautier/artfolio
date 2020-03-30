@@ -1,33 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using artfolio.Data;
+using artfolio.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using artfolio.Models;
-using artfolio.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Security.Claims;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace artfolio.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
         private readonly SignInManager<Artist> _signInManager;
         private readonly UserManager<Artist> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -35,14 +33,12 @@ namespace artfolio.Areas.Identity.Pages.Account
         private readonly IWebHostEnvironment _hostingEnv;
 
         public RegisterModel(
-            ApplicationDbContext context,
             UserManager<Artist> userManager,
             SignInManager<Artist> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IWebHostEnvironment hostingEnv)
         {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -56,7 +52,6 @@ namespace artfolio.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
 
         public class InputViewModel
         {
@@ -105,7 +100,7 @@ namespace artfolio.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -128,15 +123,14 @@ namespace artfolio.Areas.Identity.Pages.Account
                     int newHeight = (int)Math.Floor(image.Height * ratio);
 
                     var newImage = new Bitmap(200, newHeight);
-                    using (var thumbnail = Graphics.FromImage(newImage))
-                    {
-                        thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
-                        thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        thumbnail.CompositingMode = CompositingMode.SourceCopy;
-                        thumbnail.DrawImage(image, 0, 0, 200, newHeight);
 
-                        newImage.Save(thumbnailFilePath);
-                    }
+                    using var thumbnail = Graphics.FromImage(newImage);
+                    thumbnail.CompositingQuality = CompositingQuality.HighSpeed;
+                    thumbnail.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    thumbnail.CompositingMode = CompositingMode.SourceCopy;
+                    thumbnail.DrawImage(image, 0, 0, 200, newHeight);
+
+                    newImage.Save(thumbnailFilePath);
                 }
 
                 var user = new Artist
@@ -164,7 +158,7 @@ namespace artfolio.Areas.Identity.Pages.Account
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code },
+                        values: new { area = "Identity", userId = user.Id, code },
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.AspNetUser.Email, "Confirm your email",
@@ -184,7 +178,6 @@ namespace artfolio.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-
             }
 
             // If we got this far, something failed, redisplay form

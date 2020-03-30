@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/bootstrap.custom.css",
+    "inputFile": "wwwroot/css/bootstrap.custom.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/css/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/js/site.es5.js",
+    "inputFile": "wwwroot/js/site.js"
+  },
+  {
+    "outputFile": "wwwroot/css/nav.css",
+    "inputFile": "wwwroot/css/nav.scss"
+  }
+]

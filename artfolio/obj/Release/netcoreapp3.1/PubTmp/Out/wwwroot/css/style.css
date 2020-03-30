@@ -51,6 +51,7 @@ body {
     border-left: none;
     height: 300px;
 }
+
 .body-home {
     background: url("../images/design/home/background.svg") left top;
 }
@@ -69,7 +70,7 @@ h1, h3 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-header { 
+header {
     border-bottom: 0px solid lightgray;
     z-index: 5;
     position: relative;
@@ -132,14 +133,15 @@ header {
         border: 0px;
         width: 90% !important;
     }
-    .search-box-header input:focus, .search-box-header input.focus {
-        box-shadow: none;
-    }
+
+        .search-box-header input:focus, .search-box-header input.focus {
+            box-shadow: none;
+        }
 
     .search-box-header:hover, .search-box-header:focus-within {
         box-shadow: 0 2px 5px rgba(0,0,0,.1);
     }
-    
+
 .profile-pic-nav {
     width: 70px;
     height: 70px;
@@ -240,13 +242,12 @@ header {
 
     .btn-artfolio:focus, .btn-artfolio.focus {
         box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
-}
+    }
 
 .form-artfolio:focus, .form-artfolio.focus {
     border-color: #F9A585;
     box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
 }
-
 
 .btn-search {
     color: #F9A585;
@@ -287,11 +288,10 @@ main {
     transition: all .15s ease-in-out;
 }
 
-.card:hover {
-    border-color: white;
-    box-shadow: 0 2px 7px lightgray;
-}
-
+    .card:hover {
+        border-color: white;
+        box-shadow: 0 2px 7px lightgray;
+    }
 
 /*GALLERY*/
 .row-card {
@@ -312,11 +312,12 @@ main {
     box-shadow: 0 2px 4px lightgray;
     border-radius: 5px;
     transition: all .15s ease-in-out;
-    z-index:1;
+    z-index: 1;
     overflow: hidden;
     /*position: relative;
     z-index: 1;*/
 }
+
     .artwork-card a, .artwork-card a:hover, .artwork-card a:focus, .artwork-card a:visited, .artwork-card a:active {
         /*text-decoration: none;*/
         color: initial !important;
@@ -325,8 +326,9 @@ main {
     .artwork-card:hover {
         box-shadow: 0 2px 6px lightgray;
         position: relative;
-        z-index:1000;
+        z-index: 1000;
     }
+
         .artwork-card:hover .description-card {
             box-shadow: 0 5px 20px black;
         }
@@ -392,9 +394,8 @@ main {
         background-color: #f3f3f3;
     }
 
-.btn-category img {
-}
-
+    .btn-category img {
+    }
 
 .selected {
     background-color: #f3f3f3;
@@ -529,9 +530,9 @@ main {
     z-index: 1;
 }
 
-.footer-home ul li {
-    margin-left: 20px;
-}
+    .footer-home ul li {
+        margin-left: 20px;
+    }
 
     .footer-home a {
         color: gray;
@@ -543,9 +544,9 @@ main {
             text-decoration: none;
         }
 
-    .footer-home a:focus, .footer-home a.focus {
-        color: black;
-    }
+        .footer-home a:focus, .footer-home a.focus {
+            color: black;
+        }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {

@@ -1,0 +1,40 @@
+﻿$main-color: #fc8b5e;
+$main-color-light: #f9a585;
+$text-size-large: 4rem;
+$color-darkgray: #DEDEDE;
+$color-artfolio-lightgray: #f3f3f3;
+
+@import "nav.scss";
+
+
+/* UTILS FOR ALL */
+.btn-artfolio {
+    color: $main-color-light;
+    background-color: #fff;
+    border-color: $main-color-light;
+    border-radius: 5px !important;
+}
+
+.btn-artfolio:hover {
+    color: #fff;
+    background-color: $main-color-light;
+    border-color: $main-color-light;
+}
+
+.btn-artfolio:focus, .btn-artfolio.focus {
+    box-shadow: 0 0 0 0.2rem rgba(249,165,128,.5);
+}
+
+.btn-category {
+    border: 0;
+    background-color: none;
+}
+
+.btn-category:hover {
+    background-color: $color-artfolio-lightgray;
+}
+
+.btn-category:focus, .btn-category:active {
+    box-shadow: 0 2px 6px lightgray;
+    background-color: #f3f3f3;
+}

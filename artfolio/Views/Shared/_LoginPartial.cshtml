@@ -1,51 +1,52 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<Artist> SignInManager
 @inject UserManager<Artist> UserManager
+@{
+    Artist user = await UserManager.GetUserAsync(User);
+}
 
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0 d-lg-flex align-items-lg-center">
-        @if (SignInManager.IsSignedIn(User))
-        {
-            
-            <li class="nav-item">
-                <a asp-area="" asp-controller="Discover" asp-action="Index" class="nav-link sign-in primary-underline">discover</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link sign-up" asp-area="" asp-controller="Artwork" asp-action="Publish">publish artwork</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-inline-block d-lg-none">profile</span>
-
-                    <div class="profile-pic-nav d-none d-lg-flex" style="overflow: hidden; display: flex; justify-content: center; align-items: center">
+<ul>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <a class="nav-link sign-in primary-underline" asp-area="" asp-controller="Discover" asp-action="Index">discover</a>
+        </li>
+        <li>
+            <a class="nav-link sign-up" asp-area="" asp-controller="Artwork" asp-action="Publish">publish<span class="artwork-btn"> artwork</span></a>
+        </li>
+        <li class="dropdown">
+            <a href="#" id="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="profile-pic-nav d-flex" style="overflow: hidden; display: flex; justify-content: center; align-items: center">
+                    @if (!String.IsNullOrEmpty(user.PhotoFilePath))
+                    {
                         <img src="~/images/avatars/thumbnails/@UserManager.GetUserAsync(User).Result.PhotoFilePath" width="150" style="margin: auto" alt="profile picture" />
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" asp-area="" asp-controller="Artist" asp-action="Index" asp-route-userName="@UserManager.GetUserName(User)">my artfolio</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Index">messages</a>
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">account</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Copyrights">copyrights</a>
-                    <a class="dropdown-item" href="#">visibility settings</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a>
-                    <br />
-                    <form class="dropdown-item btn-logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit">logout</button>
-                    </form>
+                    }
                 </div>
-            </li>
-        }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link sign-in primary-underline" asp-area="Identity" asp-page="/Account/Login">sign in</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link sign-up" asp-area="Identity" asp-page="/Account/Register">sign up</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" role="button" asp-area="Identity" asp-page="/Account/Register">
-                    <div class="profile-pic-nav d-none d-lg-inline-block"></div>
-                </a>
-            </li>
-        }
-    </ul>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown">
+                <a class="dropdown-item" asp-area="" asp-controller="Artist" asp-action="Index" asp-route-userName="@UserManager.GetUserName(User)">my artfolio</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Index">messages</a>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">account</a>
+                <br />
+
+                <form class="dropdown-item btn-logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="dropdown-item btn-logout-btn">logout</button>
+                </form>
+            </div>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a class="nav-link sign-in primary-underline" asp-area="Identity" asp-page="/Account/Login">sign in</a>
+        </li>
+        <li>
+            <a class="nav-link sign-up" asp-area="Identity" asp-page="/Account/Register">sign up</a>
+        </li>
+        <li class="dropdown">
+            <a role="button" asp-area="Identity" asp-page="/Account/Register">
+                <div class="profile-pic-nav d-sm-inline-block"></div>
+            </a>
+        </li>
+    }
+</ul>

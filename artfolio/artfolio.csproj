@@ -3,33 +3,24 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-artfolio-B8C8718F-3A96-46FB-ACCA-FD00B97AE141</UserSecretsId>
+    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_OldLayout.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\js\site.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
-    <None Include="wwwroot\lib\bootstrap\LICENSE" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />

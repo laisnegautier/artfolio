@@ -9,7 +9,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetRoles] (
         [Id] nvarchar(450) NOT NULL,
@@ -22,7 +22,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetUsers] (
         [Id] nvarchar(450) NOT NULL,
@@ -54,7 +54,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [CreativeCommons] (
         [CreativeCommonsId] int NOT NULL IDENTITY,
@@ -74,7 +74,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Tags] (
         [TagId] int NOT NULL IDENTITY,
@@ -85,7 +85,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetRoleClaims] (
         [Id] int NOT NULL IDENTITY,
@@ -99,7 +99,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetUserClaims] (
         [Id] int NOT NULL IDENTITY,
@@ -113,7 +113,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetUserLogins] (
         [LoginProvider] nvarchar(128) NOT NULL,
@@ -127,7 +127,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetUserRoles] (
         [UserId] nvarchar(450) NOT NULL,
@@ -140,7 +140,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [AspNetUserTokens] (
         [UserId] nvarchar(450) NOT NULL,
@@ -154,7 +154,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Collections] (
         [CollectionId] int NOT NULL IDENTITY,
@@ -169,7 +169,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [FollowRelations] (
         [FromArtistId] nvarchar(450) NOT NULL,
@@ -182,7 +182,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Messages] (
         [MessageId] int NOT NULL IDENTITY,
@@ -199,7 +199,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Artworks] (
         [ArtworkId] int NOT NULL IDENTITY,
@@ -223,7 +223,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [ArtworkTags] (
         [ArtworkId] int NOT NULL,
@@ -236,7 +236,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Documents] (
         [DocumentId] int NOT NULL IDENTITY,
@@ -253,7 +253,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Reports] (
         [ReportId] int NOT NULL IDENTITY,
@@ -268,7 +268,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE TABLE [Supports] (
         [SupportId] int NOT NULL IDENTITY,
@@ -284,7 +284,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'CreativeCommonsId', N'Acronym', N'BY', N'Description', N'LegalCodeUrl', N'LicenseDeedUrl', N'NC', N'ND', N'SA', N'Title', N'Zero') AND [object_id] = OBJECT_ID(N'[CreativeCommons]'))
         SET IDENTITY_INSERT [CreativeCommons] ON;
@@ -302,150 +302,150 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Artworks_ArtistId] ON [Artworks] ([ArtistId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Artworks_CCLicenseCreativeCommonsId] ON [Artworks] ([CCLicenseCreativeCommonsId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Artworks_CollectionId] ON [Artworks] ([CollectionId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_ArtworkTags_TagId] ON [ArtworkTags] ([TagId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_AspNetRoleClaims_RoleId] ON [AspNetRoleClaims] ([RoleId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE UNIQUE INDEX [RoleNameIndex] ON [AspNetRoles] ([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_AspNetUserClaims_UserId] ON [AspNetUserClaims] ([UserId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_AspNetUserLogins_UserId] ON [AspNetUserLogins] ([UserId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_AspNetUserRoles_RoleId] ON [AspNetUserRoles] ([RoleId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [EmailIndex] ON [AspNetUsers] ([NormalizedEmail]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Collections_ArtistId] ON [Collections] ([ArtistId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Documents_ArtworkId] ON [Documents] ([ArtworkId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_FollowRelations_ToArtistId] ON [FollowRelations] ([ToArtistId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Messages_ReceiverId] ON [Messages] ([ReceiverId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Messages_SenderId] ON [Messages] ([SenderId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Reports_ArtistId] ON [Reports] ([ArtistId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Reports_ArtworkId] ON [Reports] ([ArtworkId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Supports_ArtistId] ON [Supports] ([ArtistId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     CREATE INDEX [IX_Supports_ArtworkId] ON [Supports] ([ArtworkId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328104123_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200328182913_Initial')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20200328104123_Initial', N'3.1.3');
+    VALUES (N'20200328182913_Initial', N'3.1.3');
 END;
 
 GO
