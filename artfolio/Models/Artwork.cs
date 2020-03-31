@@ -12,27 +12,37 @@ namespace artfolio.Models
         public int ArtworkId { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
         public string Title { get; set; }
+
         public string NormalizedTitle { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [Required]
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
+
         [Required]
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
-
         public string TerritorialJuridiction { get; set; }
 
         [Required]
-        public Visibility Privacy { get; set; }
-        
+        public bool Privacy { get; set; }
         
         [Required]
         public Category Category { get; set; }
 
-        //public bool IsDerivating { get; set; }
+        [Required]
+        public bool IsDerivating { get; set; }
+
+        public string LinkDerivating { get; set; }
+
+        public string LicenseDerivating { get; set; }
 
         public virtual Artist Artist { get; set; }
 
@@ -61,14 +71,6 @@ namespace artfolio.Models
         BY_NC_ND = 6,
         [Display(Name = "Public Domain")]
         PublicDomain = 7
-    }
-
-    public enum Visibility
-    {
-        [Display(Name = "Everyone can preview")]
-        Public = 1,
-        [Display(Name = "I'm the only one")]
-        Private = 2
     }
 
     public enum Category

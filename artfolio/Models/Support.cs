@@ -12,10 +12,15 @@ namespace artfolio.Models
     public class Support
     {
         public int SupportId { get; set; }
+
+        [Required]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
+
         public DateTime CreationDate { get; set; }
 
         public virtual Artwork Artwork { get; set; }
+        
         public virtual Artist Artist { get; set; }
     }
 }

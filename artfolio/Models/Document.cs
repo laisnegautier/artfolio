@@ -15,14 +15,20 @@ namespace artfolio.Models
     {
         public int DocumentId { get; set; }
 
+        [Required]
         [Display(Name = "Main document")]
         public bool IsMainDocument { get; set; }
+
         // 0 is the main document
         public int Position { get; set; }
+
+        [Required]
         public DocumentMedia Media { get; set; }
 
+        [Required]
         [DataType(DataType.Url)]
         public string FilePath { get; set; }
+
         public string ContentType { get; set; }
 
         public virtual Artwork Artwork { get; set; }
