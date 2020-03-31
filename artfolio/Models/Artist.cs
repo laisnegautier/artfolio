@@ -28,7 +28,6 @@ namespace artfolio.Models
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Characters are not allowed.")]
         public string Firstname { get; set; }
 
-        [Required]
         [PersonalData]
         [Display(Name = "Description")]
         public string Description { get; set; }
