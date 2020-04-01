@@ -5,7 +5,52 @@ $color-darkgray: #DEDEDE;
 $color-artfolio-lightgray: #f3f3f3;
 
 @import "nav.scss";
+html {
+    height: 100%;
+    padding: 0;
+    background: url("../images/design/home/background.svg") left top fixed;
+}
 
+body {
+    background-color: transparent;
+    height: 100%;
+}
+
+a {
+    color: #808080;
+}
+
+a:hover, a:focus, a:active {
+    color: $main-color;
+    text-decoration: none;
+}
+
+main {
+}
+
+.main-centered {
+    border: 1px solid blue;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: 200px;
+    margin-top: -210px;
+    padding: 20px;
+}
 
 /* UTILS FOR ALL */
 .btn-artfolio {
@@ -37,4 +82,34 @@ $color-artfolio-lightgray: #f3f3f3;
 .btn-category:focus, .btn-category:active {
     box-shadow: 0 2px 6px lightgray;
     background-color: #f3f3f3;
+}
+
+.artfolio-container {
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);
+    padding: 0;
+    border-radius: 5px;
+}
+
+.artfolio-container-header {
+    background: $main-color-light;
+    background: linear-gradient(8deg, $main-color 0%, $main-color-light 100%);
+    color: white;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: lighter;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.artfolio-content {
+    padding: 20px 30px 20px 30px;
+}
+
+.artfolio-content p {
+    margin: 0;
+    padding: 0;
+    color: red;
+    font-weight: bold !important;
 }

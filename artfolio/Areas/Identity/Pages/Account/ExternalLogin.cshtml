@@ -1,32 +1,33 @@
 ﻿@page
 @model ExternalLoginModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "sign up";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h4>Associate your @Model.LoginProvider account.</h4>
-<hr />
+<section class="col-md-3 mx-auto artfolio-container">
 
-<p class="text-info">
-    You've successfully authenticated with <strong>@Model.LoginProvider</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
-</p>
+    <!-- Title -->
+    <h1 class="artfolio-container-header">@ViewData["Title"]</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-</div>
+    <form asp-page-handler="Confirmation" class="artfolio-content" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+        <p class="text-info">
+            You've successfully authenticated with <strong>@Model.LoginProvider</strong>.
+            Please enter an email address for this site below and click the Register button to finish
+            logging in.
+        </p>
+
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group d-flex justify-content-center">
+            <button type="submit" class="btn btn-artfolio">sign up</button>
+        </div>
+    </form>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

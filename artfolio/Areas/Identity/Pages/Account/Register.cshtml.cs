@@ -64,7 +64,7 @@ namespace artfolio.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "Url defining your profile")]
+            [Display(Name = "Login (also URL of your profile artfolio.com/<yourLogin>")]
             [StringLength(40, MinimumLength = 1)]
             [RegularExpression(@"^[A-Za-z0-9_.+-]*$", ErrorMessage = "Characters are not allowed.")]
             public string UserName { get; set; }

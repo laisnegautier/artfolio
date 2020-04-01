@@ -1,10 +1,13 @@
 ﻿@page
 @model LockoutModel
 @{
-    ViewData["Title"] = "Locked out";
+    ViewData["Title"] = "locked out";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">This account has been locked out, please try again later.</p>
-</header>
+<section class="col-md-3 mx-auto artfolio-container">
+
+    <!-- Title -->
+    <h1 class="artfolio-container-header">@ViewData["Title"]</h1>
+
+    <p class="text-danger artfolio-content">This account has been locked out, please try again later.</p>
+</section>

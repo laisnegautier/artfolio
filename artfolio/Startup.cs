@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using artfolio.Data;
 using artfolio.Models;
+using artfolio.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using artfolio.Services;
-using Microsoft.AspNetCore.Http;
 
 namespace artfolio
 {
@@ -43,17 +36,17 @@ namespace artfolio
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddRazorPages()
+                // Rewriting Identity URLs for /Identity/Account/... to /Account/...
+                .AddRazorPagesOptions(o => o.Conventions.AddAreaFolderRouteModelConvention("Identity", "/Account/", model => { foreach (var selector in model.Selectors) { var attributeRouteModel = selector.AttributeRouteModel; attributeRouteModel.Order = -1; attributeRouteModel.Template = attributeRouteModel.Template.Remove(0, "Identity".Length); } }));
 
-
-            services.Configure<CookiePolicyOptions>(options =>
+        services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -98,7 +91,7 @@ namespace artfolio
                     pattern: "Messages/{userName}",
                     defaults: new { controller = "Messages", action = "Index" });
 
-                // Default endpoints 
+                // Default endpoints
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,22 +1,28 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
-}
+    ViewData["Title"] = "register confirmation";
+}}
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p>
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
+<section class="col-md-3 mx-auto artfolio-container">
+
+    <!-- Title -->
+    <h1 class="artfolio-container-header">@ViewData["Title"]</h1>
+
+    <!-- Content -->
+    @{
+        if (@Model.DisplayConfirmAccountLink)
+        {
+            <p class="artfolio-content">
+                This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+                Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+            </p>
+        }
+        else
+        {
+            <p class="artfolio-content">
+                Please check your email to confirm your account.
+            </p>
+        }
     }
-    else
-    {
-<p>
-        Please check your email to confirm your account.
-</p>
-    }
-}
+</section>

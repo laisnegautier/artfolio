@@ -1,16 +1,20 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "sign up";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" method="post">
-            <h1>@ViewData["Title"]</h1>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
+<section class="col-md-3 mx-auto artfolio-container">
+
+    <!-- Title -->
+    <h1 class="artfolio-container-header">@ViewData["Title"]</h1>
+
+    <!-- Content -->
+    <form asp-route-returnUrl="@Model.ReturnUrl" class="artfolio-content" enctype="multipart/form-data" method="post">
+
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+        @*<div class="form-group">
                 <label asp-for="Input.Avatar" class="control-label"></label>
                 <div class="custom-file">
                     <input asp-for="Input.Avatar" type="file" id="imgUploaded" class="form-control custom-file-input" />
@@ -21,76 +25,80 @@
                     </div>
                 </div>
                 <span asp-validation-for="Input.Avatar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Artist.Lastname"></label>
-                <input asp-for="Input.Artist.Lastname" class="form-control" />
-                <span asp-validation-for="Input.Artist.Lastname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Artist.Firstname"></label>
-                <input asp-for="Input.Artist.Firstname" class="form-control" />
-                <span asp-validation-for="Input.Artist.Firstname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Artist.Description"></label>
-                <input type="text" asp-for="Input.Artist.Description" class="form-control" />
-                <span asp-validation-for="Input.Artist.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Artist.DateOfBirth"></label>
-                <input asp-for="Input.Artist.DateOfBirth" class="form-control" />
-                <span asp-validation-for="Input.Artist.DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Artist.Nationality"></label>
-                <select asp-for="Input.Artist.Nationality" asp-items="Html.GetEnumSelectList<Nationality>()" class="form-control">
-                    <option selected disabled>Please select one</option>
-                </select>
-                <span asp-validation-for="Input.Artist.Nationality" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Artist.Gender"></label>
-                <select asp-for="Input.Artist.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
-                    <option selected disabled>Please select one</option>
-                </select>
-                <span asp-validation-for="Input.Artist.Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.AspNetUser.Email"></label>
-                <input asp-for="Input.AspNetUser.Email" class="form-control" />
-                <span asp-validation-for="Input.AspNetUser.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.AspNetUser.ConfirmEmail"></label>
-                <input asp-for="Input.AspNetUser.ConfirmEmail" class="form-control" />
-                <span asp-validation-for="Input.AspNetUser.ConfirmEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.AspNetUser.Password"></label>
-                <input asp-for="Input.AspNetUser.Password" class="form-control" />
-                <span asp-validation-for="Input.AspNetUser.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.AspNetUser.ConfirmPassword"></label>
-                <input asp-for="Input.AspNetUser.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.AspNetUser.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-inline">
-                <label asp-for="Input.Artist.IsPubliclyVisible"></label>
-                <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="true" id="IsPubliclyVisible" checked />Yes<br />
-                <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="false" id="IsPubliclyVisible" />No<br />
-                <span asp-validation-for="Input.Artist.IsPubliclyVisible" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.AspNetUser.UserName"></label>
-                <input asp-for="Input.AspNetUser.UserName" class="form-control" />
-                <span asp-validation-for="Input.AspNetUser.UserName" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-</div>
+            </div>*@
+
+        <div class="form-group">
+            <label asp-for="Input.AspNetUser.UserName"></label>
+            <input asp-for="Input.AspNetUser.UserName" class="form-control" />
+            <span asp-validation-for="Input.AspNetUser.UserName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Artist.Lastname"></label>
+            <input asp-for="Input.Artist.Lastname" class="form-control" />
+            <span asp-validation-for="Input.Artist.Lastname" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Artist.Firstname"></label>
+            <input asp-for="Input.Artist.Firstname" class="form-control" />
+            <span asp-validation-for="Input.Artist.Firstname" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Artist.Description"></label>
+            <input type="text" asp-for="Input.Artist.Description" class="form-control" />
+            <span asp-validation-for="Input.Artist.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Artist.DateOfBirth"></label>
+            <input asp-for="Input.Artist.DateOfBirth" class="form-control" />
+            <span asp-validation-for="Input.Artist.DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Artist.Nationality"></label>
+            <select asp-for="Input.Artist.Nationality" asp-items="Html.GetEnumSelectList<Nationality>()" class="form-control">
+                <option selected disabled>Please select one</option>
+            </select>
+            <span asp-validation-for="Input.Artist.Nationality" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.Artist.Gender"></label>
+            <select asp-for="Input.Artist.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                <option selected disabled>Please select one</option>
+            </select>
+            <span asp-validation-for="Input.Artist.Gender" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.AspNetUser.Email"></label>
+            <input asp-for="Input.AspNetUser.Email" class="form-control" />
+            <span asp-validation-for="Input.AspNetUser.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.AspNetUser.ConfirmEmail"></label>
+            <input asp-for="Input.AspNetUser.ConfirmEmail" class="form-control" />
+            <span asp-validation-for="Input.AspNetUser.ConfirmEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.AspNetUser.Password"></label>
+            <input asp-for="Input.AspNetUser.Password" class="form-control" />
+            <span asp-validation-for="Input.AspNetUser.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.AspNetUser.ConfirmPassword"></label>
+            <input asp-for="Input.AspNetUser.ConfirmPassword" class="form-control" />
+            <span asp-validation-for="Input.AspNetUser.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="form-inline">
+            <label asp-for="Input.Artist.IsPubliclyVisible"></label>
+            <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="true" id="IsPubliclyVisible" checked />Yes<br />
+            <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="false" id="IsPubliclyVisible" />No<br />
+            <span asp-validation-for="Input.Artist.IsPubliclyVisible" class="text-danger"></span>
+        </div>
+
+        <div class="form-group d-flex justify-content-center">
+            <button type="submit" class="btn btn-artfolio">create your account</button>
+        </div>
+    </form>
+</section>
 
 @*<div class="col-md-6 col-md-offset-2">
         <section>

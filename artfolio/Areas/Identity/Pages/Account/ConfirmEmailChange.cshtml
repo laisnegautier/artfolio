@@ -1,8 +1,16 @@
 ﻿@page
 @model ConfirmEmailChangeModel
 @{
-    ViewData["Title"] = "Confirm email change";
+    ViewData["Title"] = "confirm email change";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<section class="col-md-3 mx-auto artfolio-container">
+
+    <!-- Title -->
+    <h1 class="artfolio-container-header">@ViewData["Title"]</h1>
+
+    <!-- Content -->
+    <div class="artfolio-content">
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+    </div>
+</section>
