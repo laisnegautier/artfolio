@@ -50,7 +50,7 @@ namespace artfolio.Areas.Identity.Pages.Account
 
         [BindProperty]
         [Required]
-        [Display(Name = "Login")]
+        [Display(Name = "User name")]
         [StringLength(40, MinimumLength = 1)]
         [RegularExpression(@"^[A-Za-z0-9_.+-]*$", ErrorMessage = "Characters are not allowed.")]
         [PageRemote(

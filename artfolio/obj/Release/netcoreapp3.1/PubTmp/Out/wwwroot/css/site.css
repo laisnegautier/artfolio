@@ -2,7 +2,8 @@
 nav {
   display: flex;
   padding: 20px;
-  justify-content: flex-start; }
+  justify-content: flex-start;
+  background: white; }
 
 .brand {
   font-size: 4rem;
@@ -179,6 +180,43 @@ nav ul {
   .artwork-btn {
     display: none; } }
 
+html {
+  height: 100%;
+  padding: 0;
+  background: url("../images/design/home/background.svg") left top fixed; }
+
+body {
+  background-color: transparent;
+  height: 100%; }
+
+a {
+  color: #808080; }
+
+a:hover, a:focus, a:active {
+  color: #fc8b5e;
+  text-decoration: none; }
+
+.main-centered {
+  border: 1px solid blue;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 200px;
+  margin-top: -210px;
+  padding: 20px; }
+
 /* UTILS FOR ALL */
 .btn-artfolio {
   color: #f9a585;
@@ -204,3 +242,79 @@ nav ul {
 .btn-category:focus, .btn-category:active {
   box-shadow: 0 2px 6px lightgray;
   background-color: #f3f3f3; }
+
+.artfolio-container {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);
+  padding: 0;
+  border-radius: 5px;
+  margin-bottom: 40px; }
+
+.artfolio-container-header {
+  background: #f9a585;
+  background: linear-gradient(8deg, #fc8b5e 0%, #f9a585 100%);
+  color: white;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: lighter;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 5px 5px 0 0; }
+
+.artfolio-content {
+  padding: 20px 30px 20px 30px; }
+
+.artfolio-content p {
+  margin: 0;
+  padding: 0; }
+
+.artfolio-content h3 {
+  margin: 0 0 10px 0;
+  padding: 0 0 10px 0;
+  font-weight: lighter;
+  font-family: "Source Sans Pro";
+  border-bottom: 1px solid #f3f3f3; }
+
+.custom-file {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+#divPreview {
+  width: 150px;
+  height: 150px;
+  border-radius: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #f3f3f3; }
+
+#imgPreview {
+  max-width: 300px;
+  background-color: #f3f3f3; }
+
+.cookieConsent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  z-index: 99999; }
+
+.cookieConsent a {
+  color: white;
+  text-decoration: underline; }
+
+.cookieConsent .btn-artfolio {
+  background: #fc8b5e;
+  color: white;
+  border: #fc8b5e; }

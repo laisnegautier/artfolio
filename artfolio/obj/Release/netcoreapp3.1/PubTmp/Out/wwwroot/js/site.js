@@ -2,6 +2,10 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+//$(function () {
+//    $('[data-toggle="tooltip"]').tooltip()
+//})
+$('[data-toggle="popover"]').popover({ trigger: 'hover click' });
 
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();

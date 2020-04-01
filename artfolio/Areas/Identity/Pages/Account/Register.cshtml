@@ -4,7 +4,7 @@
     ViewData["Title"] = "sign up";
 }
 
-<section class="col-md-5 mx-auto artfolio-container">
+<section class="col-md-6 mx-auto artfolio-container">
 
     <!-- Title -->
     <h1 class="artfolio-container-header">@ViewData["Title"]</h1>
@@ -15,15 +15,17 @@
         @*<div asp-validation-summary="All" class="text-danger"></div>*@
 
         <h3>credentials</h3>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex flex-wrap justify-content-between">
             <div class="col-md-4 px-0">
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
-                        <div><label asp-for="UserName"></label>*</div>
-                        <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="Your login will be needed to sign in and to find you on artfolio. Your profile link will have the form artfolio.com/&lt;yourLogin&gt;.">
+                        <div><label asp-for="UserName" class="m-0"></label>*</div>
+                        <div data-container="body" data-toggle="popover" data-placement="auto" data-content="Your user name will be needed to sign in and to find you on artfolio.">
                             <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                        </a>
+                        </div>
                     </div>
+                    <p class="small m-0 text-muted" style="margin-bottom: 3px">artfolio.com/<em>your-user-name</em></p>
+
                     <input asp-for="UserName" class="form-control" />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
@@ -31,9 +33,9 @@
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <div><label asp-for="Email"></label>*</div>
-                        <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="Your email will only be used to validate your registration and in case you forgot your password. It will not be shared and visible online.">
+                        <div data-container="body" data-toggle="popover" data-placement="auto" data-content="Your email will only be used to validate your registration and in case you forgot your password. It will not be shared and visible online.">
                             <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" style="margin:0;padding:0;" />
-                        </a>
+                        </div>
                     </div>
                     <input asp-for="Email" placeholder="example@example.com" class="form-control" />
                     @*<span asp-validation-for="Input.AspNetUser.Email" class="text-danger"></span>*@
@@ -43,7 +45,8 @@
 
             <div class="col-md-7 offset-md-1 px-0">
                 <div class="form-group">
-                    <div><label asp-for="Input.AspNetUser.Password"></label>*</div>
+                    <div><label asp-for="Input.AspNetUser.Password" class="m-0"></label>*</div>
+                    <p class="small m-0 text-muted" style="margin-bottom: 3px">at least 6 characters</p>
                     <input asp-for="Input.AspNetUser.Password" class="form-control" />
                     <span asp-validation-for="Input.AspNetUser.Password" class="text-danger"></span>
                 </div>
@@ -63,17 +66,16 @@
 
                     <div class="d-flex justify-content-between">
                         <label asp-for="Input.Avatar"></label>
-                        <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be public.">
+                        <div data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be public.">
                             <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                        </a>
+                        </div>
                     </div>
-
                     <div class="custom-file">
-                        <input asp-for="Input.Avatar" type="file" id="imgUploaded" class="form-control custom-file-input" />
+                        <input asp-for="Input.Avatar" type="file" id="imgUploaded" class="custom-file-input" />
                         <label class="custom-file-label">Choose file</label>
 
-                        <div style="width: 200px; height: 200px; border-radius: 500px; overflow: hidden; display: flex; justify-content: center; align-items: center">
-                            <img id="imgPreview" src="#" width="400" alt="profile picture" />
+                        <div id="divPreview">
+                            <div id="imgPreview"></div>
                         </div>
                     </div>
                     <span asp-validation-for="Input.Avatar" class="text-danger"></span>
@@ -83,9 +85,9 @@
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <div><label asp-for="Input.Artist.Lastname"></label>*</div>
-                        <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be public.">
+                        <div data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be public.">
                             <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                        </a>
+                        </div>
                     </div>
                     <input asp-for="Input.Artist.Lastname" class="form-control" />
                     <span asp-validation-for="Input.Artist.Lastname" class="text-danger"></span>
@@ -93,76 +95,83 @@
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <div><label asp-for="Input.Artist.Firstname"></label>*</div>
-                        <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be public.">
+                        <div data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be public.">
                             <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                        </a>
+                        </div>
                     </div>
                     <input asp-for="Input.Artist.Firstname" class="form-control" />
                     <span asp-validation-for="Input.Artist.Firstname" class="text-danger"></span>
                 </div>
+
+                <div class="d-flex flex-wrap justify-content-between">
+                    <div class="col-md-5 px-0 form-group">
+                        <div class="d-flex justify-content-between">
+                            <div><label asp-for="Input.Artist.DateOfBirth"></label>*</div>
+                            <div data-container="body" data-toggle="popover" data-placement="auto" data-content="Your age will be public. Your precise birthdate will stay confidential.">
+                                <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
+                            </div>
+                        </div>
+                        <input asp-for="Input.Artist.DateOfBirth" class="form-control" />
+                        <span asp-validation-for="Input.Artist.DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 px-0 form-group">
+                        <div class="d-flex justify-content-between">
+                            <div><label asp-for="Input.Artist.Gender"></label>*</div>
+                            <div data-container="body" data-toggle="popover" data-placement="auto" data-content="Your choice will be public.">
+                                <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
+                            </div>
+                        </div>
+                        <select asp-for="Input.Artist.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                            <option selected disabled>Please select one</option>
+                        </select>
+                        <span asp-validation-for="Input.Artist.Gender" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="d-flex flex-wrap justify-content-between">
-            <div class="col-md-3 px-0 form-group">
-                <div class="d-flex justify-content-between">
-                    <div><label asp-for="Input.Artist.DateOfBirth"></label>*</div>
-                    <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="Your age will be public. Your precise birthdate will stay confidential.">
-                        <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                    </a>
-                </div>
-                <input asp-for="Input.Artist.DateOfBirth" class="form-control" />
-                <span asp-validation-for="Input.Artist.DateOfBirth" class="text-danger"></span>
-            </div>
+        <div class="d-flex flex-wrap">
+
             <div class="col-md-4 px-0 form-group">
+
+                <div class="d-flex justify-content-between">
+                    <div><label asp-for="Input.Artist.IsPubliclyVisible"></label>*</div>
+                    <div data-container="body" data-toggle="popover" data-placement="auto" data-content="This can be changed in your profile settings.">
+                        <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
+                    </div>
+                </div>
+                <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="true" id="IsPubliclyVisible" checked style="margin-left:10px; margin-right: 10px;" />Yes
+                <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="false" id="IsPubliclyVisible" style="margin-left:10px; margin-right: 10px;" />No<br />
+                <span asp-validation-for="Input.Artist.IsPubliclyVisible" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-7 offset-md-1 px-0 form-group">
                 <div class="d-flex justify-content-between">
                     <div><label asp-for="Input.Artist.Nationality"></label>*</div>
-                    <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="Your choice will be public.">
+                    <div data-container="body" data-toggle="popover" data-placement="auto" data-content="Your choice will be public.">
                         <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                    </a>
+                    </div>
                 </div>
                 <select asp-for="Input.Artist.Nationality" asp-items="Html.GetEnumSelectList<Nationality>()" class="form-control">
                     <option selected disabled>Please select one</option>
                 </select>
                 <span asp-validation-for="Input.Artist.Nationality" class="text-danger"></span>
             </div>
-            <div class="col-md-4 px-0 form-group">
-                <div class="d-flex justify-content-between">
-                    <div><label asp-for="Input.Artist.Gender"></label>*</div>
-                    <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="Your choice will be public.">
-                        <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                    </a>
-                </div>
-                <select asp-for="Input.Artist.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
-                    <option selected disabled>Please select one</option>
-                </select>
-                <span asp-validation-for="Input.Artist.Gender" class="text-danger"></span>
-            </div>
         </div>
 
         <div class="form-group">
             <div class="d-flex justify-content-between">
                 <div><label asp-for="Input.Artist.Description"></label>*</div>
-                <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="This description will be public.">
+                <div data-container="body" data-toggle="popover" data-placement="auto" data-content="This description will be public.">
                     <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-                </a>
+                </div>
             </div>
-            <textarea type="text" asp-for="Input.Artist.Description" class="form-control" placeholder="Describe yourself in a few words."></textarea>
+            <textarea type="text" asp-for="Input.Artist.Description" class="form-control" placeholder="Describe yourself in few words."></textarea>
             <span asp-validation-for="Input.Artist.Description" class="text-danger"></span>
         </div>
 
-        <div class="col-md-8 px-0" style="margin-bottom: 10px">
-            <a href="#" data-container="body" data-toggle="popover" data-placement="auto" data-content="This can be changed in your profile settings.">
-                <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
-            </a>
-            <label asp-for="Input.Artist.IsPubliclyVisible" style="margin-left: 10px"></label>*
-            <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="true" id="IsPubliclyVisible" checked style="margin-left:10px; margin-right: 10px;" />Yes
-            <input type="radio" asp-for="Input.Artist.IsPubliclyVisible" value="false" id="IsPubliclyVisible" style="margin-left:10px; margin-right: 10px;" />No<br />
-            <span asp-validation-for="Input.Artist.IsPubliclyVisible" class="text-danger"></span>
-        </div>
-
         <div class="form-group d-flex justify-content-center">
-            <button type="submit" class="btn btn-artfolio">create your account</button>
+            <button type="submit" class="btn btn-artfolio" style="margin-top: 10px;">create your account</button>
         </div>
 
         <p class="small font-italic text-muted">all fields with * must be filled.</p>
@@ -215,6 +224,7 @@
             }
         }
         $("#imgUploaded").change(function () {
+            $("#imgPreview").replaceWith('<img id="imgPreview" src="#" alt="profile picture" />')
             readURL(this);
         });
 
@@ -226,7 +236,7 @@
         });
     </script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <partial name="_ValidationScriptsPartial" />
     <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
 }

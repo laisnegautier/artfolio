@@ -5,9 +5,8 @@
 //$(function () {
 //    $('[data-toggle="tooltip"]').tooltip()
 //})
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
+$('[data-toggle="popover"]').popover({ trigger: 'hover click' });
+
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
 function openCity(evt, cityName) {

@@ -23,6 +23,14 @@ namespace artfolio.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        [BindProperty]
+        [Display(Name ="User name")]
+        [PageRemote(
+                ErrorMessage = "This user name already exists.",
+                AdditionalFields = "__RequestVerificationToken",
+                HttpMethod = "post",
+                PageHandler = "CheckUserName"
+            )]
         public string Username { get; set; }
 
         [TempData]
@@ -46,6 +54,14 @@ namespace artfolio.Areas.Identity.Pages.Account.Manage
             {
                 Username = userName
             };
+        }
+
+        public async Task<JsonResult> OnPostCheckUserName()
+        {
+            Artist username = _userManager.Users.FirstOrDefault(x => x.UserName == Username.ToLower()
+            || x.NormalizedUserName.ToLower() == Username.ToLower());
+
+            return new JsonResult((username != null && username != await _userManager.GetUserAsync(User)) ? false : true);
         }
 
         public async Task<IActionResult> OnGetAsync()

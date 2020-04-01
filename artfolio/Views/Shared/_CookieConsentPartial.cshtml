@@ -8,12 +8,13 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info" role="alert">
+    <div id="cookieConsent" class="cookieConsent" role="alert">
         <p>
             This site uses cookies to provide you with a great user experience. Do you accept of our
             <a asp-area="" asp-controller="Home" asp-action="CookiesPolicy" title="Cookies policy" alt="Cookies policy">use of cookies</a>?
         </p>
-        <button type="button" data-dismiss="alert" data-cookie-string="@cookieString">
+
+        <button type="button" class="btn btn-artfolio" data-dismiss="alert" data-cookie-string="@cookieString">
             <span aria-hidden="true">I accept</span>
         </button>
     </div>
@@ -23,6 +24,7 @@
             var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click", function (event) {
                 document.cookie = button.dataset.cookieString;
+                location.reload();
             }, false);
         })();
     </script>

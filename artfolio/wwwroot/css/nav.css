@@ -3,8 +3,7 @@ nav {
   display: flex;
   padding: 20px;
   justify-content: flex-start;
-  background: white;
-  margin-bottom: 30px; }
+  background: white; }
 
 .brand {
   font-size: 4rem;

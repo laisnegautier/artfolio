@@ -120,3 +120,90 @@ footer {
     font-family: "Source Sans Pro";
     border-bottom: 1px solid #f3f3f3;
 }
+
+.custom-file {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#divPreview {
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f3f3f3;
+}
+
+#imgPreview {
+    max-width: 300px;
+    background-color: #f3f3f3;
+}
+
+.cookieConsent {
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0,0,0,.7);
+    color: white;
+    z-index: 99999;
+}
+
+.cookieConsent a {
+    color: white;
+    text-decoration: underline;
+}
+
+.cookieConsent .btn-artfolio {
+    background: $main-color;
+    color: white;
+    border: $main-color;
+}
+
+
+/* MANAGE ACCOUNT */
+.manage-menu {
+    margin-right: 0px;
+    margin-left: 0px;
+    background: white;
+}
+
+.manage h1, .manage h4 {
+    font-weight: lighter;
+    font-family: "Source Sans Pro";
+}
+
+.manage-nav-link {
+    border: 0px solid red;
+    transition: all .15s ease-in-out;
+    border-radius: 5px;
+    box-shadow: none;
+    background: none;
+    padding: 15px 20px;
+    margin-left: 10px;
+}
+
+.manage-nav-link:hover {
+    margin-left: 0px;
+    background: transparent;
+    box-shadow: 0 2px 6px lightgray;
+}
+
+.active {
+    margin-left: 0px;
+    background: transparent !important;
+    box-shadow: 0 2px 6px lightgray;
+    color: $main-color !important;
+    font-weight: bold;
+}
