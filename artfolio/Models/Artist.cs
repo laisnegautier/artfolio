@@ -66,12 +66,17 @@ namespace artfolio.Models
 
     public enum Gender
     {
+        [Display(Name = "I wish to keep it private")]
+        DoNotShow = 0,
         Male = 1,
-        Female = 2
+        Female = 2,
+        Other = 3
     }
 
     public enum Nationality
     {
+        [Display(Name="I wish to keep it private")]
+        DoNotShow = 0,
         Afghan,
         Albanian,
         Algerian,

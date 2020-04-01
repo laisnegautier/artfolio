@@ -1,5 +1,4 @@
-﻿using artfolio.Data;
-using artfolio.Models;
+﻿using artfolio.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +48,31 @@ namespace artfolio.Areas.Identity.Pages.Account
         [BindProperty]
         public InputViewModel Input { get; set; }
 
+        [BindProperty]
+        [Required]
+        [Display(Name = "Login")]
+        [StringLength(40, MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-z0-9_.+-]*$", ErrorMessage = "Characters are not allowed.")]
+        [PageRemote(
+                ErrorMessage = "This user name already exists.",
+                AdditionalFields = "__RequestVerificationToken",
+                HttpMethod = "post",
+                PageHandler = "CheckUserName"
+            )]
+        public string UserName { get; set; }
+
+        [BindProperty]
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        [PageRemote(
+                ErrorMessage = "Email address already exists.",
+                AdditionalFields = "__RequestVerificationToken",
+                HttpMethod = "post",
+                PageHandler = "CheckEmail"
+            )]
+        public string Email { get; set; }
+
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
@@ -63,22 +87,8 @@ namespace artfolio.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Login (also URL of your profile artfolio.com/<yourLogin>")]
-            [StringLength(40, MinimumLength = 1)]
-            [RegularExpression(@"^[A-Za-z0-9_.+-]*$", ErrorMessage = "Characters are not allowed.")]
             public string UserName { get; set; }
-
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
             public string Email { get; set; }
-
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Confirm email")]
-            [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
-            public string ConfirmEmail { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -90,6 +100,22 @@ namespace artfolio.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+        }
+
+        public JsonResult OnPostCheckUserName()
+        {
+            Artist username = _userManager.Users.FirstOrDefault(x => x.UserName == UserName.ToLower()
+            || x.NormalizedUserName.ToLower() == UserName.ToLower());
+
+            return new JsonResult(username == null ? true : false);
+        }
+
+        public JsonResult OnPostCheckEmail()
+        {
+            Artist artistEmail = _userManager.Users.FirstOrDefault(x => x.Email == Email.ToLower() 
+            || x.NormalizedEmail.ToLower() == Email.ToLower());
+            
+            return new JsonResult(artistEmail == null ? true : false);
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -135,8 +161,8 @@ namespace artfolio.Areas.Identity.Pages.Account
 
                 var user = new Artist
                 {
-                    UserName = Input.AspNetUser.UserName,
-                    Email = Input.AspNetUser.Email,
+                    UserName = UserName,
+                    Email = Email,
                     Lastname = Input.Artist.Lastname,
                     Firstname = Input.Artist.Firstname,
                     Description = Input.Artist.Description,
@@ -161,12 +187,12 @@ namespace artfolio.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.AspNetUser.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.AspNetUser.Email });
+                        return RedirectToPage("RegisterConfirmation", new { email = Email });
                     }
                     else
                     {

@@ -89,6 +89,7 @@ footer {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);
     padding: 0;
     border-radius: 5px;
+    margin-bottom: 40px;
 }
 
 .artfolio-container-header {
@@ -110,6 +111,12 @@ footer {
 .artfolio-content p {
     margin: 0;
     padding: 0;
-    color: red;
-    font-weight: bold !important;
+}
+
+.artfolio-content h3 {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-weight: lighter;
+    font-family: "Source Sans Pro";
+    border-bottom: 1px solid #f3f3f3;
 }
