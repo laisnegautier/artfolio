@@ -24,10 +24,9 @@
     }
 }
 
-<div class="row justify-content-center">
+<div class="col-10 mx-auto d-flex justify-content-center">
     <div class="col-md-2 d-none d-lg-block">
         <h2 class="font-weight-lighter">artists</h2>
-
         @if (!Model.Artists.Any())
         {
             <h6>No artist found</h6>
@@ -72,7 +71,6 @@
         }
     </div>
 
-
     <div class="col-md-7">
         <div class="d-flex justify-content-between">
             <h2 class="font-weight-lighter">artworks</h2>
@@ -82,7 +80,6 @@
                 @foreach (Category category in Enum.GetValues(typeof(Category)))
                         {
                             categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
-                    
                     <a asp-controller="Discover" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-tag="@ViewData["tag"]" asp-route-category="@redirectCategory(category.ToString())" class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
                         <img src="~/@categoryImageUrl" width="25" alt="@category.ToString()" />
                     </a>
@@ -158,7 +155,7 @@
         }
 
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 artfolio-content">
         <h2 class="font-weight-lighter">filters</h2>
         <form asp-controller="Discover" asp-action="Index" method="get">
             <input type="hidden" name="q" value="@ViewData["q"]" />

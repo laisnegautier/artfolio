@@ -5,6 +5,10 @@ $color-darkgray: #DEDEDE;
 $color-artfolio-lightgray: #f3f3f3;
 
 @import "nav.scss";
+@import "publish.scss";
+@import "discover.scss";
+@import "artwork.scss";
+
 html {
     height: 100%;
     padding: 0;
@@ -169,4 +173,41 @@ footer {
     background: $main-color;
     color: white;
     border: $main-color;
+}
+
+
+/* MANAGE ACCOUNT */
+.manage-menu {
+    margin-right: 0px;
+    margin-left: 0px;
+    background: white;
+}
+
+.manage h1, .manage h4 {
+    font-weight: lighter;
+    font-family: "Source Sans Pro";
+}
+
+.manage-nav-link {
+    border: 0px solid red;
+    transition: all .15s ease-in-out;
+    border-radius: 5px;
+    box-shadow: none;
+    background: none;
+    padding: 15px 20px;
+    margin-left: 10px;
+}
+
+.manage-nav-link:hover {
+    margin-left: 0px;
+    background: transparent;
+    box-shadow: 0 2px 6px lightgray;
+}
+
+.active {
+    margin-left: 0px;
+    background: transparent !important;
+    box-shadow: 0 2px 6px lightgray;
+    color: $main-color !important;
+    font-weight: bold;
 }

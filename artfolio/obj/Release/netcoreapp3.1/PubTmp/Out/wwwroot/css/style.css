@@ -159,24 +159,6 @@ header {
     background: blue;
 }
 
-.list-group a {
-    border: 0px solid red;
-    transition: all .15s ease-in-out;
-    margin-left: 0px;
-    border-radius: 5px;
-    box-shadow: none;
-    background: none;
-}
-
-    .list-group a:hover {
-        margin-left: -10px;
-        background: transparent;
-        box-shadow: 0 2px 6px lightgray;
-    }
-
-    .list-group a:focus, .list-group a:active {
-        background: transparent;
-    }
 
 .sign-in {
     background-color: #fff;

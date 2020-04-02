@@ -20,7 +20,6 @@ namespace artfolio.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
 
@@ -29,8 +28,6 @@ namespace artfolio.Models
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
-        public string TerritorialJuridiction { get; set; }
-
         [Required]
         public bool Privacy { get; set; }
         
@@ -38,11 +35,17 @@ namespace artfolio.Models
         public Category Category { get; set; }
 
         [Required]
+        [Display(Name="Is this artwork derivating from another one?")]
         public bool IsDerivating { get; set; }
 
+        [Display(Name = "Link to find the artwork")]
         public string LinkDerivating { get; set; }
 
+        [Display(Name = "Original license terms")]
         public string LicenseDerivating { get; set; }
+
+        [Display(Name = "Author name")]
+        public string AuthorDerivating { get; set; }
 
         public virtual Artist Artist { get; set; }
 

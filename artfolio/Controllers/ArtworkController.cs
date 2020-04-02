@@ -31,6 +31,7 @@ namespace artfolio.Controllers
             _hostingEnv = hostingEnv;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string userName, string title)
         {
             ArtworkIndexViewModel viewModel = new ArtworkIndexViewModel
@@ -173,14 +174,16 @@ namespace artfolio.Controllers
                     ReleaseDate = viewModel.Artwork.ReleaseDate,
                     Privacy = viewModel.Artwork.Privacy,
                     CCLicense = await _context.CreativeCommons.FirstAsync(x => x.CreativeCommonsId == viewModel.CreativeCommonsId),
-                    TerritorialJuridiction = viewModel.Artwork.TerritorialJuridiction,
                     Category = viewModel.Artwork.Category,
+                    IsDerivating = viewModel.Artwork.IsDerivating,
+                    LinkDerivating = viewModel.Artwork.LinkDerivating,
+                    LicenseDerivating = viewModel.Artwork.LicenseDerivating,
+                    AuthorDerivating = viewModel.Artwork.AuthorDerivating,
                     Artist = await _userManager.GetUserAsync(User)
                 };
 
                 Document documentToAdd = new Document
                 {
-                    IsMainDocument = viewModel.Document.IsMainDocument,
                     Media = viewModel.Document.Media,
                     FilePath = uniqueFileName,
                     ContentType = viewModel.File.ContentType.ToLower(),
@@ -205,7 +208,9 @@ namespace artfolio.Controllers
                 }
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Publish));
+
+                // We redirect on the new artwork page then
+                return RedirectToAction(nameof(Index), new { userName = _userManager.GetUserName(User), title = normalizedTitle });
             }
             return View(viewModel);
         }

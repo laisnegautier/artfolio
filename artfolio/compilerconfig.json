@@ -14,5 +14,17 @@
   {
     "outputFile": "wwwroot/css/nav.css",
     "inputFile": "wwwroot/css/nav.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/publish.css",
+    "inputFile": "wwwroot/css/publish.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/discover.css",
+    "inputFile": "wwwroot/css/discover.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/artwork.css",
+    "inputFile": "wwwroot/css/artwork.scss"
   }
 ]

@@ -23,7 +23,6 @@ namespace artfolio.ViewModels
         [ArtfolioMedia]
         public IFormFile File { get; set; }
 
-
         public int CreativeCommonsId { get; set; }
         public IEnumerable<CreativeCommons> CreativeCommons { get; set; }
         //public List<Document> Documents { get; set; }

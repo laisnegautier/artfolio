@@ -255,6 +255,9 @@ namespace artfolio.Migrations
                     b.Property<string>("ArtistId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AuthorDerivating")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("CCLicenseCreativeCommonsId")
                         .HasColumnType("int");
 
@@ -287,9 +290,6 @@ namespace artfolio.Migrations
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("TerritorialJuridiction")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -505,7 +505,6 @@ namespace artfolio.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsMainDocument")

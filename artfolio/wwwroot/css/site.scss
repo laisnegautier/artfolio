@@ -5,6 +5,10 @@ $color-darkgray: #DEDEDE;
 $color-artfolio-lightgray: #f3f3f3;
 
 @import "nav.scss";
+@import "publish.scss";
+@import "discover.scss";
+@import "artwork.scss";
+
 html {
     height: 100%;
     padding: 0;
