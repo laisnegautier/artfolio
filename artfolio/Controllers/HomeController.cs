@@ -1,89 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using artfolio.Data;
+using artfolio.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using artfolio.Models;
-using artfolio.ViewModels;
-using artfolio.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace artfolio.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<Artist> _userManager;
+        private readonly Random _rnd = new Random();
 
-        public HomeController(UserManager<Artist> userManager, ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
-        {            
-            return View(await _userManager.Users.ToListAsync());
-        }
-        
-        public async Task<IActionResult> Index2()
+        public IActionResult Index()
         {
-            return View(await _userManager.Users.ToListAsync());
-        }
-        
-        public async Task<IActionResult> Search(string id)
-        {
-            if (String.IsNullOrEmpty(id)) return NotFound();
+            int offset = _rnd.Next(0, _context.Artworks.Count());
 
-            // REQUESTS
-            var artworks = from a in _context.Artworks
-                           select a;
-            var artists = from a in _context.Artworks
-                          select a;
-
-            // QUERIES
-            artworks = artworks.Where(x => x.Title.Contains(id));
-
-            // SORT
-            artworks = artworks
-                    .Include(x => x.ArtworkTags)
-                        .ThenInclude(artworkTag => artworkTag.Tag)
-                    .Include(x => x.Documents)
-                    .Include(x => x.Artist)
-                    .OrderByDescending(x => x.ReleaseDate);
-
-            SearchIndexViewModel viewModel = new SearchIndexViewModel
-            {
-                Artworks = await artworks.ToListAsync()
-            };
-
-            return View(viewModel);
+            return View(_context.Artworks.Skip(offset).FirstOrDefault());
         }
 
-        public async Task<IActionResult> CurrentUser()
-        {
-            Artist myself = await _userManager.GetUserAsync(User);
+        public IActionResult Privacy() => View();
 
-            return View(myself);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult CookiesPolicy()
-        {
-            return View();
-        }
+        public IActionResult CookiePolicy() => View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() =>
+            View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

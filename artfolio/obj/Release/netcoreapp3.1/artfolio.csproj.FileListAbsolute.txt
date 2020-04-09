@@ -218,10 +218,7 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Publish.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Discover\Index.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\CookiesPolicy.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\CurrentUser.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\Index2.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Messages\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -243,3 +240,4 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfol
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.pdb
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.genruntimeconfig.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\CookiePolicy.cshtml.g.cs
