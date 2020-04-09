@@ -445,3 +445,4 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\artfolio
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_OldLayout.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Home\CookiePolicy.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ArtworkCard.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Home\Seed.cshtml.g.cs
