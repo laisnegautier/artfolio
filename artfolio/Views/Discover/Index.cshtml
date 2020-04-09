@@ -18,10 +18,6 @@
     {
         return (@selection(category) != "") ? "" : category;
     }
-    string formatToImg(string acromym)
-    {
-        return acromym + ".sm.png";
-    }
 }
 
 <div class="col-10 mx-auto d-flex justify-content-center">
@@ -78,8 +74,8 @@
             @* --- CATEGORIES --- *@
             <div>
                 @foreach (Category category in Enum.GetValues(typeof(Category)))
-                        {
-                            categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
+                {
+                    categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
                     <a asp-controller="Discover" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-tag="@ViewData["tag"]" asp-route-category="@redirectCategory(category.ToString())" class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
                         <img src="~/@categoryImageUrl" width="25" alt="@category.ToString()" />
                     </a>
@@ -103,58 +99,16 @@
                         {
                             @if (index % 4 == col)
                             {
-                        <div class="artwork-card">
-                            @if (artwork.Documents.Count > 0)
-                            {
-                            <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@artwork.Artist.UserName" asp-route-title="@artwork.NormalizedTitle" alt="See the details" title="See the details">
-                                @if (artwork.Documents[0].Media == DocumentMedia.Picture)
-                                {
-                                    <img src="~/artworks/picture/thumbnails/@artwork.Documents[0].FilePath" class="artwork-thumbnail-pic" alt="@artwork.Title, by @artwork.Artist.Firstname @artwork.Artist.Lastname">
-                                }
-                                else if (artwork.Documents[0].Media == DocumentMedia.Audio)
-                                {
-                                    <audio controls preload="metadata" style=" width:200px;">
-                                        <source src="~/artworks/audio/@artwork.Documents[0].FilePath" type="@artwork.Documents[0].ContentType">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                }
-                            </a>
-
-                            }
-                            else
-                            {
-                                @*<img src="~/images/artworks/1a0c33fc-9ed1-4a0b-bb5e-acfe1e6081b9_IMG_20190506_215537_2.jpg">*@
-                            }
-                        <div class="description-card">
-                            @if (artwork.ArtworkTags.Count > 0)
-                            {
-                                <p class="m-0 small pb-1">
-                                    @foreach (var artworkTag in artwork.ArtworkTags)
-                                    {
-                                        <a class="tag" asp-controller="Discover" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-tag="@artworkTag.Tag.Name" asp-route-category="@ViewData["category"]" alt="Search similar artworks with the tag '@artworkTag.Tag.Name'" title="Search similar artworks with the tag '@artworkTag.Tag.Name'">
-                                            @artworkTag.Tag.Name
-                                        </a>
-                                    }
-                                </p>
-                            }
-                            <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@artwork.Artist.UserName" asp-route-title="@artwork.NormalizedTitle" alt="Click for more details" title="Click for more details">
-                                <h5 class="mb-1">@Html.DisplayFor(modelItem => artwork.Title)</h5>
-                            </a>
-                            <h6 class="small mb-1">@Html.DisplayFor(modelItem => artwork.Category) by <a asp-controller="Artist" asp-action="Index" asp-route-userName="@artwork.Artist.UserName" alt="Look through @artwork.Artist.Firstname @artwork.Artist.Lastname's artfolio" title="Look through @artwork.Artist.Firstname @artwork.Artist.Lastname's artfolio">@artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => artwork.ReleaseDate)</h6>
-                            <img class="ccIcon" src="~/images/ccicons/@formatToImg(artwork.CCLicense.Acronym)" alt="CC @artwork.CCLicense.Title License" title="CC @artwork.CCLicense.Title License" />
-
-                        </div>
-                        </div>
+                                @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = artwork })
                             }
                             index++;
                         }
                     </div>
                 }
             </div>
-
         }
-
     </div>
+
     <div class="col-md-2 artfolio-content">
         <h2 class="font-weight-lighter">filters</h2>
         <form asp-controller="Discover" asp-action="Index" method="get">

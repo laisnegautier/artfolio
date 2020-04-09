@@ -18,29 +18,10 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
 </head>
-<body class="body-home animated fadeIn">
+<body class="animated fadeIn">
 
     <header>
         <nav>
-            @if (String.IsNullOrEmpty((string)ViewData["home"]))
-            {
-                <!-- Logo -->
-                <a class="brand brand-short" asp-area="" asp-controller="Home" asp-action="Index"><span>a</span>f</a>
-                <a class="brand brand-long" asp-area="" asp-controller="Home" asp-action="Index"><span>art</span>folio</a>
-
-                <!-- Search bar -->
-                <form class="my-auto d-inline search-box" asp-controller="Discover" asp-action="Index" method="get">
-                    <div class="input-group px-2 py-1">
-                        <img src="~/images/icons/search-outline.svg" width="20" class="m-2" />
-                        <input name="q" class="form-control mr-md-2 form-artfolio" type="text" value="@ViewData["q"]" placeholder="search for an artist, an artwork...">
-                        <span class="input-group-append">
-                            <button class="btn btn-artfolio btn-category" type="submit">
-                                <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            }
             <!-- Profile Management -->
             <partial name="_LoginPartial" />
         </nav>
@@ -64,21 +45,16 @@
     </main>
 
     <div class="discover-link">
-        <a asp-area="" asp-controller="Discover" asp-action="Index">
-            artwork of the day :
-            <br />
-            see more !
-            <img src="~/images/design/home/arrowDown.svg" />
-        </a>
+        @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = Model })
     </div>
 
-    @*<footer class="footer footer-home">
-        <ul class="d-flex flex-row list-unstyled col-12 justify-content-end">
-            <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
-            <li class="muted">artfolio - 2020</li>
-        </ul>
-    </footer>*@
+    <footer class="footer footer-home">
+            <ul class="d-flex flex-row list-unstyled col-12 justify-content-end">
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
+                <li class="muted">artfolio - 2020</li>
+            </ul>
+        </footer>
 
     <div style="display: none">
         @RenderBody()

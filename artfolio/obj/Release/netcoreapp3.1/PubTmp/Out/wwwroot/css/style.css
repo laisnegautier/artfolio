@@ -466,44 +466,7 @@ main {
         }
 }
 
-.discover-link {
-    position: fixed;
-    bottom: 10%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 2;
-}
 
-    .discover-link a {
-        display: flex;
-        height: 90px;
-        padding: 20px;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        color: black;
-        font-family: "Source Sans Pro";
-        font-size: 1.5rem;
-        font-weight: 300 !important;
-        border: 1px solid transparent;
-        transition: all .15s ease-in-out;
-        box-shadow: 0;
-    }
-
-        .discover-link a:hover {
-            background: white;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,.1);
-            border-radius: 5px;
-            border: 1px solid #DEDEDE;
-            font-weight: 300 !important;
-        }
-
-    .discover-link img {
-        width: 20px;
-        height: 20px;
-    }
 
 .footer-home {
     background: transparent;
@@ -537,12 +500,6 @@ main {
         max-width: 100%;
     }
 
-    .discover-link a {
-        background: #fff;
-        box-shadow: 0 2px 5px rgba(0,0,0,.1);
-        border-radius: 5px;
-        border: 1px solid #fff;
-    }
 
     .sign-in {
         background-color: #fff;
@@ -600,13 +557,6 @@ main {
     .column-card {
         flex: 100%;
         max-width: 100%;
-    }
-
-    .discover-link a {
-        background: #fff;
-        box-shadow: 0 2px 5px rgba(0,0,0,.1);
-        border-radius: 5px;
-        border: 1px solid #fff;
     }
 
     .sign-in {
