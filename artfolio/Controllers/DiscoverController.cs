@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using artfolio.Data;
 using artfolio.Models;
 using artfolio.ViewModels;
-using artfolio.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace artfolio.Controllers
 {
@@ -26,7 +23,7 @@ namespace artfolio.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string q, string tag, string category, string cc, string release)
+        public async Task<IActionResult> Index(string q, string tag, string category, string cc, string release, string following)
         {
             // Initial queries
             IQueryable<Artwork> artworks = _context.Artworks
@@ -45,19 +42,26 @@ namespace artfolio.Controllers
             }
 
             if (!string.IsNullOrEmpty(tag))
-                artworks = artworks.Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag))); 
+                artworks = artworks.Where(x => x.ArtworkTags.Any(artworkTag => artworkTag.Tag.Name.Contains(tag)));
 
-            if (!string.IsNullOrEmpty(category)) 
+            if (!string.IsNullOrEmpty(category))
                 artworks = artworks.Where(x => x.Category == (Category)Enum.Parse(typeof(Category), category, true));
 
             if (!string.IsNullOrEmpty(cc))
                 artworks = artworks.Where(x => x.CCLicense.Acronym == cc);
 
             if (!string.IsNullOrEmpty(release))
-                if(release == "latest")
+                if (release == "latest")
                     artworks = artworks.OrderByDescending(x => x.ReleaseDate);
-                else if(release == "oldest")
+                else if (release == "oldest")
                     artworks = artworks.OrderBy(x => x.ReleaseDate);
+
+            if (_signInManager.IsSignedIn(User) && following == "true")
+            {
+                Artist user = await _userManager.GetUserAsync(User);
+                artworks = artworks.Where(x => x.Artist.FollowedBy.Any(followedBy => followedBy.FromArtist == user));
+                artists = artists.Where(x => x.FollowedBy.Any(followedBy => followedBy.FromArtist == user));
+            }
 
             // Get rid of himself if connected
             if (_signInManager.IsSignedIn(User))
@@ -76,6 +80,7 @@ namespace artfolio.Controllers
             ViewData["category"] = category;
             ViewData["cc"] = cc;
             ViewData["release"] = release;
+            ViewData["following"] = following;
 
             return View(viewModel);
         }

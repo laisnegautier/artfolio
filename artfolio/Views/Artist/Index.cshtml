@@ -6,37 +6,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="row justify-content-center">
-        <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
-            <h1>@Model.Artist.Firstname @Model.Artist.Lastname</h1>
-            <h2 class="small text-muted">artfolio.com/@Model.Artist.UserName</h2>
-            <a href="#" class="openModal text-center" data-id="@Model.Artist.Id">@Model.Artist.Description</a>
+<div class="row justify-content-center">
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+        <h1>@Model.Artist.Firstname @Model.Artist.Lastname</h1>
+        <h2 class="small text-muted">artfolio.com/@Model.Artist.UserName</h2>
+        <a href="#" class="openModal text-center" data-id="@Model.Artist.Id">@Model.Artist.Description</a>
+    </div>
+    <div class="col-md-3 d-flex justify-content-center">
+        <div class="profile-pic-nav" style="border-radius: 500px; box-shadow: 0 2px 4px lightgray; opacity: 1; overflow: hidden; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center">
+            <img src="~/images/avatars/@Model.Artist.PhotoFilePath" width="400" style="margin: auto" alt="profile picture" />
         </div>
-        <div class="col-md-3 d-flex justify-content-center">
-            <div class="profile-pic-nav" style="border-radius: 500px; box-shadow: 0 2px 4px lightgray; opacity: 1; overflow: hidden; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center">
-                <img src="~/images/avatars/@Model.Artist.PhotoFilePath" width="400" style="margin: auto" alt="profile picture" />
-            </div>
-        </div>
-        <div class="col-md-4 d-flex justify-content-center align-items-center">
-            @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) != Model.Artist.UserName)
+    </div>
+    <div class="col-md-4 d-flex justify-content-center align-items-center">
+        @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) != Model.Artist.UserName)
+        {
+            <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">send a message</a>
+            @if (!(bool)ViewData["isFollowing"])
             {
-                <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">send a message</a>
-                @if (!(bool)ViewData["isFollowing"])
-                {
-                    <a asp-area="" asp-controller="Artist" asp-action="Follow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">follow</a>
-                }
-                else
-                { <a asp-area="" asp-controller="Artist" asp-action="Unfollow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">unfollow</a>
-
-                }
+                <a asp-area="" asp-controller="Artist" asp-action="Follow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">follow</a>
             }
             else
             {
-                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-artfolio">sign up to contact this artist and follow him</a>
+                <a asp-area="" asp-controller="Artist" asp-action="Unfollow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">unfollow</a>
             }
-        </div>
-
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-artfolio">sign up to contact this artist and follow him</a>
+        }
     </div>
+</div>
 
 <div class="row justify-content-center">
     <div class="col-md-2 d-none d-lg-block">
@@ -45,13 +44,12 @@
         {
             <a href="#">add a collection</a>
         }
-    <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+        </div>
     </div>
-    </div>
-
 
     <div class="col-md-7">
         <div class="d-flex justify-content-between">
@@ -72,7 +70,6 @@
                 <p>Tokyo is the capital of Japan.</p>
             </div>
         </div>
-
     </div>
     <div class="col-md-2">
         <h2 class="font-weight-lighter">filters</h2>
@@ -107,20 +104,20 @@
                 }
             }
 
-            z
+            
 
             @*if (SignInManager.IsSignedIn(User))
-            {
-                var maliste = Model.FollowedBy.Where(x => x.FromArtistId == UserManager.GetUserId(User));
-                if (maliste != null)
                 {
-                    foreach (var followedBy in maliste)
+                    var maliste = Model.FollowedBy.Where(x => x.FromArtistId == UserManager.GetUserId(User));
+                    if (maliste != null)
                     {
-                        <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                        foreach (var followedBy in maliste)
+                        {
+                            <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                            }
                         }
                     }
-                }
-            }*@
+                }*@
         </ul>
     </div>
 </div>

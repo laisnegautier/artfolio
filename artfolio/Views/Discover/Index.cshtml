@@ -14,6 +14,7 @@
     {
         return (selection == (string)ViewData["category"]) ? "category-selected" : "";
     }
+
     string redirectCategory(string category)
     {
         return (@selection(category) != "") ? "" : category;
@@ -25,6 +26,10 @@
     string redirectRelease(string release)
     {
         return release == (string)ViewData["release"] ? "" : release;
+    }
+    string redirectFollowing(string following)
+    {
+        return following == (string)ViewData["following"] ? "" : following;
     }
 }
 
@@ -38,7 +43,6 @@
         else
         {
             <div class="list-group">
-                <a href="#">see only the artist I follow</a>
                 @foreach (var artist in Model.Artists)
                 {
                     <a asp-controller="Artist" asp-action="Index" asp-route-userName="@artist.UserName" class="artists-list list-group-item list-group-item-action flex-column align-items-start pl-2 pr-3 py-2">
@@ -94,7 +98,8 @@
                        asp-route-tag="@ViewData["tag"]"
                        asp-route-category="@redirectCategory(category.ToString())"
                        asp-route-cc="@ViewData["cc"]"
-               asp-route-release="@ViewData["release"]"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
                        class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
                         <img src="~/@categoryImageUrl" width="25" alt="@category.ToString()" />
                     </a>
@@ -153,6 +158,10 @@
                 {
                     <input type="hidden" name="release" value="@ViewData["release"]" />
                 }
+                @if (!string.IsNullOrEmpty((string)ViewData["following"]))
+                {
+                    <input type="hidden" name="following" value="@ViewData["following"]" />
+                }
                 <span class="input-group-append">
                     <button class="btn btn-artfolio btn-category" value="filter" type="submit">
                         <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
@@ -161,6 +170,15 @@
             </div>
         </form>
 
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@ViewData["by"]"
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@redirectFollowing("true")">see only the artist I follow</a>
+
         <h3>license</h3>
         <a asp-controller="Discover"
            asp-action="Index"
@@ -168,7 +186,8 @@
            asp-route-tag="@ViewData["tag"]"
            asp-route-category="@ViewData["category"]"
            asp-route-cc="@redirectCC("by")"
-               asp-route-release="@ViewData["release"]">
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@ViewData["following"]">
             <img src="~/images/ccicons/by.sm.png" width="100" />
         </a>
         <a asp-controller="Discover"
@@ -177,7 +196,8 @@
            asp-route-tag="@ViewData["tag"]"
            asp-route-category="@ViewData["category"]"
            asp-route-cc="@redirectCC("by-sa")"
-               asp-route-release="@ViewData["release"]">
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@ViewData["following"]">
             <img src="~/images/ccicons/by-sa.sm.png" width="100" />
         </a>
         <a asp-controller="Discover"
@@ -186,7 +206,8 @@
            asp-route-tag="@ViewData["tag"]"
            asp-route-category="@ViewData["category"]"
            asp-route-cc="@redirectCC("by-nc")"
-               asp-route-release="@ViewData["release"]">
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@ViewData["following"]">
             <img src="~/images/ccicons/by-nc.sm.png" width="100" />
         </a>
         <a asp-controller="Discover"
@@ -195,7 +216,8 @@
            asp-route-tag="@ViewData["tag"]"
            asp-route-category="@ViewData["category"]"
            asp-route-cc="@redirectCC("by-nd")"
-               asp-route-release="@ViewData["release"]">
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@ViewData["following"]">
             <img src="~/images/ccicons/by-nd.sm.png" width="100" />
         </a>
         <a asp-controller="Discover"
@@ -204,7 +226,8 @@
            asp-route-tag="@ViewData["tag"]"
            asp-route-category="@ViewData["category"]"
            asp-route-cc="@redirectCC("by-nc-nd")"
-               asp-route-release="@ViewData["release"]">
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@ViewData["following"]">
             <img src="~/images/ccicons/by-nc-nd.sm.png" width="100" />
         </a>
         <a asp-controller="Discover"
@@ -213,7 +236,8 @@
            asp-route-tag="@ViewData["tag"]"
            asp-route-category="@ViewData["category"]"
            asp-route-cc="@redirectCC("by-nc-sa")"
-               asp-route-release="@ViewData["release"]">
+           asp-route-release="@ViewData["release"]"
+           asp-route-following="@ViewData["following"]">
             <img src="~/images/ccicons/by-nc-sa.sm.png" width="100" />
         </a>
 
@@ -225,7 +249,8 @@
                asp-route-tag="@ViewData["tag"]"
                asp-route-category="@ViewData["category"]"
                asp-route-cc="@ViewData["cc"]"
-               asp-route-release="@redirectRelease("latest")">
+               asp-route-release="@redirectRelease("latest")"
+               asp-route-following="@ViewData["following"]">
                 latest
             </a>
             <a asp-controller="Discover"
@@ -234,7 +259,8 @@
                asp-route-tag="@ViewData["tag"]"
                asp-route-category="@ViewData["category"]"
                asp-route-cc="@ViewData["cc"]"
-               asp-route-release="@redirectRelease("oldest")">
+               asp-route-release="@redirectRelease("oldest")"
+               asp-route-following="@ViewData["following"]">
                 oldest
             </a>
         </div>
