@@ -123,25 +123,6 @@
     background-color: #f3f3f3;
 }
 
-.btn-category {
-    border: 0;
-}
-
-.btn-category:hover {
-    background-color: #f3f3f3;
-}
-
-.btn-category:focus, .btn-category:active {
-    box-shadow: 0 2px 6px lightgray;
-    background-color: #f3f3f3;
-}
-
-.btn-category img {
-}
-
-.selected {
-    background-color: #f3f3f3;
-}
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {

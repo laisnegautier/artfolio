@@ -27,7 +27,7 @@ namespace artfolio.Controllers
         // Display an artist profile
         public async Task<IActionResult> Index(string userName)
         {
-            if (String.IsNullOrEmpty(userName)) return NotFound();
+            if (string.IsNullOrEmpty(userName)) return NotFound();
 
             Artist artist = await _userManager.FindByNameAsync(userName);
             if (artist == null) return NotFound();
@@ -67,7 +67,7 @@ namespace artfolio.Controllers
             if (duplicate == null)
             {
                 _context.Add(followRelation);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             else return NotFound();
 

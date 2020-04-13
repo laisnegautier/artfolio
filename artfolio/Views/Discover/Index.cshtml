@@ -12,11 +12,19 @@
 
     string selection(string selection)
     {
-        return (selection == (string)ViewData["category"]) ? "selected" : "";
+        return (selection == (string)ViewData["category"]) ? "category-selected" : "";
     }
     string redirectCategory(string category)
     {
         return (@selection(category) != "") ? "" : category;
+    }
+    string redirectCC(string cc)
+    {
+        return cc == (string)ViewData["cc"] ? "" : cc;
+    }
+    string redirectRelease(string release)
+    {
+        return release == (string)ViewData["release"] ? "" : release;
     }
 }
 
@@ -30,6 +38,7 @@
         else
         {
             <div class="list-group">
+                <a href="#">see only the artist I follow</a>
                 @foreach (var artist in Model.Artists)
                 {
                     <a asp-controller="Artist" asp-action="Index" asp-route-userName="@artist.UserName" class="artists-list list-group-item list-group-item-action flex-column align-items-start pl-2 pr-3 py-2">
@@ -37,7 +46,7 @@
                             <div class="profile-pic-nav d-none d-lg-flex" style="overflow: hidden; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center">
                                 @if (artist.PhotoFilePath != null)
                                 {
-                                <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
+                                    <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
                                 }
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -79,7 +88,14 @@
                 @foreach (Category category in Enum.GetValues(typeof(Category)))
                 {
                     categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
-                    <a asp-controller="Discover" asp-action="Index" asp-route-q="@ViewData["q"]" asp-route-tag="@ViewData["tag"]" asp-route-category="@redirectCategory(category.ToString())" class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@redirectCategory(category.ToString())"
+                       asp-route-cc="@ViewData["cc"]"
+               asp-route-release="@ViewData["release"]"
+                       class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
                         <img src="~/@categoryImageUrl" width="25" alt="@category.ToString()" />
                     </a>
                 }
@@ -113,33 +129,114 @@
     </div>
 
     <div class="col-md-2 artfolio-content">
-        <h2 class="font-weight-lighter">filters</h2>
-        <form asp-controller="Discover" asp-action="Index" method="get">
-            <input type="hidden" name="q" value="@ViewData["q"]" />
-            <input type="search" name="tag" placeholder="Filter by tag" style="padding: 7px 12px; border: 1px solid lightgray; border-radius: 5px;">
-            @if (!String.IsNullOrEmpty((string)ViewData["category"]))
-            {
-                <input type="hidden" name="category" value="@ViewData["category"]" />
-            }
-            <input type="submit" value="filter" class="btn btn-artfolio" />
-        </form>
-        <ul>
-            <li><a href="#">CC0</a></li>
-            <li><a href="#">CC1</a></li>
-            <li><a href="#">CC2</a></li>
-            <li><a href="#">CC3</a></li>
-            <li><a href="#">CC4...</a></li>
+        <h2 class="font-weight-lighter">filter</h2>
 
-            <li><a href="#">latest releases</a></li>
-            <li><a href="#">oldest releases</a></li>
-            <li><a href="#">alphabetical order</a></li>
-            <li><a href="#">reverse alphabetical order</a></li>
-            <li><a href="#">see only the artist I follow</a></li>
-        </ul>
-        <hr />
-        <ul>
-            <li>Released after ...</li>
-            <li>Released before ...</li>
-        </ul>
+        <form class="small-form" method="get"
+              asp-controller="Discover"
+              asp-action="Index">
+            <div class="input-group px-1 py-1">
+                @if (!string.IsNullOrEmpty((string)ViewData["q"]))
+                {
+                    <input type="hidden" name="q" value="@ViewData["q"]" />
+                }
+                <input name="tag" placeholder="Filter by tag" value="@ViewData["tag"]" class="form-control mr-md-2 form-artfolio" type="text">
+
+                @if (!string.IsNullOrEmpty((string)ViewData["category"]))
+                {
+                    <input type="hidden" name="category" value="@ViewData["category"]" />
+                }
+                @if (!string.IsNullOrEmpty((string)ViewData["cc"]))
+                {
+                    <input type="hidden" name="cc" value="@ViewData["cc"]" />
+                }
+                @if (!string.IsNullOrEmpty((string)ViewData["release"]))
+                {
+                    <input type="hidden" name="release" value="@ViewData["release"]" />
+                }
+                <span class="input-group-append">
+                    <button class="btn btn-artfolio btn-category" value="filter" type="submit">
+                        <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
+                    </button>
+                </span>
+            </div>
+        </form>
+
+        <h3>license</h3>
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@redirectCC("by")"
+               asp-route-release="@ViewData["release"]">
+            <img src="~/images/ccicons/by.sm.png" width="100" />
+        </a>
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@redirectCC("by-sa")"
+               asp-route-release="@ViewData["release"]">
+            <img src="~/images/ccicons/by-sa.sm.png" width="100" />
+        </a>
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@redirectCC("by-nc")"
+               asp-route-release="@ViewData["release"]">
+            <img src="~/images/ccicons/by-nc.sm.png" width="100" />
+        </a>
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@redirectCC("by-nd")"
+               asp-route-release="@ViewData["release"]">
+            <img src="~/images/ccicons/by-nd.sm.png" width="100" />
+        </a>
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@redirectCC("by-nc-nd")"
+               asp-route-release="@ViewData["release"]">
+            <img src="~/images/ccicons/by-nc-nd.sm.png" width="100" />
+        </a>
+        <a asp-controller="Discover"
+           asp-action="Index"
+           asp-route-q="@ViewData["q"]"
+           asp-route-tag="@ViewData["tag"]"
+           asp-route-category="@ViewData["category"]"
+           asp-route-cc="@redirectCC("by-nc-sa")"
+               asp-route-release="@ViewData["release"]">
+            <img src="~/images/ccicons/by-nc-sa.sm.png" width="100" />
+        </a>
+
+        <h3>sort by release</h3>
+        <div class="d-flex flex-column">
+            <a asp-controller="Discover"
+               asp-action="Index"
+               asp-route-q="@ViewData["q"]"
+               asp-route-tag="@ViewData["tag"]"
+               asp-route-category="@ViewData["category"]"
+               asp-route-cc="@ViewData["cc"]"
+               asp-route-release="@redirectRelease("latest")">
+                latest
+            </a>
+            <a asp-controller="Discover"
+               asp-action="Index"
+               asp-route-q="@ViewData["q"]"
+               asp-route-tag="@ViewData["tag"]"
+               asp-route-category="@ViewData["category"]"
+               asp-route-cc="@ViewData["cc"]"
+               asp-route-release="@redirectRelease("oldest")">
+                oldest
+            </a>
+        </div>
     </div>
 </div>
