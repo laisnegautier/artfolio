@@ -4,120 +4,133 @@
 @{
     ViewData["Title"] = Model.Artist.Firstname + " " + Model.Artist.Lastname + "'s artfolio";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string Age(DateTime birthday)
+    {
+        DateTime now = DateTime.Today;
+        int age = now.Year - birthday.Year;
+        if (now < birthday.AddYears(age)) age--;
+
+        return age.ToString();
+    }
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
-        <h1>@Model.Artist.Firstname @Model.Artist.Lastname</h1>
-        <h2 class="small text-muted">artfolio.com/@Model.Artist.UserName</h2>
-        <a href="#" class="openModal text-center" data-id="@Model.Artist.Id">@Model.Artist.Description</a>
-    </div>
-    <div class="col-md-3 d-flex justify-content-center">
-        <div class="profile-pic-nav" style="border-radius: 500px; box-shadow: 0 2px 4px lightgray; opacity: 1; overflow: hidden; width: 200px; height: 200px; display: flex; justify-content: center; align-items: center">
-            <img src="~/images/avatars/@Model.Artist.PhotoFilePath" width="400" style="margin: auto" alt="profile picture" />
-        </div>
-    </div>
-    <div class="col-md-4 d-flex justify-content-center align-items-center">
-        @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) != Model.Artist.UserName)
-        {
-            <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">send a message</a>
-            @if (!(bool)ViewData["isFollowing"])
-            {
-                <a asp-area="" asp-controller="Artist" asp-action="Follow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">follow</a>
-            }
-            else
-            {
-                <a asp-area="" asp-controller="Artist" asp-action="Unfollow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio">unfollow</a>
-            }
-        }
-        else
-        {
-            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-artfolio">sign up to contact this artist and follow him</a>
-        }
-    </div>
-</div>
+<section class="col-md-8 mx-auto publish">
 
-<div class="row justify-content-center">
-    <div class="col-md-2 d-none d-lg-block">
-        <h2 class="font-weight-lighter">collections</h2>
-        @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) == Model.Artist.UserName)
-        {
-            <a href="#">add a collection</a>
-        }
-        <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">London</button>
-            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+    <!-- Header -->
+    <div class="row d-flex align-items-center" style="justify-content: space-evenly">
+        <div class="profile-pic-nav" style="border-radius: 500px; box-shadow: 0 2px 4px lightgray; opacity: 1; overflow: hidden; width: 150px; height: 150px; display: flex; justify-content: center; align-items: center">
+            @if (!string.IsNullOrEmpty(Model.Artist.PhotoFilePath))
+            {
+                <img src="~/images/avatars/@Model.Artist.PhotoFilePath" width="300" style="margin: auto" alt="profile picture" />
+            }
+        </div>
+
+        <div class="col-md-9">
+            <h1>@ViewData["Title"]</h1>
+            <h4>@Model.Artist.Description</h4>
         </div>
     </div>
 
-    <div class="col-md-7">
-        <div class="d-flex justify-content-between">
-            <h2 class="font-weight-lighter">artworks</h2>
-
-            <div id="London" class="tabcontent">
-                <h3>London</h3>
-                <p>London is the capital city of England.</p>
-            </div>
-
-            <div id="Paris" class="tabcontent">
-                <h3>Paris</h3>
-                <p>Paris is the capital of France.</p>
-            </div>
-
-            <div id="Tokyo" class="tabcontent">
-                <h3>Tokyo</h3>
-                <p>Tokyo is the capital of Japan.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <h2 class="font-weight-lighter">filters</h2>
-    </div>
-
-    <div class="d-none">
-        <h1>Artist</h1>
-
-        <ul>
-            <li>@Html.DisplayFor(a => a.Artist.UserName)</li>
-            <li>@Html.DisplayFor(a => a.Artist.DateOfBirth)</li>
-            <li>@Html.DisplayFor(a => a.Artist.Firstname)</li>
-            <li>@Html.DisplayFor(a => a.Artist.Lastname)</li>
-            <li>@Html.DisplayFor(a => a.Artist.Nationality)</li>
-            <li><img src="~/images/avatars/thumbnails/@Model.Artist.PhotoFilePath" /></li>
-
-            @if (Model.Artist.FollowedBy.Count > 0)
-            {
-                <p>followedBy :</p>
-                foreach (var followedBy in Model.Artist.FollowedBy)
-                {
-                    <p>@followedBy.FromArtist.Lastname @followedBy.FromArtist.Firstname @followedBy.FromArtist.UserName</p>
-                }
-            }
-
-            @if (Model.Artist.Following.Count > 0)
-            {
-                <p>following :</p>
-                foreach (var following in Model.Artist.Following)
-                {
-                    <p>@following.FromArtist.Lastname @following.FromArtist.Firstname @following.FromArtist.UserName</p>
-                }
-            }
-
-            
-
-            @*if (SignInManager.IsSignedIn(User))
-                {
-                    var maliste = Model.FollowedBy.Where(x => x.FromArtistId == UserManager.GetUserId(User));
-                    if (maliste != null)
-                    {
-                        foreach (var followedBy in maliste)
+    <div>
+        <div>
+            <hr />
+            <div class="mb-3 d-flex justify-content-between">
+                <div>
+                    <ul class="list-profile list-unstyled d-flex flex-row">
+                        <li>User name : @Model.Artist.UserName</li>
+                        <li>@Age(Model.Artist.DateOfBirth) ans</li>
+                        @if (Model.Artist.Nationality == 0)
                         {
-                            <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
-                            }
+                            <li>Nationality : Do not wish to share</li>
+                        }
+                        else
+                        {
+                            <li>Nationality : @Html.DisplayFor(modelItem => modelItem.Artist.Nationality)</li>
+                        }
+                        @if (Model.Artist.Gender == 0)
+                        {
+                            <li>Gender : Do not wish to share</li>
+                        }
+                        else
+                        {
+                            <li>Gender : @Html.DisplayFor(modelItem => modelItem.Artist.Gender)</li>
+                        }
+                    </ul>
+                </div>
+                <div class="p-0 d-flex flex-wrap justify-content-end">
+                    @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) != Model.Artist.UserName)
+                    {
+                        <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio m-0 mr-2">send a message</a>
+                        @if (!(bool)ViewData["isFollowing"])
+                        {
+                            <a asp-area="" asp-controller="Artist" asp-action="Follow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio m-0">follow</a>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Artist" asp-action="Unfollow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio m-0">unfollow</a>
                         }
                     }
-                }*@
-        </ul>
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-artfolio">sign up to contact this artist and follow him</a>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 nav nav-pills publish-menu flex-column">
+
+                    <section class="w-100 artfolio-container">
+
+                        <!-- Title -->
+                        <h1 class="artfolio-container-header">collection title</h1>
+
+                        <!-- Content -->
+                        <div class="artfolio-content">
+                            collection
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-md-6">
+                    <section class="w-100 mx-auto artfolio-container">
+
+                        <!-- Title -->
+                        <h1 class="artfolio-container-header">collection title 2</h1>
+
+                        <!-- Content -->
+                        <div class="artfolio-content">
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    + Create a collection
+                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Create a collection</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @await Html.PartialAsync("_CreateCollection.cshtml", new Collection()) 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>

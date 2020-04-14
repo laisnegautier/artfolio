@@ -359,19 +359,6 @@ nav ul {
   text-decoration: none;
   background-color: #f3f3f3; }
 
-.btn-category {
-  border: 0; }
-
-.btn-category:hover {
-  background-color: #f3f3f3; }
-
-.btn-category:focus, .btn-category:active {
-  box-shadow: 0 2px 6px lightgray;
-  background-color: #f3f3f3; }
-
-.selected {
-  background-color: #f3f3f3; }
-
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
   .column-card {
@@ -461,6 +448,21 @@ footer {
 .btn-category:focus, .btn-category:active {
   box-shadow: 0 2px 6px lightgray;
   background-color: #f3f3f3; }
+
+.category-selected {
+  background-color: #f3f3f3; }
+
+.small-form {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid lightgray;
+  border-radius: 5px; }
+
+.small-form:focus-within {
+  border: 1px solid #fc8b5e; }
+
+.small-form input {
+  border: 0 !important; }
 
 .artfolio-container {
   background: white;

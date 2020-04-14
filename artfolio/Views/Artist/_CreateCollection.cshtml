@@ -1,0 +1,31 @@
+﻿@model Collection 
+
+<form class="artfolio-content" asp-controller="Artist" asp-action="CreateCollection" method="post">
+    <div class="form-group">
+        <div class="d-flex justify-content-between">
+            <div><label asp-for="Name" class="m-0"></label>*</div>
+            <div data-container="body" data-toggle="popover" data-placement="auto" data-content="This will be displayed as the collection title on your profile.">
+                <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
+            </div>
+        </div>
+
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="d-flex justify-content-between">
+            <div><label asp-for="Description" class="m-0"></label>*</div>
+            <div data-container="body" data-toggle="popover" data-placement="auto" data-content="Explain why do you create this collection.">
+                <img src="~/images/icons/info.svg" title="Help" alt="Help" width="16" />
+            </div>
+        </div>
+
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex justify-content-center">
+        <button type="submit" class="btn btn-artfolio" style="margin-top: 10px;">create</button>
+    </div>
+</form>

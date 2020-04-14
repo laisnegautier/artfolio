@@ -89,5 +89,28 @@ namespace artfolio.Controllers
 
             return RedirectToAction(nameof(Index), toFollow.UserName);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCollection([Bind("Name","Description")] Collection model)
+        {
+            Artist user = await _userManager.GetUserAsync(User);
+
+            if (ModelState.IsValid)
+            {
+                Collection collectionToAdd = new Collection
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    CreationDate = DateTime.Now,
+                    Artist = user
+                };
+
+                _context.Add(collectionToAdd);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index), user.UserName);
+        }
     }
 }

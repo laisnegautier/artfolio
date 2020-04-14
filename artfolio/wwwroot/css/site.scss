@@ -231,3 +231,15 @@ footer {
     color: $main-color !important;
     font-weight: bold;
 }
+
+/* PROFILE */
+.list-profile {
+    margin: 0;
+    padding: 0;
+}
+.list-profile li {
+    margin-left: 10px;
+    padding: 5px 7px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}

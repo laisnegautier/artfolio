@@ -88,6 +88,26 @@ footer {
     background-color: #f3f3f3;
 }
 
+.category-selected {
+    background-color: #f3f3f3;
+}
+
+.small-form {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.small-form:focus-within {
+    border: 1px solid $main-color;
+}
+
+.small-form input {
+    border: 0 !important;
+}
+
+
 .artfolio-container {
     background: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);
