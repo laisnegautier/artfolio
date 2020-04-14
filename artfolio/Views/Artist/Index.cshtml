@@ -13,6 +13,11 @@
 
         return age.ToString();
     }
+
+    string targetDelete(int id)
+    { 
+        return "#deleteCollection" + id;
+    }
 }
 
 <section class="col-md-8 mx-auto publish">
@@ -93,7 +98,7 @@
 
                                     @if (SignInManager.IsSignedIn(User) && UserManager.GetUserId(User) == Model.Artist.Id)
                                     {
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteCollection">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="@targetDelete(collection.CollectionId)">
                                             &times;
                                         </button>
                                     }
@@ -107,7 +112,8 @@
                             </section>
                         </div>
 
-                        @await Html.PartialAsync("_DeleteCollection.cshtml", new Collection { CollectionId = collection.CollectionId })
+                        <!-- not the real name but needed here -->
+                        @await Html.PartialAsync("_DeleteCollection.cshtml", new Collection { CollectionId = collection.CollectionId, Name = "deleteCollection" + collection.CollectionId })
                     }
                 }
             </div>
