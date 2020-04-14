@@ -112,5 +112,19 @@ namespace artfolio.Controllers
 
             return RedirectToAction(nameof(Index), user.UserName);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCollection(int id)
+        {
+            Artist user = await _userManager.GetUserAsync(User);
+            Collection collection = await _context.Collections.FindAsync(id);
+
+            _context.Collections.Remove(collection);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index), user.UserName);
+        }
     }
 }
