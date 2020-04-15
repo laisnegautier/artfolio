@@ -1,0 +1,29 @@
+﻿@model AddArtworkCollectionArtistViewModel
+@inject UserManager<Artist> UserManager
+
+<div class="modal fade" id="@Model.ToggleModalAddCollection" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Add an artwork in the collection</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form class="artfolio-content" asp-controller="Artist" asp-action="AddArtworkCollection" method="post">
+                    <input type="hidden" name="CollectionId" value="@Model.CollectionId" />
+
+                    <select asp-for="@Model.ArtworkId" asp-items="@(new SelectList(Model.Artworks,"ArtworkId","Title"))">
+                        <option>Please select one</option>
+                    </select>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <button type="submit" class="btn btn-artfolio" style="margin-top: 10px;">add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -292,6 +292,7 @@ namespace artfolio.Controllers
             var artwork = await _context.Artworks.FindAsync(id);
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

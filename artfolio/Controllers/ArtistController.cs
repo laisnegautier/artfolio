@@ -109,6 +109,7 @@ namespace artfolio.Controllers
                 _context.Add(collectionToAdd);
                 await _context.SaveChangesAsync();
             }
+            else return NotFound();
 
             return RedirectToAction(nameof(Index), user.UserName);
         }
@@ -122,6 +123,27 @@ namespace artfolio.Controllers
             
             _context.Collections.Remove(collection);
             await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index), user.UserName);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddArtworkCollection(AddArtworkCollectionArtistViewModel viewModel)
+        {
+            Artist user = await _userManager.GetUserAsync(User);
+
+            if(ModelState.IsValid)
+            {
+                Collection collection = await _context.Collections.FindAsync(viewModel.CollectionId);
+                Artwork artworkToUpdate = await _context.Artworks.FindAsync(viewModel.ArtworkId);
+
+                artworkToUpdate.Collection = collection;
+
+                _context.Artworks.Update(artworkToUpdate);
+                _context.SaveChanges();
+            }
+            else return NotFound();
 
             return RedirectToAction(nameof(Index), user.UserName);
         }
