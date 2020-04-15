@@ -1,20 +1,54 @@
-﻿.list-group a {
-    border: 0px solid red;
-    transition: all .15s ease-in-out;
-    margin-left: 0px;
-    border-radius: 5px;
-    box-shadow: none;
-    background: none;
-}
-
-.list-group a:hover {
+﻿.scroll-horizontal-artists {
+    display: flex;
+    padding: 10px;
+    margin-top: -10px;
+    margin-bottom: -10px;
     margin-left: -10px;
-    background: transparent;
-    box-shadow: 0 2px 6px lightgray;
-}
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
 
-.list-group a:focus, .list-group a:active {
-    background: transparent;
+    .artist-card {
+        flex: 0 0 auto;
+        width: 200px;
+        box-shadow: 0;
+        transition: all .15s ease-in-out;
+        border-radius: 5px;
+        border: 1px solid #f3f3f3;
+        padding: 5px 10px 5px 5px;
+        margin-right: 10px;
+        background: white;
+
+        &:hover {
+            border: 0px solid white;
+            box-shadow: 0 2px 6px lightgray;
+        }
+
+        .profile-pic {
+            overflow: hidden;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f3f3f3;
+            border-radius: 50px;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::before {
+        position: absolute;
+        content: '';
+        right: 0;
+        height: 100%;
+        width: 10%;
+        background: linear-gradient(to left,rgba(255, 255, 255, 1) 0%, rgba(255,255,255, 0) 100%);
+    }
 }
 
 .card {
@@ -27,14 +61,12 @@
     border-color: white;
     box-shadow: 0 2px 7px lightgray;
 }
-
 /*GALLERY*/
 .row-card {
     display: flex;
     flex-wrap: wrap;
     padding: 0 4px;
 }
-
 /* Create four equal columns that sits next to each other */
 .column-card {
     flex: 25%;
@@ -122,8 +154,6 @@
     text-decoration: none;
     background-color: #f3f3f3;
 }
-
-
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
     .column-card {
@@ -131,7 +161,6 @@
         max-width: 50%;
     }
 }
-
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
     .column-card {
@@ -139,7 +168,6 @@
         max-width: 100%;
     }
 }
-
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 991.98px) {
     .column-card {

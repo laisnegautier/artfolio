@@ -42,7 +42,7 @@
         <a asp-controller="Artwork" asp-action="Index" asp-route-userName="@Model.Artwork.Artist.UserName" asp-route-title="@Model.Artwork.NormalizedTitle" alt="Click for more details" title="Click for more details">
             <h5 class="mb-1">@Html.DisplayFor(modelItem => Model.Artwork.Title)</h5>
         </a>
-        <h6 class="small mb-1">@Html.DisplayFor(modelItem => Model.Artwork.Category) by <a asp-controller="Artist" asp-action="Index" asp-route-userName="@Model.Artwork.Artist.UserName" alt="Look through @Model.Artwork.Artist.Firstname @Model.Artwork.Artist.Lastname's artfolio" title="Look through @Model.Artwork.Artist.Firstname @Model.Artwork.Artist.Lastname's artfolio">@Model.Artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => Model.Artwork.ReleaseDate)</h6>
+        <h6 class="small mb-1">@Html.DisplayFor(modelItem => Model.Artwork.Category) by <a asp-controller="Artist" asp-action="Index" asp-route-userName="@Model.Artwork.Artist.UserName" alt="Look through @Model.Artwork.Artist.Firstname @Model.Artwork.Artist.Lastname's artfolio" title="Look through @Model.Artwork.Artist.Firstname @Model.Artwork.Artist.Lastname's artfolio">@Model.Artwork.Artist.Firstname @Model.Artwork.Artist.Lastname</a>, @Html.DisplayFor(modelItem => Model.Artwork.ReleaseDate)</h6>
         <img class="ccIcon" src="~/images/ccicons/@formatToImg(Model.Artwork.CCLicense.Acronym)" alt="CC @Model.Artwork.CCLicense.Title License" title="CC @Model.Artwork.CCLicense.Title License" />
     </div>
 </div>

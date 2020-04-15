@@ -33,57 +33,58 @@
     }
 }
 
-<div class="col-10 mx-auto d-flex justify-content-center">
-    <div class="col-md-2 d-none d-lg-block">
-        <h2 class="font-weight-lighter">artists</h2>
-        @if (!Model.Artists.Any())
-        {
-            <h6>No artist found</h6>
-        }
-        else
-        {
-            <div class="list-group">
-                @foreach (var artist in Model.Artists)
-                {
-                    <a asp-controller="Artist" asp-action="Index" asp-route-userName="@artist.UserName" class="artists-list list-group-item list-group-item-action flex-column align-items-start pl-2 pr-3 py-2">
-                        <div class="d-flex w-100 align-items-center">
-                            <div class="profile-pic-nav d-none d-lg-flex" style="overflow: hidden; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center">
-                                @if (artist.PhotoFilePath != null)
-                                {
-                                    <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
-                                }
+<div class="col-md-9 mx-auto">
+    <h2 class="font-weight-lighter">artists</h2>
+    @if (!Model.Artists.Any())
+    {
+        <h6>No artist found</h6>
+    }
+    else
+    {
+        <div class="scroll-horizontal-artists">
+            @foreach (var artist in Model.Artists)
+            {
+                <a asp-controller="Artist" asp-action="Index" asp-route-userName="@artist.UserName" class="artist-card">
+                    <div class="d-flex w-100 align-items-center">
+                        <div class="profile-pic">
+                            @if (artist.PhotoFilePath != null)
+                            {
+                                <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
+                            }
+                        </div>
+                        <div class="d-flex justify-content-between flex-grow-1">
+                            <div class="ml-2 d-flex flex-column justify-content-center">
+                                <h6 class="m-0">
+                                    @Html.DisplayFor(modelItem => artist.Firstname) @Html.DisplayFor(modelItem => artist.Lastname)
+                                </h6>
+                                <small class="m-0 text-muted">
+                                    @Html.DisplayFor(modelItem => artist.UserName)
+                                </small>
                             </div>
-                            <div class="d-flex justify-content-between flex-grow-1">
-                                <div class="ml-2 d-flex flex-column justify-content-center">
-                                    <h6 class="m-0">
-                                        @Html.DisplayFor(modelItem => artist.Firstname) @Html.DisplayFor(modelItem => artist.Lastname)
-                                    </h6>
-                                    <small class="m-0 text-muted">
-                                        @Html.DisplayFor(modelItem => artist.UserName)
-                                    </small>
-                                </div>
-                                @if (artist.FollowedBy.Count > 0)
+                            @if (artist.FollowedBy.Count > 0)
+                            {
+                                if (SignInManager.IsSignedIn(User))
                                 {
-                                    if (SignInManager.IsSignedIn(User))
+                                    foreach (var followedBy in artist.FollowedBy)
                                     {
-                                        foreach (var followedBy in artist.FollowedBy)
+                                        if (followedBy.FromArtistId == UserManager.GetUserId(User))
                                         {
-                                            if (followedBy.FromArtistId == UserManager.GetUserId(User))
-                                            {
-                                                <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
-                                            }
+                                            <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
                                         }
                                     }
                                 }
-                            </div>
+                            }
                         </div>
-                    </a>
-                }
-            </div>
-        }
-    </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>
 
-    <div class="col-md-7">
+<div class="col-10 mx-auto d-flex justify-content-center">
+
+    <div class="col-md-9">
         <div class="d-flex justify-content-between">
             <h2 class="font-weight-lighter">artworks</h2>
 
@@ -170,14 +171,17 @@
             </div>
         </form>
 
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@ViewData["by"]"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@redirectFollowing("true")">see only the artist I follow</a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-controller="Discover"
+               asp-action="Index"
+               asp-route-q="@ViewData["q"]"
+               asp-route-tag="@ViewData["tag"]"
+               asp-route-category="@ViewData["category"]"
+               asp-route-cc="@ViewData["by"]"
+               asp-route-release="@ViewData["release"]"
+               asp-route-following="@redirectFollowing("true")">see only the artist I follow</a>
+        }
 
         <h3>license</h3>
         <a asp-controller="Discover"
