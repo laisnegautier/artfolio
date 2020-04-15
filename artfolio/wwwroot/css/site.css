@@ -295,6 +295,13 @@ nav ul {
   margin: auto;
   bottom: 0; }
 
+.discover-link-home {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 20%; }
+
 .artwork-card {
   margin-bottom: 15px;
   box-shadow: 0 2px 4px lightgray;
@@ -581,3 +588,45 @@ footer {
   padding: 5px 7px;
   border: 1px solid lightgray;
   border-radius: 5px; }
+
+/* FOOTER */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fafafa; }
+
+.footer-home {
+  position: absolute;
+  bottom: 0;
+  background: transparent;
+  font-weight: 300;
+  font-family: "Source Sans Pro";
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  padding: 0;
+  margin: 0; }
+
+.footer-home ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+.footer-home ul li {
+  display: inline;
+  margin-right: 20px; }
+
+.footer-home a {
+  color: gray;
+  transition: all .15s ease-in-out; }
+
+.footer-home a:hover {
+  color: black;
+  text-decoration: none; }
+
+.footer-home a:focus, .footer-home a.focus {
+  color: black; }

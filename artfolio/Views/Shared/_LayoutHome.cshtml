@@ -44,17 +44,40 @@
         </div>
     </main>
 
-    <div class="discover-link">
-        @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = Model })
+    <div class="discover-link-home">
+        <div class="discover-link">
+            @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = Model })
+        </div>
     </div>
 
-    <footer class="footer footer-home">
-            <ul class="d-flex flex-row list-unstyled col-12 justify-content-end">
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
-                <li class="muted">artfolio - 2020</li>
-            </ul>
-        </footer>
+    <div class="modal fade" style="z-index: 99999999" id="p2iModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLongTitle">What is artfolio ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">
+                        This platform has been created in 2020 by Gautier LAISNE as a project to share artworks legally. It is meant to be a computer science mandatory project.
+                        <br />
+                        This website uses ASP.NET Core 3.1, EntityFramework Core and SQL Server. <b>All artworks on this website comes from <a href="https://unsplash.com/" title="unsplash.com" alt="unsplash.com">unsplash.com</a> and are uploaded in a demonstration purpose.</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-home">
+        <ul>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">contact</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Privacy">privacy</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="CookiePolicy">cookie policy</a></li>
+            <li><a type="button" asp-area="" asp-controller="Home" asp-action="Contact" data-toggle="modal" data-target="#p2iModal">artfolio - 2020</a></li>
+        </ul>
+    </footer>
 
     <div style="display: none">
         @RenderBody()

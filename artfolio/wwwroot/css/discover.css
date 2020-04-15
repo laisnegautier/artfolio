@@ -41,6 +41,13 @@
   margin: auto;
   bottom: 0; }
 
+.discover-link-home {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 20%; }
+
 .artwork-card {
   margin-bottom: 15px;
   box-shadow: 0 2px 4px lightgray;
