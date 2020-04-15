@@ -16,12 +16,28 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/bootstrap.custom.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body class="animated fadeIn">
 
     <header>
         <nav>
+            <!-- Logo -->
+            <a class="brand brand-short d-sm-none" asp-area="" asp-controller="Home" asp-action="Index"><span>a</span>f</a>
+            <a class="brand brand-long d-sm-none" asp-area="" asp-controller="Home" asp-action="Index"><span>art</span>folio</a>
+
+            <!-- Search bar -->
+            <form class="my-auto d-inline search-box d-sm-none" asp-controller="Discover" asp-action="Index" method="get">
+                <div class="input-group px-2 py-1">
+                    <img src="~/images/icons/search-outline.svg" width="20" class="m-2" />
+                    <input name="q" class="form-control mr-md-2 form-artfolio" type="text" value="@ViewData["q"]" placeholder="search for an artist, an artwork...">
+                    <span class="input-group-append">
+                        <button class="btn btn-artfolio btn-category" type="submit">
+                            <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
+                        </button>
+                    </span>
+                </div>
+            </form>
+
             <!-- Profile Management -->
             <partial name="_LoginPartial" />
         </nav>
@@ -29,8 +45,8 @@
 
     <main class="home-main">
         <div class="centered col-12 col-md-10">
-            <h1 class="home-brand font-weight-light d-none d-lg-block"><span style="color: #F9A585;">art</span>folio</h1>
-            <form asp-controller="Discover" asp-action="Index" method="get" class="form-inline my-lg-0 search-box-header px-1 py-1 col-lg-9 col-xl-6">
+            <h1 class="home-brand font-weight-light d-none d-sm-block d-none d-sm-flex"><span style="color: #F9A585;">art</span>folio</h1>
+            <form asp-controller="Discover" asp-action="Index" method="get" class="form-inline my-lg-0 search-box-header px-1 py-1 col-lg-9 col-xl-6 d-none d-sm-flex">
                 <div class="col-10 d-flex flex-row col-sm-9 col-lg-10">
                     <img src="~/images/icons/search-outline.svg" width="20" class="d-inline-block" />
                     <input class="form-control mr-md-2 form-artfolio" type="search" name="q" placeholder="search for an artist, an artwork...">
@@ -40,17 +56,17 @@
                 </button>
             </form>
 
-            <partial name="_CookieConsentPartial" />
+            <div class="discover-link-home">
+                <div class="discover-link">
+                    @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = Model })
+                </div>
+            </div>
         </div>
     </main>
 
-    <div class="discover-link-home">
-        <div class="discover-link">
-            @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = Model })
-        </div>
-    </div>
+    <partial name="_CookieConsentPartial" />
 
-    <div class="modal fade" style="z-index: 99999999" id="p2iModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="p2iModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

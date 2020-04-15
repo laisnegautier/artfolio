@@ -295,13 +295,6 @@ nav ul {
   margin: auto;
   bottom: 0; }
 
-.discover-link-home {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  bottom: 20%; }
-
 .artwork-card {
   margin-bottom: 15px;
   box-shadow: 0 2px 4px lightgray;
@@ -630,3 +623,53 @@ footer {
 
 .footer-home a:focus, .footer-home a.focus {
   color: black; }
+
+/* HOME */
+.home-main {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%; }
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.home-brand {
+  font-size: 6rem !important;
+  color: #747474 !important;
+  font-weight: lighter !important;
+  padding: 0 !important;
+  margin-top: -14px;
+  font-family: "Source Sans Pro" !important;
+  /*margin-bottom: 0;*/ }
+
+.search-box-header {
+  border: 1px solid #DEDEDE;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0;
+  border-radius: 5px;
+  transition: all .15s ease-in-out; }
+
+.search-box-header input {
+  border: 0px;
+  width: 90% !important; }
+
+.search-box-header input:focus, .search-box-header input.focus {
+  box-shadow: none; }
+
+.search-box-header:hover, .search-box-header:focus-within {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+
+.discover-link-home {
+  margin-top: 100px; }
+
+@media screen and (max-width: 579px) {
+  .discover-link-home {
+    margin-top: 0px; } }
