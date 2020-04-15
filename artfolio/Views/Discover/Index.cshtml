@@ -7,31 +7,255 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     string categoryImageUrl = null;
-    int[] i = new int[] { 0, 0, 0, 0 };
+    int[] i = new int[] { 0, 0, 0, 0, 0 };
     int index = 0;
 
     string selection(string selection)
     {
-        return (selection == (string)ViewData["category"]) ? "category-selected" : "";
+        return (selection == (string)ViewData["category"]) ? "selected" : "";
     }
 
     string redirectCategory(string category)
     {
         return (@selection(category) != "") ? "" : category;
     }
+
     string redirectCC(string cc)
     {
         return cc == (string)ViewData["cc"] ? "" : cc;
     }
+    string selectionCC(string selection)
+    {
+        return (selection == (string)ViewData["cc"]) ? "selected" : "";
+    }
+
     string redirectRelease(string release)
     {
         return release == (string)ViewData["release"] ? "" : release;
     }
+    string selectionRelease(string selection)
+    {
+        return (selection == (string)ViewData["release"]) ? "selected" : "";
+    }
+
     string redirectFollowing(string following)
     {
         return following == (string)ViewData["following"] ? "" : following;
     }
+    string selectionFollowing(string selection)
+    {
+        return (selection == (string)ViewData["following"]) ? "selected" : "";
+    }
 }
+<div class="filters">
+    <div class="col-lg-9 mx-auto">
+        <div class="scroll-horizontal-filters">
+
+            <div class="encart encart-filter categories">
+                @foreach (Category category in Enum.GetValues(typeof(Category)))
+                {
+                    categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@redirectCategory(category.ToString())"
+                       asp-route-cc="@ViewData["cc"]"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selection(category.ToString())" alt="@category.ToString()" title="@category.ToString()">
+                        <img src="~/@categoryImageUrl" width="25" alt="@category.ToString()" />
+                    </a>
+                }
+            </div>
+
+            <form class="encart tag-form" method="get"
+                  asp-controller="Discover"
+                  asp-action="Index">
+                <div class="input-group">
+                    @if (!string.IsNullOrEmpty((string)ViewData["q"]))
+                    {
+                        <input type="hidden" name="q" value="@ViewData["q"]" />
+                    }
+                    <input name="tag" placeholder="filter by tag" value="@ViewData["tag"]" class="form-control form-artfolio" type="text">
+                    @if (!string.IsNullOrEmpty((string)ViewData["category"]))
+                    {
+                        <input type="hidden" name="category" value="@ViewData["category"]" />
+                    }
+                    @if (!string.IsNullOrEmpty((string)ViewData["cc"]))
+                    {
+                        <input type="hidden" name="cc" value="@ViewData["cc"]" />
+                    }
+                    @if (!string.IsNullOrEmpty((string)ViewData["release"]))
+                    {
+                        <input type="hidden" name="release" value="@ViewData["release"]" />
+                    }
+                    @if (!string.IsNullOrEmpty((string)ViewData["following"]))
+                    {
+                        <input type="hidden" name="following" value="@ViewData["following"]" />
+                    }
+                    <span class="input-group-append">
+                        <button class="btn btn-artfolio btn-category" value="filter" type="submit">
+                            <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
+                        </button>
+                    </span>
+                </div>
+            </form>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="encart encart-filter">
+                    <div class="link-content">
+                        <a asp-controller="Discover"
+                           asp-action="Index"
+                           asp-route-q="@ViewData["q"]"
+                           asp-route-tag="@ViewData["tag"]"
+                           asp-route-category="@ViewData["category"]"
+                           asp-route-cc="@ViewData["by"]"
+                           asp-route-release="@ViewData["release"]"
+                           asp-route-following="@redirectFollowing("true")"
+                           class="following @selectionFollowing("true")"
+                           alt="see only my favourite artists and their artworks"
+                           title="see only my favourite artists and their artworks">
+                            <img src="~/images/icons/star-outline.svg" />
+                        </a>
+                    </div>
+                </div>
+            }
+
+            <div class="encart encart-filter">
+                <h3>sort by release</h3>
+                <div class="link-content">
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@ViewData["cc"]"
+                       asp-route-release="@redirectRelease("latest")"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionRelease("latest")">
+                        latest
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@ViewData["cc"]"
+                       asp-route-release="@redirectRelease("oldest")"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionRelease("oldest")">
+                        oldest
+                    </a>
+                </div>
+            </div>
+
+            <div class="encart encart-filter">
+                <h3>sort by license</h3>
+                <div class="link-content">
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("by")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("by")">
+                        @*<img src="~/images/ccicons/by.sm.png" />*@
+                        BY-SM
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("by-sa")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("by-sa")">
+                        @*<img src="~/images/ccicons/by-sa.sm.png" />*@
+                        BY-SA
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("by-nc")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("by-nc")">
+                        @*<img src="~/images/ccicons/by-nc.sm.png" />*@
+                        BY-NC
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("by-nd")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("by-nd")">
+                        @*<img src="~/images/ccicons/by-nd.sm.png" />*@
+                        BY-ND
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("by-nc-nd")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("by-nc-nd")">
+                        @*<img src="~/images/ccicons/by-nc-nd.sm.png" />*@
+                        BY-NC-ND
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("by-nc-sa")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("by-nc-sa")">
+                        @*<img src="~/images/ccicons/by-nc-sa.sm.png" />*@
+                        BY-NC-SA
+                    </a>
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       asp-route-tag="@ViewData["tag"]"
+                       asp-route-category="@ViewData["category"]"
+                       asp-route-cc="@redirectCC("cc-zero")"
+                       asp-route-release="@ViewData["release"]"
+                       asp-route-following="@ViewData["following"]"
+                       class="@selectionCC("cc-zero")">
+                        @*<img src="~/images/ccicons/cc-zero.sm.png" />*@
+                        CC0
+                    </a>
+                </div>
+            </div>
+
+            <div class="encart encart-filter">
+                <div class="link-content">
+                    <a asp-controller="Discover"
+                       asp-action="Index"
+                       asp-route-q="@ViewData["q"]"
+                       class="following"
+                       alt="no filter"
+                       title="no filter">
+                        <img src="~/images/icons/close-outline.svg" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="col-md-9 mx-auto">
     <h2 class="font-weight-lighter">artists</h2>
@@ -82,191 +306,30 @@
     }
 </div>
 
-<div class="col-10 mx-auto d-flex justify-content-center">
+<div class="col-md-9 mx-auto artwork-container">
+    <h2 class="font-weight-lighter">artworks</h2>
 
-    <div class="col-md-9">
-        <div class="d-flex justify-content-between">
-            <h2 class="font-weight-lighter">artworks</h2>
-
-            @* --- CATEGORIES --- *@
-            <div>
-                @foreach (Category category in Enum.GetValues(typeof(Category)))
-                {
-                    categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
-                    <a asp-controller="Discover"
-                       asp-action="Index"
-                       asp-route-q="@ViewData["q"]"
-                       asp-route-tag="@ViewData["tag"]"
-                       asp-route-category="@redirectCategory(category.ToString())"
-                       asp-route-cc="@ViewData["cc"]"
-                       asp-route-release="@ViewData["release"]"
-                       asp-route-following="@ViewData["following"]"
-                       class="btn btn-artfolio font-weight-light btn-category @selection(category.ToString())" role="button" alt="@category.ToString()" title="@category.ToString()">
-                        <img src="~/@categoryImageUrl" width="25" alt="@category.ToString()" />
-                    </a>
-                }
-            </div>
-            @* --- ENDCATEGORIES --- *@
-        </div>
-
-        @if (!Model.Artworks.Any())
-        {
-            <h6>No artwork found</h6>
-        }
-        else
-        {
-            <div class="row-card p-0 m-0">
-                @for (int col = 0; col < 4; col++)
-                {
-                    index = 0;
-                    <div class="column-card">
-                        @foreach (var artwork in Model.Artworks)
+    @if (!Model.Artworks.Any())
+    {
+        <h6>No artwork found</h6>
+    }
+    else
+    {
+        <div class="row-card p-0 m-0">
+            @for (int col = 0; col < 5; col++)
+            {
+                index = 0;
+                <div class="column-card">
+                    @foreach (var artwork in Model.Artworks)
+                    {
+                        @if (index % 5 == col)
                         {
-                            @if (index % 4 == col)
-                            {
-                                @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = artwork })
-                            }
-                            index++;
+                            @await Html.PartialAsync("_ArtworkCard", new ArtworkCardPartialViewModel { Artwork = artwork })
                         }
-                    </div>
-                }
-            </div>
-        }
-    </div>
-
-    <div class="col-md-2 artfolio-content">
-        <h2 class="font-weight-lighter">filter</h2>
-
-        <form class="small-form" method="get"
-              asp-controller="Discover"
-              asp-action="Index">
-            <div class="input-group px-1 py-1">
-                @if (!string.IsNullOrEmpty((string)ViewData["q"]))
-                {
-                    <input type="hidden" name="q" value="@ViewData["q"]" />
-                }
-                <input name="tag" placeholder="Filter by tag" value="@ViewData["tag"]" class="form-control mr-md-2 form-artfolio" type="text">
-
-                @if (!string.IsNullOrEmpty((string)ViewData["category"]))
-                {
-                    <input type="hidden" name="category" value="@ViewData["category"]" />
-                }
-                @if (!string.IsNullOrEmpty((string)ViewData["cc"]))
-                {
-                    <input type="hidden" name="cc" value="@ViewData["cc"]" />
-                }
-                @if (!string.IsNullOrEmpty((string)ViewData["release"]))
-                {
-                    <input type="hidden" name="release" value="@ViewData["release"]" />
-                }
-                @if (!string.IsNullOrEmpty((string)ViewData["following"]))
-                {
-                    <input type="hidden" name="following" value="@ViewData["following"]" />
-                }
-                <span class="input-group-append">
-                    <button class="btn btn-artfolio btn-category" value="filter" type="submit">
-                        <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
-                    </button>
-                </span>
-            </div>
-        </form>
-
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <a asp-controller="Discover"
-               asp-action="Index"
-               asp-route-q="@ViewData["q"]"
-               asp-route-tag="@ViewData["tag"]"
-               asp-route-category="@ViewData["category"]"
-               asp-route-cc="@ViewData["by"]"
-               asp-route-release="@ViewData["release"]"
-               asp-route-following="@redirectFollowing("true")">see only the artist I follow</a>
-        }
-
-        <h3>license</h3>
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@redirectCC("by")"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@ViewData["following"]">
-            <img src="~/images/ccicons/by.sm.png" width="100" />
-        </a>
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@redirectCC("by-sa")"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@ViewData["following"]">
-            <img src="~/images/ccicons/by-sa.sm.png" width="100" />
-        </a>
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@redirectCC("by-nc")"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@ViewData["following"]">
-            <img src="~/images/ccicons/by-nc.sm.png" width="100" />
-        </a>
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@redirectCC("by-nd")"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@ViewData["following"]">
-            <img src="~/images/ccicons/by-nd.sm.png" width="100" />
-        </a>
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@redirectCC("by-nc-nd")"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@ViewData["following"]">
-            <img src="~/images/ccicons/by-nc-nd.sm.png" width="100" />
-        </a>
-        <a asp-controller="Discover"
-           asp-action="Index"
-           asp-route-q="@ViewData["q"]"
-           asp-route-tag="@ViewData["tag"]"
-           asp-route-category="@ViewData["category"]"
-           asp-route-cc="@redirectCC("by-nc-sa")"
-           asp-route-release="@ViewData["release"]"
-           asp-route-following="@ViewData["following"]">
-            <img src="~/images/ccicons/by-nc-sa.sm.png" width="100" />
-        </a>
-
-        <h3>sort by release</h3>
-        <div class="d-flex flex-column">
-            <a asp-controller="Discover"
-               asp-action="Index"
-               asp-route-q="@ViewData["q"]"
-               asp-route-tag="@ViewData["tag"]"
-               asp-route-category="@ViewData["category"]"
-               asp-route-cc="@ViewData["cc"]"
-               asp-route-release="@redirectRelease("latest")"
-               asp-route-following="@ViewData["following"]">
-                latest
-            </a>
-            <a asp-controller="Discover"
-               asp-action="Index"
-               asp-route-q="@ViewData["q"]"
-               asp-route-tag="@ViewData["tag"]"
-               asp-route-category="@ViewData["category"]"
-               asp-route-cc="@ViewData["cc"]"
-               asp-route-release="@redirectRelease("oldest")"
-               asp-route-following="@ViewData["following"]">
-                oldest
-            </a>
+                        index++;
+                    }
+                </div>
+            }
         </div>
-    </div>
+    }
 </div>

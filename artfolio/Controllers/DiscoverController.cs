@@ -42,7 +42,7 @@ namespace artfolio.Controllers
         {
             // Initial queries
             IQueryable<Artwork> artworks = _context.Artworks
-                .Where(x => x.Privacy == true) // is visible by everyone
+                .Where(x => x.Privacy == true && x.ReleaseDate <= DateTime.Now) // is visible by everyone and is released
                 .OrderByDescending(x => x.ReleaseDate)
                 .Take(30);
 
