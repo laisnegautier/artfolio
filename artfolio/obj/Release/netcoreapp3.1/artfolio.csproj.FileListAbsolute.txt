@@ -161,9 +161,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Release\netcoreapp3.1\runtim
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Gautier\source\repos\artfolio\artfolio\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.csproj.CoreCompileInputs.cache
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.RazorAssemblyInfo.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.RazorAssemblyInfo.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.AssemblyInfoInputs.cache
@@ -226,7 +223,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LayoutHome.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.RazorTargetAssemblyInfo.cache
@@ -245,3 +241,8 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_DeleteCollection.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_AddArtworkCollection.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Messages\_Messages.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Messages\_Test.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.csproj.CoreCompileInputs.cache
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.MvcApplicationPartsAssemblyInfo.cache

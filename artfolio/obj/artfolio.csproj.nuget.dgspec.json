@@ -82,11 +82,15 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
+            },
+            "Microsoft.jQuery.Unobtrusive.Ajax": {
+              "target": "Package",
+              "version": "[3.2.6, )"
             },
             "SendGrid": {
               "target": "Package",
-              "version": "[9.13.1, )"
+              "version": "[9.14.0, )"
             },
             "Slugify.Core": {
               "target": "Package",

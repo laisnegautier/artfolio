@@ -47,11 +47,11 @@
         return (selection == (string)ViewData["following"]) ? "selected" : "";
     }
 }
-<div class="filters">
+<div class="controls">
     <div class="col-lg-9 mx-auto">
-        <div class="scroll-horizontal-filters">
+        <div class="scroll-horizontal-controls">
 
-            <div class="encart encart-filter categories">
+            <div class="encart encart-div categories">
                 @foreach (Category category in Enum.GetValues(typeof(Category)))
                 {
                     categoryImageUrl = "images/icons/categories/" + category.ToString() + ".svg";
@@ -104,7 +104,7 @@
 
             @if (SignInManager.IsSignedIn(User))
             {
-                <div class="encart encart-filter">
+                <div class="encart encart-div">
                     <div class="link-content">
                         <a asp-controller="Discover"
                            asp-action="Index"
@@ -123,7 +123,7 @@
                 </div>
             }
 
-            <div class="encart encart-filter">
+            <div class="encart encart-div">
                 <h3>sort by release</h3>
                 <div class="link-content">
                     <a asp-controller="Discover"
@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <div class="encart encart-filter">
+            <div class="encart encart-div">
                 <h3>sort by license</h3>
                 <div class="link-content">
                     <a asp-controller="Discover"
@@ -241,7 +241,7 @@
                 </div>
             </div>
 
-            <div class="encart encart-filter">
+            <div class="encart encart-div">
                 <div class="link-content">
                     <a asp-controller="Discover"
                        asp-action="Index"

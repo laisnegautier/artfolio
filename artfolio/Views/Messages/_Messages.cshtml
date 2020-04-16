@@ -1,0 +1,19 @@
+﻿@model MessagesIndexViewModel
+
+@if (Model.Messages.Count > 0)
+{
+    foreach (var message in Model.Messages)
+    {
+        <div style="border: 1px solid lightgray; background-color: #fafafa; padding: 10px 15px; margin: 10px;">
+            <p class="small">Sender: @message.Sender.Firstname @message.Sender.Lastname</p>
+            <p class="small">Receiver: @message.Receiver.Firstname @message.Receiver.Lastname</p>
+            <p>Content: @message.Content</p>
+            <p class="small muted">Send the @Html.DisplayFor(m => message.CreationDate)</p>
+        </div>
+        <hr />
+    }
+}
+else
+{
+    <p>pas de message</p>
+}

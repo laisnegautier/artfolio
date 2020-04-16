@@ -25,7 +25,142 @@
     }
 }
 
-<section class="col-md-8 mx-auto publish">
+@* ADMINISTRATION *@
+@if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) == Model.Artist.UserName)
+{
+    <div class="controls">
+        <div class="col-lg-9 mx-auto">
+            <div class="scroll-horizontal-controls">
+
+                <div class="encart encart-div">
+                    <h3>artworks</h3>
+                    <div class="link-content">
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            add
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            delete
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            edit
+                        </a>
+                    </div>
+                </div>
+
+                <div class="encart encart-div">
+                    <h3>collections</h3>
+                    <div class="link-content">
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            add
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            delete
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            update
+                        </a>
+                    </div>
+                </div>
+
+                <div class="encart encart-div">
+                    <h3>infos</h3>
+                    <div class="link-content">
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            visibility
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            edit infos
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            share
+                        </a>
+                    </div>
+                </div>
+
+                <div class="encart encart-div">
+                    <h3>following</h3>
+                    <div class="link-content">
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            artists followed
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            followed by
+                        </a>
+                        <a asp-controller="Discover"
+                           asp-action="Index">
+                            messages
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="col-md-9 mx-auto">
+    <h2 class="font-weight-lighter">followed by</h2>
+    @if (!Model.Artist.FollowedBy.Any())
+    {
+        <h6>No one (yet).</h6>
+    }
+    else
+    {
+        <div class="scroll-horizontal-artists">
+            @foreach (var followRelation in Model.Artist.FollowedBy)
+            {
+                <a asp-controller="Artist" asp-action="Index" asp-route-userName="@followRelation.FromArtist.UserName" class="artist-card">
+                    <div class="d-flex w-100 align-items-center">
+                        <div class="profile-pic">
+                            @if (followRelation.FromArtist.PhotoFilePath != null)
+                            {
+                                <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => followRelation.FromArtist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
+                            }
+                        </div>
+                        <div class="d-flex justify-content-between flex-grow-1">
+                            <div class="ml-2 d-flex flex-column justify-content-center">
+                                <h6 class="m-0">
+                                    @Html.DisplayFor(modelItem => followRelation.FromArtist.Firstname) @Html.DisplayFor(modelItem => followRelation.FromArtist.Lastname)
+                                </h6>
+                                <small class="m-0 text-muted">
+                                    @Html.DisplayFor(modelItem => followRelation.FromArtist.UserName)
+                                </small>
+                            </div>
+                            @if (followRelation.FromArtist.FollowedBy.Count > 0)
+                            {
+                                if (SignInManager.IsSignedIn(User))
+                                {
+                                    foreach (var followedBy in followRelation.FromArtist.FollowedBy)
+                                    {
+                                        if (followedBy.FromArtistId == UserManager.GetUserId(User))
+                                        {
+                                            <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                                        }
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+</div>
+
+
+<section class="col-md-9 mx-auto publish">
 
     <!-- Header -->
     <div class="row d-flex align-items-center" style="justify-content: space-evenly">
@@ -131,9 +266,9 @@
                                     ToggleModalAddCollection = "addArtworkCollection" + collection.CollectionId,
                                     Artworks = Model.Artist.Artworks
                                 })
-                        
 
-                            @await Html.PartialAsync("_DeleteCollection.cshtml", new Collection { CollectionId = collection.CollectionId, Name = "deleteCollection" + collection.CollectionId })
+
+                        @await Html.PartialAsync("_DeleteCollection.cshtml", new Collection { CollectionId = collection.CollectionId, Name = "deleteCollection" + collection.CollectionId })
                     }
                 }
             </div>

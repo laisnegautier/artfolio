@@ -6,30 +6,23 @@
 
 <h1>Messages</h1>
 
-@if (Model.Messages.Count > 0)
-{
-    foreach (var message in Model.Messages)
-    {
-        <div style="border: 1px solid lightgray; background-color: #fafafa; padding: 10px 15px; margin: 10px;">
-            <p class="small">Sender: @message.Sender.Firstname @message.Sender.Lastname</p>
-            <p class="small">Receiver: @message.Receiver.Firstname @message.Receiver.Lastname</p>
-            <p>Content: @message.Content</p>
-            <p class="small muted">Send the @Html.DisplayFor(m => message.CreationDate)</p>
-        </div>
-        <hr />
-    }
-}
-else
-{
-    <p>pas de message</p>
-}
-
-
 <h3>SEND A MESSAGE TO @Model.Receiver.Firstname @Model.Receiver.Lastname</h3>
 
-<form asp-controller="Messages" asp-action="Index" method="post">
+<form asp-controller="Messages" asp-action="Messages"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#ajaxresult">
     <input type="hidden" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
     <textarea asp-for="MessageToSend.Content"></textarea>
     <input type="submit" value="send" class="btn btn-artfolio" />
 </form>
 
+<div id="ajaxresult">
+
+    @await Html.PartialAsync("_Messages.cshtml", Model)
+
+</div>
+@section scripts {
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+}

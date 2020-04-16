@@ -47,8 +47,8 @@ namespace artfolio.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index([Bind("ReceiverId, MessageToSend")] MessagesIndexViewModel viewModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Messages([Bind("ReceiverId, MessageToSend")] MessagesIndexViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -64,10 +64,24 @@ namespace artfolio.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+
+                Artist receiver = await _userManager.FindByIdAsync(viewModel.ReceiverId);
+                Artist user = await _userManager.GetUserAsync(User);
+                IQueryable<Message> messages =
+                    _context.Messages
+                    .Where(m => (m.Receiver == receiver && m.Sender == user) || (m.Receiver == user && m.Sender == receiver))
+                    .OrderBy(m => m.CreationDate);
+
+                MessagesIndexViewModel nviewModel = new MessagesIndexViewModel
+                {
+                    Receiver = receiver,
+                    Messages = messages.ToList()
+                };
+
+                return PartialView("_Messages", nviewModel);
             }
 
-            return View(viewModel);
+            return PartialView("_Test");
         }
     }
 }
