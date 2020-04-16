@@ -8,11 +8,13 @@ namespace artfolio.ViewModels
 {
     public class MessagesIndexViewModel
     {
+        public Artist Sender { get; set; }
         public Artist Receiver { get; set; }
         public IList<Message> Messages { get; set; }
 
         // Form
+        public string SenderId { get; set; }
         public string ReceiverId { get; set; }
-        public Message MessageToSend { get; set; }
+        public string MessageContent { get; set; }
     }
 }

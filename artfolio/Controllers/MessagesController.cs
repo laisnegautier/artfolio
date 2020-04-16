@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using artfolio.Data;
+using artfolio.Hubs;
+using artfolio.Models;
+using artfolio.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using artfolio.Models;
-using artfolio.Data;
-using artfolio.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
 
 namespace artfolio.Controllers
 {
@@ -18,7 +19,7 @@ namespace artfolio.Controllers
         private readonly UserManager<Artist> _userManager;
 
         public MessagesController(UserManager<Artist> userManager, ApplicationDbContext context)
-        {
+        {            
             _context = context;
             _userManager = userManager;
         }
@@ -31,14 +32,16 @@ namespace artfolio.Controllers
             }
 
             Artist receiver = await _userManager.FindByNameAsync(userName);
-            Artist user = await _userManager.GetUserAsync(User);
+            Artist sender = await _userManager.GetUserAsync(User);
+
             IQueryable<Message> messages =
                 _context.Messages
-                .Where(m => (m.Receiver == receiver && m.Sender == user) || (m.Receiver == user && m.Sender == receiver))
+                .Where(m => (m.Receiver == receiver && m.Sender == sender) || (m.Receiver == sender && m.Sender == receiver))
                 .OrderBy(m => m.CreationDate);
 
             MessagesIndexViewModel viewModel = new MessagesIndexViewModel
             {
+                Sender = sender,
                 Receiver = receiver,
                 Messages = messages.ToList()
             };
@@ -46,30 +49,32 @@ namespace artfolio.Controllers
             return View(viewModel);
         }
 
+        // AJAX
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Messages([Bind("ReceiverId, MessageToSend")] MessagesIndexViewModel viewModel)
+        public async Task<IActionResult> MessagesE(string senderId, string receiverId, string messageContent)
         {
+            Artist sender = await _userManager.FindByIdAsync(senderId);
+            Artist receiver = await _userManager.FindByIdAsync(receiverId);
+
             if (ModelState.IsValid)
             {
                 Message message = new Message
                 {
-                    Content = viewModel.MessageToSend.Content,
+                    Content = messageContent,
                     CreationDate = DateTime.Now,
-                    Sender = await _userManager.GetUserAsync(User),
-                    Receiver = await _userManager.FindByIdAsync(viewModel.ReceiverId)
+                    Sender = sender,
+                    Receiver = receiver
                 };
 
                 _context.Messages.Add(message);
-
                 await _context.SaveChangesAsync();
 
+                //----------------
 
-                Artist receiver = await _userManager.FindByIdAsync(viewModel.ReceiverId);
-                Artist user = await _userManager.GetUserAsync(User);
                 IQueryable<Message> messages =
                     _context.Messages
-                    .Where(m => (m.Receiver == receiver && m.Sender == user) || (m.Receiver == user && m.Sender == receiver))
+                    .Where(m => (m.Receiver == receiver && m.Sender == sender) || (m.Receiver == sender && m.Sender == receiver))
                     .OrderBy(m => m.CreationDate);
 
                 MessagesIndexViewModel nviewModel = new MessagesIndexViewModel

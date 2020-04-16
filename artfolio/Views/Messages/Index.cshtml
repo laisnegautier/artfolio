@@ -13,16 +13,39 @@
       data-ajax-method="POST"
       data-ajax-mode="replace"
       data-ajax-update="#ajaxresult">
-    <input type="hidden" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
-    <textarea asp-for="MessageToSend.Content"></textarea>
+    <input type="hidden" asp-for="@Model.Receiver.Id" value="@Model.Receiver.Id" />
+    <textarea asp-for="@Model.MessageContent"></textarea>
     <input type="submit" value="send" class="btn btn-artfolio" />
 </form>
 
 <div id="ajaxresult">
-
     @await Html.PartialAsync("_Messages.cshtml", Model)
-
 </div>
+
+
+<div class="container">
+    <input type="hidden" id="senderId" value="@Model.Sender.Id" />
+    <input type="hidden" id="receiverId" value="@Model.Receiver.Id" />
+
+    <div class="col-2">Message content</div>
+    <input type="text" id="messageContent" />
+
+    <div class="col-6">
+        <input type="button" id="sendButton" value="Send Message" />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+
 @section scripts {
+
     <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/messages.js"></script>
 }

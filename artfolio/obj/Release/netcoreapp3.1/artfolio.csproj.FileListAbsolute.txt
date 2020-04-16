@@ -238,7 +238,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\_ArtworkCard.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Home\Seed.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_CreateCollection.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_DeleteCollection.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_AddArtworkCollection.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Messages\_Messages.cshtml.g.cs
