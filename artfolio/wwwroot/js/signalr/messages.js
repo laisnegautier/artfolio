@@ -1,19 +1,12 @@
 ﻿"use strict";
 
+// 0 : connection builder
 var connection = new signalR.HubConnectionBuilder().withUrl("/MessagesHub").build();
 
-//Disable send button until connection is established
-document.getElementById("sendMessage").disabled = true;
-
-// 3
-connection.on("ReceiveMessage", function (senderId, receiverId, messageContent) {
-    document.getElementById("getMessages").click();
-});
-
-// 1 : start connection
-connection.start().then(function () {
-    document.getElementById("sendMessage").disabled = false;
-}).catch(function (err) {
+// 1 : start connection between the 2 artists
+// .then can be added if we want
+connection.start()
+    .catch(function (err) {
     return console.error(err.toString());
 });
 
@@ -29,3 +22,8 @@ function startSignalR() {
     });
     event.preventDefault();
 };
+
+// 3
+connection.on("ReceiveMessage", function (senderId, receiverId, messageContent) {
+    document.getElementById("getMessages").click();
+});
