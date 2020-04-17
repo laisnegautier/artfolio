@@ -18,10 +18,10 @@ namespace artfolio.Hubs
             _userManager = userManager;
         }
 
-        public async Task SendMessage(string senderId, string receiverId, string messageContent)
+        public async Task SendMessageHub(string senderId, string receiverId)
         {
             // a message is sent from sender to receiver
-            await Clients.User(receiverId).SendAsync("ReceiveMessage", senderId, receiverId, messageContent);
+            await Clients.User(receiverId).SendAsync("ReceiveMessage", senderId, receiverId);
         }
     }
 }

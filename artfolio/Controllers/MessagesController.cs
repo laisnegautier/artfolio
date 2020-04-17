@@ -49,19 +49,19 @@ namespace artfolio.Controllers
             return View(viewModel);
         }
 
-        // AJAX
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> MessagesE(string senderId, string receiverId, string messageContent)
-        {
-            Artist sender = await _userManager.FindByIdAsync(senderId);
-            Artist receiver = await _userManager.FindByIdAsync(receiverId);
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendMessage([Bind("SenderId","ReceiverId","MessageContent")] MessagesIndexViewModel viewModel)
+        {
             if (ModelState.IsValid)
             {
+                Artist sender = await _userManager.FindByIdAsync(viewModel.SenderId);
+                Artist receiver = await _userManager.FindByIdAsync(viewModel.ReceiverId);
+
                 Message message = new Message
                 {
-                    Content = messageContent,
+                    Content = viewModel.MessageContent,
                     CreationDate = DateTime.Now,
                     Sender = sender,
                     Receiver = receiver
@@ -70,7 +70,19 @@ namespace artfolio.Controllers
                 _context.Messages.Add(message);
                 await _context.SaveChangesAsync();
 
-                //----------------
+                return await GetMessages(viewModel);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> GetMessages([Bind("SenderId", "ReceiverId")] MessagesIndexViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Artist sender = await _userManager.FindByIdAsync(viewModel.SenderId);
+                Artist receiver = await _userManager.FindByIdAsync(viewModel.ReceiverId);
 
                 IQueryable<Message> messages =
                     _context.Messages
@@ -85,8 +97,7 @@ namespace artfolio.Controllers
 
                 return PartialView("_Messages", nviewModel);
             }
-
-            return PartialView("_Test");
+            return NotFound();
         }
     }
 }
