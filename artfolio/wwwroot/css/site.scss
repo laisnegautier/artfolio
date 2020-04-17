@@ -512,3 +512,75 @@ footer {
         margin-top: 0px;
     }
 }
+
+/* MESSAGES */
+#messagesList {
+    /*background: white;*/
+    /*box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);*/
+    border: 0px solid red;
+    border-radius: 5px;
+    position: relative;
+    z-index:99999;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: flex-start;
+
+    max-height: 300px;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+.messageBox {
+    background: white;
+    justify-self: center;
+    align-self: center;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);
+}
+
+.sender {
+    border-radius: 27px 27px 12px 27px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: flex-end;
+
+    text-align: right;
+
+    .messageContent {
+        text-align:right;
+    }
+}
+
+.receiver {
+    background: white;
+    border-radius: 27px 27px 27px 12px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+}
+
+.messageContent {
+    margin: 0;
+    padding: 0;
+}
+
+.dateMessage {
+    color: gray;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}

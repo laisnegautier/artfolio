@@ -97,7 +97,7 @@ namespace artfolio
                 endpoints.MapControllerRoute(
                     name: "messages",
                     pattern: "Messages/{userName}",
-                    defaults: new { controller = "Messages", action = "Index" });
+                    defaults: new { controller = "Messages", action = "Messages" });
 
                 // Default endpoints
                 endpoints.MapControllerRoute(

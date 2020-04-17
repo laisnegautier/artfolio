@@ -1,12 +1,12 @@
 ﻿using artfolio.Data;
-using artfolio.Hubs;
 using artfolio.Models;
 using artfolio.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,40 +19,64 @@ namespace artfolio.Controllers
         private readonly UserManager<Artist> _userManager;
 
         public MessagesController(UserManager<Artist> userManager, ApplicationDbContext context)
-        {            
+        {
             _context = context;
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(string userName)
+        public async Task<IActionResult> Index()
         {
-            if (String.IsNullOrEmpty(userName))
-            {
-                return NotFound();
-            }
+            Artist user = await _userManager.GetUserAsync(User);
 
-            Artist receiver = await _userManager.FindByNameAsync(userName);
-            Artist sender = await _userManager.GetUserAsync(User);
+            // we get the last 10 conversations where user tried to send a message at least once
+            IQueryable<IGrouping<Artist, Message>> conversations = _context.Messages
+                .GroupBy(c => c.Sender)
+                .Take(10);
 
-            IQueryable<Message> messages =
-                _context.Messages
-                .Where(m => (m.Receiver == receiver && m.Sender == sender) || (m.Receiver == sender && m.Sender == receiver))
-                .OrderBy(m => m.CreationDate);
+            IQueryable<Artist> artists = _userManager.Users
+                .OrderByDescending(x => x.UserName)
+                .Where(x => x.Id != _userManager.GetUserId(User) && x.FollowedBy.Any(followedBy => followedBy.FromArtist == user))
+                .Take(10);
 
+            // Adding to view model
             MessagesIndexViewModel viewModel = new MessagesIndexViewModel
             {
-                Sender = sender,
-                Receiver = receiver,
-                Messages = messages.ToList()
+                Conversations = conversations.AsEnumerable(),
+                Artists = await artists.ToListAsync()
             };
+
+            ViewData["User"] = user;
 
             return View(viewModel);
         }
 
+        public async Task<IActionResult> Messages(string userName)
+        {
+            if (!String.IsNullOrEmpty(userName))
+            {
+                Artist receiver = await _userManager.FindByNameAsync(userName);
+                Artist sender = await _userManager.GetUserAsync(User);
+
+                IQueryable<Message> messages =
+                    _context.Messages
+                    .Where(m => (m.Receiver == receiver && m.Sender == sender) || (m.Receiver == sender && m.Sender == receiver))
+                    .OrderBy(m => m.CreationDate);
+
+                MessagesViewModel viewModel = new MessagesViewModel
+                {
+                    Sender = sender,
+                    Receiver = receiver,
+                    Messages = messages.ToList()
+                };
+
+                return View(viewModel);
+            }
+            return NotFound();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SendMessage([Bind("SenderId","ReceiverId","MessageContent")] MessagesIndexViewModel viewModel)
+        public async Task<IActionResult> SendMessage([Bind("SenderId", "ReceiverId", "MessageContent")] MessagesViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +101,7 @@ namespace artfolio.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> GetMessages([Bind("SenderId", "ReceiverId")] MessagesIndexViewModel viewModel)
+        public async Task<IActionResult> GetMessages([Bind("SenderId", "ReceiverId")] MessagesViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +113,7 @@ namespace artfolio.Controllers
                     .Where(m => (m.Receiver == receiver && m.Sender == sender) || (m.Receiver == sender && m.Sender == receiver))
                     .OrderBy(m => m.CreationDate);
 
-                MessagesIndexViewModel nviewModel = new MessagesIndexViewModel
+                MessagesViewModel nviewModel = new MessagesViewModel
                 {
                     Receiver = receiver,
                     Messages = messages.ToList()
@@ -98,6 +122,25 @@ namespace artfolio.Controllers
                 return PartialView("_Messages", nviewModel);
             }
             return NotFound();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConversation(string userName)
+        {
+            Artist sender = await _userManager.GetUserAsync(User);
+            Artist receiver = await _userManager.FindByNameAsync(userName);
+
+            List<Message> messagesToRemove = await
+                _context.Messages
+                .Where(m => (m.Receiver == receiver && m.Sender == sender) || (m.Receiver == sender && m.Sender == receiver))
+                .ToListAsync();
+
+            _context.Messages.RemoveRange(messagesToRemove);
+            await _context.SaveChangesAsync();
+
+            return Redirect("/Messages/" + userName);
         }
     }
 }

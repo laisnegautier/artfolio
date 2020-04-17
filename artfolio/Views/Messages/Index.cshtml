@@ -1,44 +1,79 @@
 ﻿@model MessagesIndexViewModel
+@inject SignInManager<Artist> SignInManager
+@inject UserManager<Artist> UserManager
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Messages";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Messages</h1>
-
-<h3>SEND A MESSAGE TO @Model.Receiver.Firstname @Model.Receiver.Lastname</h3>
-
-<div id="messagesList">
-    @await Html.PartialAsync("_Messages.cshtml", Model)
+<div class="col-md-9 mx-auto">
+    <h2 class="font-weight-lighter">artists followed</h2>
+    @if (!Model.Artists.Any())
+    {
+        <h6>None</h6>
+    }
+    else
+    {
+        <div class="scroll-horizontal-artists">
+            @foreach (var artist in Model.Artists)
+            {
+                <a asp-controller="Messages" asp-action="Messages" asp-route-userName="@artist.UserName" class="artist-card">
+                    <div class="d-flex w-100 align-items-center">
+                        <div class="profile-pic">
+                            @if (artist.PhotoFilePath != null)
+                            {
+                                <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => artist.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
+                            }
+                        </div>
+                        <div class="d-flex justify-content-between flex-grow-1">
+                            <div class="ml-2 d-flex flex-column justify-content-center">
+                                <h6 class="m-0">
+                                    @Html.DisplayFor(modelItem => artist.Firstname) @Html.DisplayFor(modelItem => artist.Lastname)
+                                </h6>
+                                <small class="m-0 text-muted">
+                                    @Html.DisplayFor(modelItem => artist.UserName)
+                                </small>
+                            </div>
+                            @if (artist.FollowedBy.Count > 0)
+                            {
+                                foreach (var followedBy in artist.FollowedBy)
+                                {
+                                    <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                                }
+                            }
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    }
 </div>
 
-<form asp-controller="Messages" asp-action="SendMessage"
-      data-ajax="true"
-      data-ajax-method="POST"
-      data-ajax-mode="replace"
-      data-ajax-update="#messagesList"
-      data-ajax-complete="startSignalR()">
-    <input type="hidden" id="receiverId" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
-    <input type="hidden" id="senderId" asp-for="@Model.SenderId" value="@Model.Sender.Id" />
-    <textarea asp-for="@Model.MessageContent"></textarea>
-    <input type="submit" value="send" id="sendMessage" class="btn btn-artfolio" />
-</form>
+<div class="col-md-9 mx-auto">
+    <h2 class="font-weight-lighter">conversations</h2>
+    @if (!Model.Conversations.Any())
+    {
+        <h6>None</h6>
+    }
+    else
+    {
+        <div class="scroll-horizontal-artists">
+            @foreach (IGrouping<Artist, Message> conversation in Model.Conversations)
+            {
+                Message lastMessage = conversation.First();
 
-@* AJAX CALLBACK *@
-<form asp-controller="Messages" asp-action="GetMessages"
-      data-ajax="true"
-      data-ajax-method="POST"
-      data-ajax-mode="replace"
-      data-ajax-update="#messagesList"
-      display="hidden">
-    <input type="hidden" id="receiverId" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
-    <input type="hidden" id="senderId" asp-for="@Model.SenderId" value="@Model.Sender.Id" />
-    <input type="submit" id="getMessages" />
-</form>
+                <a asp-controller="Messages" asp-action="Messages" asp-route-userName="@lastMessage.Sender.UserName" class="artist-card">
+                    message : @Html.Display(@lastMessage.Content)
+                    send the @Html.DisplayFor(item => lastMessage.CreationDate)
+                    send by @Html.DisplayFor(item => lastMessage.Sender.UserName)
+                    received by @Html.DisplayFor(item => lastMessage.Receiver.UserName)
+                </a>
+            }
+        </div>
+    }
+</div>
 
 @section scripts {
     <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
-
-    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/signalr/messages.js"></script>
 }

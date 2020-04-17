@@ -206,7 +206,7 @@
                 <div class="p-0 d-flex flex-wrap justify-content-end">
                     @if (SignInManager.IsSignedIn(User) && UserManager.GetUserName(User) != Model.Artist.UserName)
                     {
-                        <a asp-area="" asp-controller="Messages" asp-action="Index" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio m-0 mr-2">send a message</a>
+                        <a asp-area="" asp-controller="Messages" asp-action="Messages" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio m-0 mr-2">send a message</a>
                         @if (!(bool)ViewData["isFollowing"])
                         {
                             <a asp-area="" asp-controller="Artist" asp-action="Follow" asp-route-userName="@Model.Artist.UserName" class="btn btn-artfolio m-0">follow</a>

@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<Artist> SignInManager
+﻿@inject SignInManager<Artist> SignInManager
 @inject UserManager<Artist> UserManager
 @{
     Artist user = await UserManager.GetUserAsync(User);

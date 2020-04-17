@@ -6,7 +6,7 @@ using artfolio.Models;
 
 namespace artfolio.ViewModels
 {
-    public class SearchIndexViewModel
+    public class DiscoverIndexViewModel
     {
         public IEnumerable<Artwork> Artworks { get; set; }
         public IEnumerable<Artist> Artists { get; set; }

@@ -84,7 +84,7 @@ namespace artfolio.Controllers
                 artists = artists.Where(x => x.Id != _userManager.GetUserId(User));
 
             // Adding to view model
-            SearchIndexViewModel viewModel = new SearchIndexViewModel
+            DiscoverIndexViewModel viewModel = new DiscoverIndexViewModel
             {
                 Artworks = await artworks.ToListAsync(),
                 Artists = await artists.ToListAsync()

@@ -1,0 +1,165 @@
+﻿@model MessagesViewModel
+@inject UserManager<Artist> UserManager
+@{
+    ViewData["Title"] = "Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-9 mx-auto">
+    <h2 class="font-weight-lighter">conversation</h2>
+    <h5 class="font-weight-lighter">with @Model.Receiver.Firstname @Model.Receiver.Lastname</h5>
+    <hr />
+
+    <div id="messagesList">
+        @await Html.PartialAsync("_Messages.cshtml", Model)
+    </div>
+</div>
+
+@*<form class="form-message" asp-controller="Messages" asp-action="SendMessage"
+          data-ajax="true"
+          data-ajax-method="POST"
+          data-ajax-mode="replace"
+          data-ajax-update="#messagesList"
+          data-ajax-complete="startSignalR(); toBottom()">
+        <input type="hidden" id="receiverId" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
+        <input type="hidden" id="senderId" asp-for="@Model.SenderId" value="@Model.Sender.Id" />
+        <div class="col-md-9 d-flex">
+            <textarea class="form-control form-artfolio" asp-for="@Model.MessageContent"></textarea>
+            <input type="submit" value="send" id="sendMessage" class="btn btn-artfolio" />
+        </div>
+    </form>*@
+
+<div class="controls">
+    <div class="col-lg-9 mx-auto">
+        <div class="scroll-horizontal-controls">
+
+            <form class="encart tag-form" asp-controller="Messages" asp-action="SendMessage"
+                  data-ajax="true"
+                  data-ajax-method="POST"
+                  data-ajax-mode="replace"
+                  data-ajax-update="#messagesList"
+                  data-ajax-complete="startSignalR(); toBottom(); emptyInput()">
+
+                <div class="input-group">
+                    <input type="hidden" id="receiverId" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
+                    <input type="hidden" id="senderId" asp-for="@Model.SenderId" value="@Model.Sender.Id" />
+                    <input placeholder="your message" id="inputMessage" class="form-control form-artfolio" asp-for="@Model.MessageContent" type="text">
+
+                    <span class="input-group-append">
+                        <button class="btn btn-artfolio btn-category" id="sendMessage" value="filter" type="submit">
+                            <img src="~/images/icons/arrow-forward-outline.svg" width="20" />
+                        </button>
+                    </span>
+                </div>
+            </form>
+
+            <div class="encart encart-div">
+                <a asp-controller="Artist" asp-action="Index" asp-route-userName="@Model.Receiver.UserName" class="artist-card">
+                    <div class="d-flex w-100 align-items-center">
+                        <div class="profile-pic">
+                            @if (Model.Receiver.PhotoFilePath != null)
+                            {
+                                <img src="~/images/avatars/thumbnails/@Html.DisplayFor(modelItem => Model.Receiver.PhotoFilePath)" width="80" style="margin: auto" alt="profile picture" />
+                            }
+                        </div>
+                        <div class="d-flex justify-content-between flex-grow-1">
+                            <div class="ml-2 d-flex flex-column justify-content-center">
+                                <h6 class="m-0">
+                                    @Html.DisplayFor(modelItem => Model.Receiver.Firstname) @Html.DisplayFor(modelItem => Model.Receiver.Lastname)
+                                </h6>
+                                <small class="m-0 text-muted">
+                                    @Html.DisplayFor(modelItem => Model.Receiver.UserName)
+                                </small>
+                            </div>
+                            @if (Model.Receiver.FollowedBy.Count > 0)
+                            {
+                                foreach (var followedBy in Model.Receiver.FollowedBy)
+                                {
+                                    if (followedBy.FromArtistId == UserManager.GetUserId(User))
+                                    {
+                                        <img class="ml-1 d-flex align-items-center" src="~/images/icons/star-outline.svg" width="15" alt="You follow this artist" title="You follow this artist" />
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="encart encart-div">
+                <h3>conversation</h3>
+                <div class="link-content">
+                    <a href="#" alt="delete conversation" title="delete conversation" 
+                       data-toggle="modal"
+                       data-target="#deleteConversation">
+                        delete conversation
+                    </a>
+                    <a asp-controller="Messages" asp-action="Index" alt="return to all messages" title="return to all messages">
+                        return to all messages
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteConversation" tabindex="-1" role="dialog" aria-labelledby="deleteConversation" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete a conversation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    <p style="margin-bottom:0">
+                        <strong>Deleting this conversation will be permanent. It cannot be recovered.</strong>
+                    </p>
+                </div>
+
+                <form asp-controller="Messages"
+                      asp-action="DeleteConversation"
+                      method="post">
+                    <div class="form-group d-flex justify-content-center">
+                        <input type="hidden" name="userName" value="@Model.Receiver.UserName" />
+                        <button type="submit" class="btn btn-danger" style="margin-top: 10px;">delete conversation</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* AJAX CALLBACK *@
+<form asp-controller="Messages" asp-action="GetMessages"
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="#messagesList"
+      data-ajax-complete="toBottom()">
+    <input type="hidden" id="receiverId" asp-for="@Model.ReceiverId" value="@Model.Receiver.Id" />
+    <input type="hidden" id="senderId" asp-for="@Model.SenderId" value="@Model.Sender.Id" />
+    <input type="submit" style="visibility: hidden" id="getMessages" />
+</form>
+
+@section scripts {
+    <script>
+        toBottom();
+
+        function toBottom() {
+            var messageBody = document.querySelector('#messagesList');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        }
+
+        function emptyInput() {
+            $('#inputMessage').val('');
+        }
+    </script>
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/signalr/messages.js"></script>
+}

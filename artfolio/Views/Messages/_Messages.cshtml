@@ -1,19 +1,22 @@
-﻿@model MessagesIndexViewModel
+﻿@model MessagesViewModel
+@inject UserManager<Artist> UserManager
+
+@{ 
+    bool sender = false;
+}
 
 @if (Model.Messages.Count > 0)
 {
-    foreach (var message in Model.Messages)
+    foreach (Message message in Model.Messages)
     {
-        <div style="border: 1px solid lightgray; background-color: #fafafa; padding: 10px 15px; margin: 10px;">
-            <p class="small">Sender: @message.Sender.Firstname @message.Sender.Lastname</p>
-            <p class="small">Receiver: @message.Receiver.Firstname @message.Receiver.Lastname</p>
-            <p>Content: @message.Content</p>
-            <p class="small muted">Send the @Html.DisplayFor(m => message.CreationDate)</p>
+        sender = (message.Sender.UserName == UserManager.GetUserName(User));
+        <div class="messageBox @(sender ? "sender" : "receiver")">
+            <p class="messageContent">@message.Content</p>
+            <p class="small dateMessage">@Html.DisplayFor(m => message.CreationDate)</p>
         </div>
-        <hr />
     }
 }
 else
 {
-    <p>pas de message</p>
+    <p>Start a conversation!</p>
 }
