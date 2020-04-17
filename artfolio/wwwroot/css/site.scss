@@ -18,6 +18,8 @@ html {
 body {
     background-color: transparent;
     height: 100%;
+    display: flex;
+    flex-direction:column;
 }
 
 a {
@@ -30,6 +32,7 @@ a:hover, a:focus, a:active {
 }
 
 main {
+    flex: 1 1 auto;
 }
 
 .main-centered {
@@ -514,13 +517,31 @@ footer {
 }
 
 /* MESSAGES */
+.flexMain {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.flexDivMessage {
+    padding: 0;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.noFlexMessage {
+    display: block;
+    flex: 0 0 auto;
+}
+
 #messagesList {
-    /*background: white;*/
-    /*box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);*/
+    /*flex: 1 1 auto;*/
+    /*max-height: 70vh;*/
+    /*height: 200px;*/
     border: 0px solid red;
-    border-radius: 5px;
-    position: relative;
-    z-index:99999;
+
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -528,10 +549,10 @@ footer {
     align-content: stretch;
     align-items: flex-start;
 
-    max-height: 300px;
-    padding-bottom: 20px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    
+    padding :0;
 
 
     &::-webkit-scrollbar {

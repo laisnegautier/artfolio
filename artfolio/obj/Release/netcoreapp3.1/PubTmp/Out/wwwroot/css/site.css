@@ -263,28 +263,6 @@ nav ul {
   overflow-x: auto;
   margin-bottom: 10px;
   -webkit-overflow-scrolling: touch; }
-  .scroll-horizontal-artists .artist-card {
-    flex: 0 0 auto;
-    width: 200px;
-    box-shadow: 0;
-    transition: all .15s ease-in-out;
-    border-radius: 5px;
-    border: 1px solid #f3f3f3;
-    padding: 5px 10px 5px 5px;
-    margin-right: 10px;
-    background: white; }
-    .scroll-horizontal-artists .artist-card:hover {
-      border: 1px solid white;
-      box-shadow: 0 2px 6px lightgray; }
-    .scroll-horizontal-artists .artist-card .profile-pic {
-      overflow: hidden;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f3f3f3;
-      border-radius: 50px; }
   .scroll-horizontal-artists::-webkit-scrollbar {
     display: none; }
   .scroll-horizontal-artists::before {
@@ -294,6 +272,29 @@ nav ul {
     height: 100%;
     width: 10%;
     background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0) 100%); }
+
+.artist-card {
+  flex: 0 0 auto;
+  width: 200px;
+  box-shadow: 0;
+  transition: all .15s ease-in-out;
+  border-radius: 5px;
+  border: 1px solid #f3f3f3;
+  padding: 5px 10px 5px 5px;
+  margin-right: 10px;
+  background: white; }
+  .artist-card:hover {
+    border: 1px solid white;
+    box-shadow: 0 2px 6px lightgray; }
+  .artist-card .profile-pic {
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    border-radius: 50px; }
 
 /* ARTWORK CARD */
 .artwork-card {
@@ -455,7 +456,9 @@ html {
 
 body {
   background-color: transparent;
-  height: 100%; }
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
 
 a {
   color: #808080; }
@@ -463,6 +466,9 @@ a {
 a:hover, a:focus, a:active {
   color: #fc8b5e;
   text-decoration: none; }
+
+main {
+  flex: 1 1 auto; }
 
 .main-centered {
   border: 1px solid blue;
@@ -851,21 +857,36 @@ footer {
     margin-top: 0px; } }
 
 /* MESSAGES */
+.flexMain {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column; }
+
+.flexDivMessage {
+  padding: 0;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  margin-bottom: 50px; }
+
+.noFlexMessage {
+  display: block;
+  flex: 0 0 auto; }
+
 #messagesList {
-  /*background: white;*/
-  /*box-shadow: 0 10px 30px rgba(0, 0, 0, 0.086);*/
+  /*flex: 1 1 auto;*/
+  /*max-height: 70vh;*/
+  /*height: 200px;*/
   border: 0px solid red;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-content: stretch;
   align-items: flex-start;
-  max-height: 60vh;
-  padding-bottom: 20px;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch;
+  padding: 0; }
   #messagesList::-webkit-scrollbar {
     display: none; }
 

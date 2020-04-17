@@ -449,3 +449,4 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Artist\_DeleteCollection.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Messages\_Messages.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Messages\Messages.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutMessages.cshtml.g.cs
