@@ -30,7 +30,9 @@ $main-color-light: #f9a585;
 
 .artist-card {
     flex: 0 0 auto;
-    width: 200px;
+    /*min-width: 200px;*/
+    min-width: 200px;
+    /*max-width: 300px;*/
     box-shadow: 0;
     transition: all .15s ease-in-out;
     border-radius: 5px;

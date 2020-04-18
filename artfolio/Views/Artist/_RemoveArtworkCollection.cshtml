@@ -1,0 +1,27 @@
+﻿@model RemoveArtworkCollectionViewModel
+@inject UserManager<Artist> UserManager
+
+<div class="modal fade" id="@Model.ToggleModalRemoveCollection" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Remove an artwork from the collection</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form class="artfolio-content" asp-controller="Artist" asp-action="RemoveArtworkCollection" method="post">
+                    <input type="hidden" name="CollectionId" value="@Model.CollectionId" />
+                    <input type="hidden" name="ArtworkId" value="@Model.ArtworkId" />
+
+                    Are you sure you want to remove this artwork ?
+                    <div class="form-group d-flex justify-content-center">
+                        <button type="submit" class="btn btn-artfolio btn-danger" style="margin-top: 10px;">remove</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@
                 <form class="artfolio-content" asp-controller="Artist" asp-action="AddArtworkCollection" method="post">
                     <input type="hidden" name="CollectionId" value="@Model.CollectionId" />
 
-                    <select asp-for="@Model.ArtworkId" asp-items="@(new SelectList(Model.Artworks,"ArtworkId","Title"))">
+                    <select asp-for="@Model.ArtworkId" asp-items="@(new SelectList(Model.Artworks,"ArtworkId","Title"))" class="form-control">
                         <option>Please select one</option>
                     </select>
 

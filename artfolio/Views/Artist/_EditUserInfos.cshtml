@@ -1,0 +1,67 @@
+﻿@model Artist
+@inject UserManager<Artist> UserManager
+
+<div class="modal fade" id="editUserInfos" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Edit infos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form class="artfolio-content" asp-controller="Artist" asp-action="EditUserInfos" method="post">
+                    <div class="form-group">
+                        <label asp-for="@Model.Lastname"></label>
+                        <input asp-for="@Model.Lastname" class="form-control" value="@Model.Lastname" />
+                        <span asp-validation-for="@Model.Lastname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Firstname"></label>
+                        <input asp-for="@Model.Firstname" class="form-control" value="@Model.Firstname" />
+                        <span asp-validation-for="@Model.Firstname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Description"></label>
+                        <textarea asp-for="@Model.Description" class="form-control" value="@Model.Description"></textarea>
+                        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Nationality"></label>
+                        <select asp-for="@Model.Nationality" asp-items="Html.GetEnumSelectList<Nationality>()" class="form-control">
+                            <option selected disabled>Please select one</option>
+                        </select>
+                        <span asp-validation-for="@Model.Nationality" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.DateOfBirth"></label>
+                        <input asp-for="@Model.DateOfBirth" class="form-control" />
+                        <span asp-validation-for="@Model.DateOfBirth" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Gender"></label>
+                        <select asp-for="@Model.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                            <option selected disabled>Please select one</option>
+                        </select>
+                        <span asp-validation-for="@Model.Gender" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.IsPubliclyVisible"></label>
+                        <input type="radio" asp-for="@Model.IsPubliclyVisible" value="true" id="IsPubliclyVisible" checked style="margin-left:10px; margin-right: 10px;" />Yes
+                        <input type="radio" asp-for="@Model.IsPubliclyVisible" value="false" id="IsPubliclyVisible" style="margin-left:10px; margin-right: 10px;" />No<br />
+                        <span asp-validation-for="@Model.IsPubliclyVisible" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <button type="submit" class="btn btn-artfolio" style="margin-top: 10px;">edit infos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
