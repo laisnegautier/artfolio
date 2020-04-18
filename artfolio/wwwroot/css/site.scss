@@ -459,7 +459,8 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding-top: 10%;
+    /*padding-top: 10%;*/
+
 }
 
 .centered {
@@ -512,7 +513,7 @@ footer {
     }
 
     .discover-link-home {
-        margin-top: 0px;
+        margin-top: -150px;
     }
 }
 
