@@ -208,9 +208,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\Index.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_DescriptionModalPartial.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Delete.cshtml.g.cs
-C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Edit.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Index.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\Publish.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Discover\Index.cshtml.g.cs
@@ -249,3 +246,6 @@ C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_EditCollection.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artist\_EditUserInfos.cshtml.g.cs
 C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\artfolio.csprojAssemblyReference.cache
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\_DeleteArtwork.cshtml.g.cs
+C:\Users\Gautier\source\repos\artfolio\artfolio\obj\Release\netcoreapp3.1\Razor\Views\Artwork\_EditArtwork.cshtml.g.cs

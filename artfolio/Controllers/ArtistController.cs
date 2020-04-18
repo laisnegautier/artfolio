@@ -196,7 +196,7 @@ namespace artfolio.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditUserInfos([Bind("Lastname","Firstname","Description","Nationality","Gender","IsPubliclyVisible")] Artist viewModel)
+        public async Task<IActionResult> EditUserInfos([Bind("Lastname","Firstname","Description","Nationality","DateOfBirth","Gender","IsPubliclyVisible")] Artist viewModel)
         {
             Artist user = await _userManager.GetUserAsync(User);
 

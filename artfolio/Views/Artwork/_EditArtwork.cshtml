@@ -1,0 +1,58 @@
+﻿@model Artwork
+
+<div class="modal fade" id="editArtwork" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Edit the artwork</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form class="artfolio-content" asp-controller="Artwork" asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="@Model.ArtworkId" value="@Model.ArtworkId" />
+                    <input type="hidden" asp-for="@Model.NormalizedTitle" value="@Model.NormalizedTitle" />
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Title"></label>
+                        <input asp-for="@Model.Title" class="form-control" value="@Model.Title" />
+                        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Description"></label>
+                        <textarea asp-for="@Model.Description" class="form-control" value="@Model.Description"></textarea>
+                        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Category" class="control-label"></label>
+                        <select asp-for="@Model.Category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
+                        <span asp-validation-for="@Model.Category" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.ReleaseDate" class="control-label"></label>
+                        <input asp-for="@Model.ReleaseDate" class="form-control" />
+                        <span asp-validation-for="@Model.ReleaseDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Privacy"></label>
+                        <select asp-for="@Model.Privacy" class="form-control">
+                            <option value="true">Visible by everyone</option>
+                            <option value="false">Not visible</option>
+                        </select>
+                        <span asp-validation-for="@Model.Privacy" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <button type="submit" class="btn btn-artfolio" style="margin-top: 10px;">edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

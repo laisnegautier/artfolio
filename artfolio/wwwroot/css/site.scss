@@ -643,3 +643,30 @@ footer {
         max-width: 100%;
     }
 }
+
+.artBig {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    box-shadow: none;
+    /*min-width: 70%;*/
+    min-width: 100%;
+    min-height: 100%;
+    filter: blur(20px) grayscale(40%);
+    overflow: hidden;
+    transform: scale(1.4);
+}
+
+.wideContainer {
+    width: 100%;
+    background: white;
+    margin-bottom:0;
+}
+
+.withoutwhite {
+
+    &::before {
+        all: initial;
+    }
+}

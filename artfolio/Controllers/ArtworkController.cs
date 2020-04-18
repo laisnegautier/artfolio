@@ -34,13 +34,20 @@ namespace artfolio.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string userName, string title)
         {
-            ArtworkIndexViewModel viewModel = new ArtworkIndexViewModel
-            {
-                Artist = await _userManager.FindByNameAsync(userName),
-                Artwork = await _context.Artworks.SingleAsync(x => x.NormalizedTitle == title)
-            };
+            if (string.IsNullOrEmpty(userName)) return NotFound();
 
-            return View(viewModel);
+            Artwork artwork = await _context.Artworks.SingleOrDefaultAsync(x => x.NormalizedTitle == title);
+
+            if (artwork != null)
+            {
+                ArtworkIndexViewModel viewModel = new ArtworkIndexViewModel
+                {
+                    Artist = await _userManager.FindByNameAsync(userName),
+                    Artwork = artwork
+                };
+                return View(viewModel);
+            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -65,25 +72,6 @@ namespace artfolio.Controllers
             return View();
         }
 
-        // GET: Artworks/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var artwork = await _context.Artworks
-                .FirstOrDefaultAsync(m => m.ArtworkId == id);
-            if (artwork == null)
-            {
-                return NotFound();
-            }
-
-            return View(artwork);
-        }
-
-        // GET: Artworks/Create
         [Authorize]
         public async Task<IActionResult> Publish()
         {
@@ -215,39 +203,33 @@ namespace artfolio.Controllers
             return View(viewModel);
         }
 
-        // GET: Artworks/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var artwork = await _context.Artworks.FindAsync(id);
-            if (artwork == null)
-            {
-                return NotFound();
-            }
-            return View(artwork);
-        }
-
         // POST: Artworks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ArtworkId,Title,Description,CreationDate,ReleaseDate,Privacy,License")] Artwork artwork)
+        public async Task<IActionResult> Edit(Artwork artwork)
         {
-            if (id != artwork.ArtworkId)
-            {
-                return NotFound();
-            }
+            Artist user = await _userManager.GetUserAsync(User);
 
             if (ModelState.IsValid)
             {
+                Artwork artworkToUpdate = await _context.Artworks.FindAsync(artwork.ArtworkId);
+
+                if (artworkToUpdate == null) return NotFound();
+
+                // SEO-friendly URL
+                SlugHelper helper = new SlugHelper();
+                string normalizedTitle = helper.GenerateSlug(artwork.Title);
+
+                artworkToUpdate.Title = artwork.Title;
+                artworkToUpdate.NormalizedTitle = normalizedTitle;
+                artworkToUpdate.Description = artwork.Description;
+                artworkToUpdate.Category = artwork.Category;
+                artworkToUpdate.ReleaseDate = artwork.ReleaseDate;
+                artworkToUpdate.Privacy = artwork.Privacy;
+
                 try
                 {
-                    _context.Update(artwork);
+                    _context.Update(artworkToUpdate);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -261,39 +243,26 @@ namespace artfolio.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("/" + user.UserName + "/" + normalizedTitle);
             }
-            return View(artwork);
+            return Redirect("/" + user.UserName + "/" + artwork.NormalizedTitle);
         }
 
-        // GET: Artworks/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var artwork = await _context.Artworks
-                .FirstOrDefaultAsync(m => m.ArtworkId == id);
-            if (artwork == null)
-            {
-                return NotFound();
-            }
-
-            return View(artwork);
-        }
-
-        // POST: Artworks/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var artwork = await _context.Artworks.FindAsync(id);
+            Artwork artwork = await _context.Artworks.FindAsync(id);
+
+            foreach(Document documentToRevove in artwork.Documents)
+            {
+                _context.Documents.Remove(documentToRevove);
+            }
+
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return Redirect("/Discover");
         }
 
         private bool ArtworkExists(int id)
