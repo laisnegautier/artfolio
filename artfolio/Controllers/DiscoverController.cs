@@ -48,7 +48,7 @@ namespace artfolio.Controllers
 
             IQueryable<Artist> artists = _userManager.Users
                 .OrderByDescending(x => x.UserName)
-                .Take(10);
+                .Take(50);
 
             // Cumulative queries
             if (!string.IsNullOrEmpty(q))

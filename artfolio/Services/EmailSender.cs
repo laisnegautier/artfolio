@@ -13,10 +13,11 @@ namespace artfolio.Services
 
         public EmailSender(IConfiguration configuration)
         {
+            //KeyVault config in it
             _configuration = configuration;
         }
 
-        public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
+        public AuthMessageSenderOptions Options { get; } //set only via KeyVault
 
         public Task SendEmailAsync(string email, string subject, string message)
         {

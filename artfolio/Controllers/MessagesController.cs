@@ -48,6 +48,8 @@ namespace artfolio.Controllers
             if (!String.IsNullOrEmpty(userName))
             {
                 Artist receiver = await _userManager.FindByNameAsync(userName);
+                if (receiver == null) return NotFound();
+
                 Artist sender = await _userManager.GetUserAsync(User);
 
                 IQueryable<Message> messages =

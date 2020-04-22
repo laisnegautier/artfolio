@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20200331072252_datatype.Designer.cs" />
     <Compile Remove="Migrations\20200419065309_NomDeMaMigration.cs" />
     <Compile Remove="Migrations\20200419065309_NomDeMaMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200422121855_MAJbaseDeDonnees.cs" />
+    <Compile Remove="Migrations\20200422121855_MAJbaseDeDonnees.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
