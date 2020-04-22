@@ -14,8 +14,6 @@ namespace artfolio.Models
     /// </summary>
     public class Artist : IdentityUser
     {
-        //public int ArtistId { get; set; }
-
         [Required]
         [PersonalData]
         [Display(Name = "Last name")]

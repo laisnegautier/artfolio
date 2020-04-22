@@ -109,7 +109,7 @@ namespace artfolio.ValidationAttributes
 
             //  Check the pdf mime types
             string contentType = postedFile.ContentType.ToLower();
-            List<string> mime = new List<string> { "audio/pdf" };
+            List<string> mime = new List<string> { "application/pdf" };
             if (!mime.Contains(contentType))
             {
                 error = "The extension does not match the content-type of the uploaded file.";

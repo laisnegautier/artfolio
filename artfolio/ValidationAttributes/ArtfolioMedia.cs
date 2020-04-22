@@ -22,7 +22,7 @@ namespace artfolio.ValidationAttributes
 
             if (!isImage && !isAudio && !isPdf) return new ValidationResult("The uploaded file must be an image, an audio or a PDF.");
             else if ((!isImage && isAudio && isPdf) || (isImage && isAudio && !isPdf) || (isImage && !isAudio && isPdf)) 
-                return new ValidationResult("The file uploaded is corrupted.");
+                return new ValidationResult("The uploaded file is corrupted.");
 
             return ValidationResult.Success;
         }

@@ -20,16 +20,22 @@
             <div class="audio-player">
                 <audio controls preload="metadata" id="audio">
                     <source src="~/artworks/audio/@Model.Artwork.Documents[0].FilePath" type="@Model.Artwork.Documents[0].ContentType">
-                    Your browser does not support the audio element.
                 </audio>
 
                 <div class='player'>
-                    <div class='btns'>
-                        <button id="pButton" class="play" onclick="playAudio()">Play</button>
-                    </div>
-                    <div class='progress'>
-                    </div>
+                    <img src="~/images/design/note.jpg" />
+                    <button id="pButton" class="play btn btn-artfolio" onclick="playAudio()">Play</button>
                 </div>
+            </div>
+        }
+        else if (Model.Artwork.Documents[0].Media == DocumentMedia.PDF)
+        {
+            <div class="pdf">
+                <img src="~/images/design/pdf.png" />
+
+                <a class="btn btn-artfolio" target="_blank" href="~/artworks/pdf/@Model.Artwork.Documents[0].FilePath" alt="See the details" title="See the details">
+                    See PDF
+                </a>
             </div>
         }
     }
@@ -59,16 +65,19 @@
 
 <script>
     var music = document.getElementById('audio');
+    var btn = document.getElementById('pButton');
 
     function playAudio() {
         if (music.paused) {
             music.play();
             pButton.className = "";
-            pButton.className = "pause";
+            btn.innerHTML = "Pause";
+            pButton.className = "pause btn btn-artfolio";
         } else {
             music.pause();
             pButton.className = "";
-            pButton.className = "play";
+            btn.innerHTML = "Play";
+            pButton.className = "play btn btn-artfolio";
         }
     }
 </script>

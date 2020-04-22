@@ -179,25 +179,26 @@ $main-color-light: #f9a585;
         border-top: 0;
         border-radius: 0 0 5px 5px;
 
-        .tag {
-            padding: 0 0 5px 0;
+    }
+}
 
-            a {
-                font-size: 0.9rem;
-                border: 1px solid #f3f3f3;
-                padding: 3px 5px;
-                border-radius: 3px;
-                background-color: white;
-                transition: all .15s ease-in-out;
-                margin-right: 7px;
+.tag {
+    padding: 0 0 5px 0;
 
-                &:hover {
-                    color: $main-color !important;
-                    background-color: white;
-                    border: 1px solid white;
-                    box-shadow: 0 2px 6px lightgray;
-                }
-            }
+    a {
+        font-size: 0.9rem;
+        border: 1px solid #f3f3f3;
+        padding: 3px 5px;
+        border-radius: 3px;
+        background-color: white;
+        transition: all .15s ease-in-out;
+        margin-right: 7px;
+
+        &:hover {
+            color: $main-color !important;
+            background-color: white;
+            border: 1px solid white;
+            box-shadow: 0 2px 6px lightgray;
         }
     }
 }

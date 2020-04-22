@@ -21,6 +21,7 @@ namespace artfolio.ViewModels
         public ArtworkTag ArtworkTag { get; set; }
 
         [ArtfolioMedia]
+        [Required]
         public IFormFile File { get; set; }
 
         public int CreativeCommonsId { get; set; }

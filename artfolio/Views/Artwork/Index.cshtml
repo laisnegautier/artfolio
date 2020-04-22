@@ -79,7 +79,7 @@
     @await Html.PartialAsync("_DeleteArtwork.cshtml", Model.Artwork)
 }
 
-<section class="artBig d-none d-md-flex">
+<section class="artBig d-none d-md-flex" style="background: white">
     @if (Model.Artwork.Documents != null && Model.Artwork.Documents.Count > 0)
     {
         <img src="~/artworks/picture/@Model.Artwork.Documents[0].FilePath" alt="@Model.Artwork.Title, by @Model.Artist.Firstname @Model.Artist.Lastname">
@@ -90,7 +90,34 @@
 
     @if (Model.Artwork.Documents != null && Model.Artwork.Documents.Count > 0)
     {
-        <img style="max-width: 100%; max-height:700px; border-radius: 5px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);" src="~/artworks/picture/@Model.Artwork.Documents[0].FilePath" alt="@Model.Artwork.Title, by @Model.Artist.Firstname @Model.Artist.Lastname">
+        if (Model.Artwork.Documents[0].Media == DocumentMedia.Picture)
+        {
+            <img style="max-width: 100%; max-height:700px; border-radius: 5px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);" src="~/artworks/picture/@Model.Artwork.Documents[0].FilePath" alt="@Model.Artwork.Title, by @Model.Artist.Firstname @Model.Artist.Lastname">
+        }
+        else if (Model.Artwork.Documents[0].Media == DocumentMedia.Audio)
+        {
+            <div class="audio-player">
+                <audio controls preload="metadata" id="audio">
+                    <source src="~/artworks/audio/@Model.Artwork.Documents[0].FilePath" type="@Model.Artwork.Documents[0].ContentType">
+                </audio>
+
+                <div class='player'>
+                    <img src="~/images/design/note.jpg" />
+                    <button id="pButton" class="play btn btn-artfolio" onclick="playAudio()">Play</button>
+                </div>
+            </div>
+        }
+        else if (Model.Artwork.Documents[0].Media == DocumentMedia.PDF)
+        {
+
+            <div class="pdf">
+                <img src="~/images/design/pdf.png" />
+
+                <a class="btn btn-artfolio" target="_blank" href="~/artworks/pdf/@Model.Artwork.Documents[0].FilePath" alt="See the details" title="See the details">
+                    See PDF
+                </a>
+            </div>
+        }
     }
 </section>
 
@@ -144,7 +171,6 @@
                     @Html.DisplayFor(modelItem => Model.Artwork.AuthorDerivating)'s artwork, used under CC @Html.DisplayFor(modelItem => Model.Artwork.LicenseDerivating)
                 </a>
             </h5>
-
         }
         <h5>“@Html.DisplayFor(modelItem => Model.Artwork.Title)” by @Html.DisplayFor(modelItem => Model.Artist.Firstname) @Html.DisplayFor(modelItem => Model.Artist.Lastname) is licensed under <a href="@Html.DisplayFor(modelItem => Model.Artwork.CCLicense.LicenseDeedUrl)" alt="license deed" title="license deed">CC @Model.Artwork.CCLicense.Acronym.ToUpper() 4.0.</a></h5>
         <img style="width: 120px" src="~/images/ccicons/@formatToImg(Model.Artwork.CCLicense.Acronym)" alt="CC @Model.Artwork.CCLicense.Title License" title="CC @Model.Artwork.CCLicense.Title License" />
@@ -170,13 +196,13 @@
         <br />
         @if (SignInManager.IsSignedIn(User))
         {
-        <form asp-controller="Artwork" asp-action="Index" method="post">
-            <input type="hidden" asp-for="@Model.ArtworkId" value="@Model.Artwork.ArtworkId" />
-            <textarea asp-for="Support.Content" class="form-control" placeholder="leave a message!"></textarea>
-            <span asp-validation-for="Support.Content" class="text-danger"></span>
-            <br />
-            <input type="submit" value="support" class="btn btn-artfolio" />
-        </form>
+            <form asp-controller="Artwork" asp-action="Index" method="post">
+                <input type="hidden" asp-for="@Model.ArtworkId" value="@Model.Artwork.ArtworkId" />
+                <textarea asp-for="Support.Content" class="form-control" placeholder="leave a message!"></textarea>
+                <span asp-validation-for="Support.Content" class="text-danger"></span>
+                <br />
+                <input type="submit" value="support" class="btn btn-artfolio" />
+            </form>
         }
         else
         {
@@ -234,5 +260,25 @@
 </section>
 
 @section Scripts {
+
+    <script>
+        var music = document.getElementById('audio');
+        var btn = document.getElementById('pButton');
+
+        function playAudio() {
+            if (music.paused) {
+                music.play();
+                pButton.className = "";
+                btn.innerHTML = "Pause";
+                pButton.className = "pause btn btn-artfolio";
+            } else {
+                music.pause();
+                pButton.className = "";
+                btn.innerHTML = "Play";
+                pButton.className = "play btn btn-artfolio";
+            }
+        }
+    </script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
