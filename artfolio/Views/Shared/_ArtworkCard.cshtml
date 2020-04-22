@@ -17,6 +17,7 @@
         }
         else if (Model.Artwork.Documents[0].Media == DocumentMedia.Audio)
         {
+
             <div class="audio-player">
                 <audio controls preload="metadata" id="audio">
                     <source src="~/artworks/audio/@Model.Artwork.Documents[0].FilePath" type="@Model.Artwork.Documents[0].ContentType">
@@ -24,7 +25,11 @@
 
                 <div class='player'>
                     <img src="~/images/design/note.jpg" />
-                    <button id="pButton" class="play btn btn-artfolio" onclick="playAudio()">Play</button>
+                    @*<button id="btnAudio" class="play btn btn-artfolio" onclick="playAudio()">Play</button>*@
+
+                    <a class="play btn btn-artfolio" asp-controller="Artwork" asp-action="Index" asp-route-userName="@Model.Artwork.Artist.UserName" asp-route-title="@Model.Artwork.NormalizedTitle" alt="See the details" title="See the details">
+                        Go to audio
+                    </a>
                 </div>
             </div>
         }
@@ -62,22 +67,3 @@
         <img class="ccIcon" src="~/images/ccicons/@formatToImg(Model.Artwork.CCLicense.Acronym)" alt="CC @Model.Artwork.CCLicense.Title License" title="CC @Model.Artwork.CCLicense.Title License" />
     </div>
 </div>
-
-<script>
-    var music = document.getElementById('audio');
-    var btn = document.getElementById('pButton');
-
-    function playAudio() {
-        if (music.paused) {
-            music.play();
-            pButton.className = "";
-            btn.innerHTML = "Pause";
-            pButton.className = "pause btn btn-artfolio";
-        } else {
-            music.pause();
-            pButton.className = "";
-            btn.innerHTML = "Play";
-            pButton.className = "play btn btn-artfolio";
-        }
-    }
-</script>

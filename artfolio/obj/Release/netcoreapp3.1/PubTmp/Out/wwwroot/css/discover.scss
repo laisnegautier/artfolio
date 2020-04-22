@@ -178,6 +178,15 @@ $main-color-light: #f9a585;
         display: none;
     }
 
+    a, a:focus, a:visited, a:active {
+        color: $main-color !important;
+        z-index: 2;
+
+        &:hover {
+            color: white !important;
+        }
+    }
+
     .player {
         position: relative;
         width: 100%;

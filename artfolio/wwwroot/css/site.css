@@ -386,6 +386,11 @@ nav ul {
   overflow: hidden; }
   .audio-player audio {
     display: none; }
+  .audio-player a, .audio-player a:focus, .audio-player a:visited, .audio-player a:active {
+    color: #fc8b5e !important;
+    z-index: 2; }
+    .audio-player a:hover, .audio-player a:focus:hover, .audio-player a:visited:hover, .audio-player a:active:hover {
+      color: white !important; }
   .audio-player .player {
     position: relative;
     width: 100%;

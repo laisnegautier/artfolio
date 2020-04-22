@@ -18,7 +18,7 @@ namespace artfolio.ValidationAttributes
 
             //  Check the image extension
             string ext = Path.GetExtension(postedFile.FileName).ToLower();
-            List<string> extensions = new List<string> { ".jpg", ".png", ".gif", ".jpeg" };
+            List<string> extensions = new List<string> { ".jpg", ".png", ".gif", ".jpeg", ".jfif" };
             if (!extensions.Contains(ext))
             {
                 error = "Only .jpg, .png, .gif and .jpeg files are accepted.";
