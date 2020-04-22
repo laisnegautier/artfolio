@@ -320,50 +320,6 @@ nav ul {
     -webkit-transform: scale(1);
     transform: scale(1);
     transition: all .3s ease-in-out; }
-  .artwork-card .audio-player {
-    width: 100%;
-    height: 200px; }
-    .artwork-card .audio-player audio {
-      display: none; }
-    .artwork-card .audio-player .player {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      background-color: #f3f3f3;
-      display: flex;
-      border-radius: 2px;
-      padding: 5px 16px; }
-      .artwork-card .audio-player .player img {
-        margin-top: 5px;
-        width: 60px;
-        height: 50px; }
-      .artwork-card .audio-player .player .info {
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: center;
-        width: 50%;
-        padding: 0 16px; }
-        .artwork-card .audio-player .player .info .name {
-          font-size: 15px;
-          font-weight: 700; }
-        .artwork-card .audio-player .player .info .singer {
-          font-size: 12px; }
-      .artwork-card .audio-player .player .btns {
-        width: 50%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 16px; }
-        .artwork-card .audio-player .player .btns div:nth-child(1) {
-          font-size: 30px; }
-        .artwork-card .audio-player .player .btns div:nth-child(2), .artwork-card .audio-player .player .btns div:nth-child(3) {
-          font-size: 18px; }
-      .artwork-card .audio-player .player .progress {
-        position: absolute;
-        height: 2px;
-        left: 0;
-        top: 0;
-        background-color: #00a8ff; }
   .artwork-card:hover {
     background-color: white;
     box-shadow: 0 2px 6px lightgray; }
@@ -399,6 +355,58 @@ nav ul {
       background-color: white;
       border: 1px solid white;
       box-shadow: 0 2px 6px lightgray; }
+
+.pdf {
+  border: 1px solid #f3f3f3;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px; }
+  .pdf a, .pdf a:focus, .pdf a:visited, .pdf a:active {
+    color: #fc8b5e !important;
+    z-index: 2; }
+    .pdf a:hover, .pdf a:focus:hover, .pdf a:visited:hover, .pdf a:active:hover {
+      color: white !important; }
+  .pdf img {
+    margin-top: 5px;
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    z-index: 1;
+    filter: blur(7px); }
+
+.audio-player {
+  border: 1px solid #f3f3f3;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  overflow: hidden; }
+  .audio-player audio {
+    display: none; }
+  .audio-player .player {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    padding: 5px 16px; }
+    .audio-player .player img {
+      margin-top: 5px;
+      position: absolute;
+      height: 300px;
+      width: 300px;
+      z-index: 1;
+      filter: blur(10px); }
+    .audio-player .player .play {
+      z-index: 2; }
+    .audio-player .player .pause {
+      z-index: 2; }
 
 /*GALLERY*/
 .row-card {

@@ -28,20 +28,13 @@ namespace artfolio.Controllers
         {
             Artist user = await _userManager.GetUserAsync(User);
 
-            // we get the last 10 conversations where user tried to send a message at least once
-            IQueryable<IGrouping<Artist, Message>> conversations = _context.Messages
-                .GroupBy(c => c.Sender)
-                .Take(10);
-
             IQueryable<Artist> artists = _userManager.Users
                 .OrderByDescending(x => x.UserName)
-                .Where(x => x.Id != _userManager.GetUserId(User) && x.FollowedBy.Any(followedBy => followedBy.FromArtist == user))
                 .Take(10);
 
             // Adding to view model
             MessagesIndexViewModel viewModel = new MessagesIndexViewModel
             {
-                Conversations = conversations.AsEnumerable(),
                 Artists = await artists.ToListAsync()
             };
 

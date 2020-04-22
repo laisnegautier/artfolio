@@ -7,7 +7,6 @@ namespace artfolio.ViewModels
     public class MessagesIndexViewModel
     {
         public Artist User { get; set; }
-        public IEnumerable<IGrouping<Artist, Message>> Conversations { get; set; }
         public IEnumerable<Artist> Artists { get; set; }
     }
 }

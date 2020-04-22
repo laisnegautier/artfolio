@@ -8,10 +8,10 @@
 }
 
 <div class="col-md-9 mx-auto">
-    <h2 class="font-weight-lighter">artists followed</h2>
+    <h2 class="font-weight-lighter">select an artist</h2>
     @if (!Model.Artists.Any())
     {
-        <h6>None</h6>
+        <h6>None to display</h6>
     }
     else
     {
@@ -44,30 +44,6 @@
                             }
                         </div>
                     </div>
-                </a>
-            }
-        </div>
-    }
-</div>
-
-<div class="col-md-9 mx-auto">
-    <h2 class="font-weight-lighter">conversations</h2>
-    @if (!Model.Conversations.Any())
-    {
-        <h6>None</h6>
-    }
-    else
-    {
-        <div class="scroll-horizontal-artists">
-            @foreach (IGrouping<Artist, Message> conversation in Model.Conversations)
-            {
-                Message lastMessage = conversation.First();
-
-                <a asp-controller="Messages" asp-action="Messages" asp-route-userName="@lastMessage.Sender.UserName" class="artist-card">
-                    message : @Html.Display(@lastMessage.Content)
-                    send the @Html.DisplayFor(item => lastMessage.CreationDate)
-                    send by @Html.DisplayFor(item => lastMessage.Sender.UserName)
-                    received by @Html.DisplayFor(item => lastMessage.Receiver.UserName)
                 </a>
             }
         </div>
